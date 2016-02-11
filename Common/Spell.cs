@@ -38,7 +38,7 @@ namespace com.jcandksolutions.lol {
     }
 
     private string formatString(string result) {
-      for (int i = 1; i < 7; ++i) {
+      for (int i = 1; i < 10; ++i) {
         if (result.IndexOf("{{ e" + i + " }}") != -1) {
           result = result.Replace("{{ e" + i + " }}", Effect != null ? Effect.Count > i ? Effect[i] : null : null);
         }
