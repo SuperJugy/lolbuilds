@@ -1111,6 +1111,12 @@
       this.openFileDialog.DefaultExt = "json";
       this.openFileDialog.Filter = "JSON files (*.json)|*.json";
       // 
+      // ToolTip
+      // 
+      this.ToolTip.AutoPopDelay = 32000;
+      this.ToolTip.InitialDelay = 500;
+      this.ToolTip.ReshowDelay = 0;
+      // 
       // MasteryPageGroupBox
       // 
       this.MasteryPageGroupBox.Controls.Add(this.MasteryPageName);

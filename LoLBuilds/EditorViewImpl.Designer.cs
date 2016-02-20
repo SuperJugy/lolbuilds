@@ -1363,7 +1363,9 @@
       // 
       // ToolTip
       // 
-      this.ToolTip.AutomaticDelay = 0;
+      this.ToolTip.AutoPopDelay = 32000;
+      this.ToolTip.InitialDelay = 500;
+      this.ToolTip.ReshowDelay = 0;
       // 
       // saveFileDialog
       // 
