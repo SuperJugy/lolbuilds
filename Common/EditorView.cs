@@ -17,5 +17,10 @@ namespace com.jcandksolutions.lol {
     void populateMasteryPage(MasteryPage masteryPage);
     void populateRunePage(RunePage runePage);
     void populateItemSet(ItemSet itemSet);
+    string askForName();
+    void addBuild(Build build);
+    void addMasteryPage(MasteryPage masteryPage);
+    void addRunePage(RunePage runePage);
+    void addItemSet(ItemSet runePage);
   }
 }

@@ -152,20 +152,59 @@ namespace com.jcandksolutions.lol {
       }
     }
 
-    public void onAddItem(object newItem) {
+    public void onAddBuild() {
+      var name = mView.askForName();
+      if (name == null) {
+        return;
+      }
       mView.setSaveEnabled(true);
       mShouldSaveBeforeExit = true;
-      if (newItem is Build) {
-        mBuildManager.addBuild((Build)newItem);
-      } else if (newItem is MasteryPage) {
-        mBuildManager.addMasteryPage((MasteryPage)newItem);
-      } else if (newItem is RunePage) {
-        mBuildManager.addRunePage((RunePage)newItem);
-      } else if (newItem is ItemSet) {
-        mBuildManager.addItemSet((ItemSet)newItem);
-      } else {
-        throw new InvalidOperationException("Not recognized data changed");
+      var build = new Build {
+        BuildName = name
+      };
+      mBuildManager.addBuild(build);
+      mView.addBuild(build);
+    }
+
+    public void onAddMasteryPage() {
+      var name = mView.askForName();
+      if (name == null) {
+        return;
       }
+      mView.setSaveEnabled(true);
+      mShouldSaveBeforeExit = true;
+      var masteryPage = new MasteryPage();
+      masteryPage["name"] = name;
+      mBuildManager.addMasteryPage(masteryPage);
+      mView.addMasteryPage(masteryPage);
+    }
+
+    public void onAddRunePage() {
+      var name = mView.askForName();
+      if (name == null) {
+        return;
+      }
+      mView.setSaveEnabled(true);
+      mShouldSaveBeforeExit = true;
+      var runePage = new RunePage() {
+        RunePageName = name
+      };
+      mBuildManager.addRunePage(runePage);
+      mView.addRunePage(runePage);
+    }
+
+    public void onAddItemSet() {
+      var name = mView.askForName();
+      if (name == null) {
+        return;
+      }
+      mView.setSaveEnabled(true);
+      mShouldSaveBeforeExit = true;
+      var itemSet = new ItemSet() {
+        ItemSetName = name
+      };
+      mBuildManager.addItemSet(itemSet);
+      mView.addItemSet(itemSet);
     }
 
     //public void finalItemChanged() {

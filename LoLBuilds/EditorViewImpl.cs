@@ -330,6 +330,10 @@ namespace com.jcandksolutions.lol {
         return openFileDialog.FileName;
       }
       return null;
+
+    public string askForName() {
+      NameDialog nameDialog = new NameDialog();
+      return nameDialog.ShowDialog() == DialogResult.OK ? nameDialog.ItemName : null;
     }
 
     private void checkBuildsCount(bool selectFirst) {
@@ -453,43 +457,39 @@ namespace com.jcandksolutions.lol {
     }
 
     private void AddBuildButton_Click(object sender, EventArgs e) {
-      addBuild(new Build());
+      mPresenter.onAddBuild();
     }
 
     private void AddMasteryPageButton_Click(object sender, EventArgs e) {
-      addMasteryPage(new MasteryPage());
+      mPresenter.onAddMasteryPage();
     }
 
     private void AddRunePageButton_Click(object sender, EventArgs e) {
-      addRunePage(new RunePage());
+      mPresenter.onAddRunePage();
     }
 
     private void AddItemSetButton_Click(object sender, EventArgs e) {
-      addItemSet(new ItemSet());
+      mPresenter.onAddItemSet();
     }
 
-    private void addBuild(Build newBuild) {
-      mPresenter.onAddItem(newBuild);
+    public void addBuild(Build newBuild) {
       BuildName.Items.Add(newBuild.BuildName);
       checkBuildsCount(false);
     }
 
-    private void addMasteryPage(MasteryPage newMasteryPage) {
-      mPresenter.onAddItem(newMasteryPage);
+    public void addMasteryPage(MasteryPage newMasteryPage) {
       MasteryPage.Items.Add(newMasteryPage["name"]);
       MasteryPageName.Items.Add(newMasteryPage["name"]);
       checkMasteryPagesCount(false);
     }
 
-    private void addRunePage(RunePage newRunePage) {
-      mPresenter.onAddItem(newRunePage);
+    public void addRunePage(RunePage newRunePage) {
       RunePage.Items.Add(newRunePage.RunePageName);
       RunePageName.Items.Add(newRunePage.RunePageName);
       checkRunePagesCount(false);
     }
 
-    private void addItemSet(ItemSet newItemSet) {
-      mPresenter.onAddItem(newItemSet);
+    public void addItemSet(ItemSet newItemSet) {
       ItemSet.Items.Add(newItemSet.ItemSetName);
       ItemSetName.Items.Add(newItemSet.ItemSetName);
       checkItemSetsCount(false);
