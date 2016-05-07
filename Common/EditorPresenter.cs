@@ -23,18 +23,12 @@ namespace com.jcandksolutions.lol {
     }
 
     public void start() {
-      try {
-        mView.ShouldPauseBinding = true;
-        mView.configureBuildsDropdowns(mBuildManager.ChampionsList);
-        mView.configureMasteryTrees(mBuildManager.MasteriesTree);
-        mView.configureRunePagesDropdowns(mBuildManager.MarksList, mBuildManager.SealsList, mBuildManager.GlyphsList, mBuildManager.QuintsList);
-        mView.configureItemSetsDropdowns(mBuildManager.ItemsList);
-        mView.ShouldPauseBinding = false;
-      } catch (Exception ex) {
-        mView.showErrorMessage(ex.Message);
-        mView.Close();
-        return;
-      }
+      mView.shouldPauseBinding = true;
+      mView.configureBuildsDropdowns(mBuildManager.ChampionsList);
+      mView.configureMasteryTrees(mBuildManager.MasteriesTree);
+      mView.configureRunePagesDropdowns(mBuildManager.MarksList, mBuildManager.SealsList, mBuildManager.GlyphsList, mBuildManager.QuintsList);
+      mView.configureItemSetsDropdowns(mBuildManager.ItemsList);
+      mView.shouldPauseBinding = false;
     }
 
     public void onNewFileClicked() {

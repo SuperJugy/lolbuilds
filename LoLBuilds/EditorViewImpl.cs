@@ -361,7 +361,12 @@ namespace com.jcandksolutions.lol {
     }
 
     private void Builder_Load(object sender, EventArgs e) {
-      mPresenter.start();
+      try {
+        mPresenter.start();
+      } catch (Exception ex) {
+        showErrorMessage(ex.Message);
+        Close();
+      }
     }
 
     private void HandleMasteryClick(Button clickedButton, Button partner1, Button partner2, int limit) {
