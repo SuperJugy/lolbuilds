@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace com.jcandksolutions.lol {
+﻿namespace com.jcandksolutions.lol {
   public class EditorPresenter {
     private const string CONFIRM_LOSE_CHANGES_MESSAGE = "You have unsaved changed. Do you really want to lose your changes?";
     private const string CONFIRM_LOSE_CHANGES_TITLE = "Confirm Lose Changes";
@@ -162,19 +160,24 @@ namespace com.jcandksolutions.lol {
       mBuildManager.updateItemSetName(data, name);
     }
 
-    public void onDeleteItem(object item) {
+    public void onDeleteBuild(Build item) {
       onDataChanged();
-      if (item is Build) {
-        mBuildManager.removeBuild((Build)item);
-      } else if (item is MasteryPage) {
-        mBuildManager.removeMasteryPage((MasteryPage)item);
-      } else if (item is RunePage) {
-        mBuildManager.removeRunePage((RunePage)item);
-      } else if (item is ItemSet) {
-        mBuildManager.removeItemSet((ItemSet)item);
-      } else {
-        throw new InvalidOperationException("Not recognized data changed");
-      }
+      mBuildManager.removeBuild(item);
+    }
+
+    public void onDeleteMasteryPage(MasteryPage item) {
+      onDataChanged();
+      mBuildManager.removeMasteryPage(item);
+    }
+
+    public void onDeleteRunePage(RunePage item) {
+      onDataChanged();
+      mBuildManager.removeRunePage(item);
+    }
+
+    public void onDeleteItemSet(ItemSet item) {
+      onDataChanged();
+      mBuildManager.removeItemSet(item);
     }
 
     public void onAddBuild() {

@@ -524,27 +524,27 @@ namespace com.jcandksolutions.lol {
     }
 
     private void DeleteBuildButton_Click(object sender, EventArgs e) {
-      mPresenter.onDeleteItem(mCurrentBuild);
+      mPresenter.onDeleteBuild(mCurrentBuild);
       BuildName.Items.Remove(mCurrentBuild.BuildName);
       checkBuildsCount(true);
     }
 
     private void DeleteMasteryPageButton_Click(object sender, EventArgs e) {
-      mPresenter.onDeleteItem(mCurrentMasteryPage);
+      mPresenter.onDeleteMasteryPage(mCurrentMasteryPage);
       MasteryPage.Items.Remove(mCurrentMasteryPage["name"]);
       MasteryPageName.Items.Remove(mCurrentMasteryPage["name"]);
       checkMasteryPagesCount(true);
     }
 
     private void DeleteRunePageButton_Click(object sender, EventArgs e) {
-      mPresenter.onDeleteItem(mCurrentRunePage);
+      mPresenter.onDeleteRunePage(mCurrentRunePage);
       RunePage.Items.Remove(mCurrentRunePage.RunePageName);
       RunePageName.Items.Remove(mCurrentRunePage.RunePageName);
       checkRunePagesCount(true);
     }
 
     private void DeleteItemSetButton_Click(object sender, EventArgs e) {
-      mPresenter.onDeleteItem(mCurrentItemSet);
+      mPresenter.onDeleteItemSet(mCurrentItemSet);
       ItemSet.Items.Remove(mCurrentItemSet.ItemSetName);
       ItemSetName.Items.Remove(mCurrentItemSet.ItemSetName);
       checkItemSetsCount(true);
