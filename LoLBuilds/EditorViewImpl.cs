@@ -530,25 +530,25 @@ namespace com.jcandksolutions.lol {
 
     private void BuildName_SelectedIndexChanged(object sender, EventArgs e) {
       if (!ShouldPauseBinding) {
-        mPresenter.onSelectedItemChanged(EditorPresenter.DataChanged.BUILDS, (string)BuildName.SelectedItem);
+        mPresenter.onSelectedBuildChanged((string)BuildName.SelectedItem);
       }
     }
 
     private void MasteryPageName_SelectedIndexChanged(object sender, EventArgs e) {
       if (!ShouldPauseBinding) {
-        mPresenter.onSelectedItemChanged(EditorPresenter.DataChanged.MASTERY_PAGES, (string)MasteryPageName.SelectedItem);
+        mPresenter.onSelectedMasteryPageChanged((string)MasteryPageName.SelectedItem);
       }
     }
 
     private void RunePageName_SelectedIndexChanged(object sender, EventArgs e) {
       if (!ShouldPauseBinding) {
-        mPresenter.onSelectedItemChanged(EditorPresenter.DataChanged.RUNE_PAGES, (string)RunePageName.SelectedItem);
+        mPresenter.onSelectedRunePageChanged((string)RunePageName.SelectedItem);
       }
     }
 
     private void ItemSetName_SelectedIndexChanged(object sender, EventArgs e) {
       if (!ShouldPauseBinding) {
-        mPresenter.onSelectedItemChanged(EditorPresenter.DataChanged.ITEM_SETS, (string)ItemSetName.SelectedItem);
+        mPresenter.onSelectedItemSetChanged((string)ItemSetName.SelectedItem);
       }
     }
 

@@ -96,25 +96,28 @@ namespace com.jcandksolutions.lol {
       return mShouldSaveBeforeExit && mView.confirmNotLoseChanges(CONFIRM_LOSE_CHANGES_MESSAGE, CONFIRM_LOSE_CHANGES_TITLE);
     }
 
-    public void onSelectedItemChanged(DataChanged data, string name) {
-      mView.ShouldPauseBinding = true;
-      switch (data) {
-        case DataChanged.BUILDS:
-          mView.populateBuild(mBuildManager.getBuildByName(name));
-          break;
-        case DataChanged.MASTERY_PAGES:
-          mView.populateMasteryPage(mBuildManager.getMasteryPageByName(name));
-          break;
-        case DataChanged.RUNE_PAGES:
-          mView.populateRunePage(mBuildManager.getRunePageByName(name));
-          break;
-        case DataChanged.ITEM_SETS:
-          mView.populateItemSet(mBuildManager.getItemSetByName(name));
-          break;
-        case DataChanged.NotRecognized:
-          throw new InvalidOperationException("Not recognized data changed");
-      }
-      mView.ShouldPauseBinding = false;
+    public void onSelectedBuildChanged(string name) {
+      mView.shouldPauseBinding = true;
+      mView.populateBuild(mBuildManager.getBuildByName(name));
+      mView.shouldPauseBinding = false;
+    }
+
+    public void onSelectedMasteryPageChanged(string name) {
+      mView.shouldPauseBinding = true;
+      mView.populateMasteryPage(mBuildManager.getMasteryPageByName(name));
+      mView.shouldPauseBinding = false;
+    }
+
+    public void onSelectedRunePageChanged(string name) {
+      mView.shouldPauseBinding = true;
+      mView.populateRunePage(mBuildManager.getRunePageByName(name));
+      mView.shouldPauseBinding = false;
+    }
+
+    public void onSelectedItemSetChanged(string name) {
+      mView.shouldPauseBinding = true;
+      mView.populateItemSet(mBuildManager.getItemSetByName(name));
+      mView.shouldPauseBinding = false;
     }
 
     public void onSelectedItemChangedName(object data, string newName) {
