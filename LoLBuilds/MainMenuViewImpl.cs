@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace com.jcandksolutions.lol {
   public partial class MainMenuViewImpl : Form, MainMenuView {
-    private MainMenuPresenter mPresenter;
+    private readonly MainMenuPresenter mPresenter;
 
     public MainMenuViewImpl() {
       InitializeComponent();
@@ -54,7 +54,7 @@ namespace com.jcandksolutions.lol {
     public void setCalculatorEnabled(bool enabled) {
       CalculatorButton.Enabled = enabled;
     }
-    
+
     private void UpdateDBButton_Click(object sender, EventArgs e) {
       mPresenter.onUpdateDBButtonClicked();
     }
@@ -78,7 +78,7 @@ namespace com.jcandksolutions.lol {
     private void settingsToolStripMenuItem_Click(object sender, EventArgs e) {
       var settingsDialog = new SettingsDialog();
       settingsDialog.setSettings(mPresenter.APIKey, mPresenter.Locale, mPresenter.Server);
-      if (settingsDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
+      if (settingsDialog.ShowDialog() == DialogResult.OK) {
         mPresenter.saveSettings(settingsDialog.APIKey, settingsDialog.Locale, settingsDialog.Server);
       }
     }

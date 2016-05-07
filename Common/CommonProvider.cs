@@ -1,7 +1,7 @@
 ﻿namespace com.jcandksolutions.lol {
   public class CommonProvider {
-    private IOManager mIOManager;
     private BuildManager mBuildManager;
+    private IOManager mIOManager;
 
     public IOManager provideIOManager() {
       if (mIOManager == null) {

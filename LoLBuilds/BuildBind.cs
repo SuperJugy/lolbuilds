@@ -10,7 +10,8 @@ namespace com.jcandksolutions.lol {
       StartAbilities,
       MaxOrder
     }
-    private Prop mProp;
+
+    private readonly Prop mProp;
 
     public BuildBind(Prop prop) {
       mProp = prop;
@@ -31,10 +32,10 @@ namespace com.jcandksolutions.lol {
           build.MasteryPage = (string)((ComboBox)control).SelectedItem;
           break;
         case Prop.StartAbilities:
-          build.StartAbilities = (string)((TextBox)control).Text;
+          build.StartAbilities = ((TextBox)control).Text;
           break;
         case Prop.MaxOrder:
-          build.MaxOrder = (string)((TextBox)control).Text;
+          build.MaxOrder = ((TextBox)control).Text;
           break;
       }
     }

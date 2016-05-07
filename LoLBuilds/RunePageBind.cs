@@ -32,7 +32,8 @@
       Quint2,
       Quint3
     }
-    private Prop mProp;
+
+    private readonly Prop mProp;
 
     public RunePageBind(Prop prop) {
       mProp = prop;

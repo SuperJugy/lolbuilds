@@ -9,7 +9,7 @@ namespace com.jcandksolutions.lol {
     }
 
     public void updateProperty(MasteryPage masteryPage, object control) {
-      masteryPage[mProp.ID] = (string)((Button)control).Text;
+      masteryPage[mProp.ID] = ((Button)control).Text;
     }
   }
 }

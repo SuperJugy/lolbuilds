@@ -2,20 +2,12 @@
 
 namespace com.jcandksolutions.lol {
   public class EditorPresenter {
-    private bool mShouldSaveBeforeExit;
-    private EditorView mView;
-    private string mBuildsPath;
     private const string CONFIRM_LOSE_CHANGES_MESSAGE = "You have unsaved changed. Do you really want to lose your changes?";
     private const string CONFIRM_LOSE_CHANGES_TITLE = "Confirm Lose Changes";
-    private BuildManager mBuildManager;
-
-    public enum DataChanged {
-      BUILDS,
-      MASTERY_PAGES,
-      RUNE_PAGES,
-      ITEM_SETS,
-      NotRecognized
-    }
+    private readonly BuildManager mBuildManager;
+    private readonly EditorView mView;
+    private string mBuildsPath;
+    private bool mShouldSaveBeforeExit;
 
     public EditorPresenter(EditorView view) {
       mView = view;
@@ -186,7 +178,7 @@ namespace com.jcandksolutions.lol {
       }
       mView.setSaveEnabled(true);
       mShouldSaveBeforeExit = true;
-      var runePage = new RunePage() {
+      var runePage = new RunePage {
         RunePageName = name
       };
       mBuildManager.addRunePage(runePage);
@@ -200,34 +192,12 @@ namespace com.jcandksolutions.lol {
       }
       mView.setSaveEnabled(true);
       mShouldSaveBeforeExit = true;
-      var itemSet = new ItemSet() {
+      var itemSet = new ItemSet {
         ItemSetName = name
       };
       mBuildManager.addItemSet(itemSet);
       mView.addItemSet(itemSet);
     }
-
-    //public void finalItemChanged() {
-    //  Build build = mView.getCurrentBuild();
-    //  JObject champion = (JObject)mChampions.Where(c => c["id"].ToString() == build.Champion).First();
-    //  List<string> finalItemsNames = mView.getCurrentFinalItems();
-    //  List<JObject> finalItems = getItemsById(finalItemsNames);
-    //  var items = extractStatInfoFromItems(finalItems);
-    //  var stats = new List<dynamic>();
-    //  var stat = new {
-    //    Name = "Armor",
-    //    Base = int.Parse(champion["stats"]["armor"].ToString()),
-    //    Growth = int.Parse(champion["stats"]["armorperlevel"].ToString()),
-    //    Level18 = (int.Parse(champion["stats"]["armorperlevel"].ToString()) * 18) + int.Parse(champion["stats"]["armor"].ToString()),
-    //    Items = items.Armor,
-    //    //Runes = runes.Armor,
-    //    //Runes18 = runes.Armor18,
-    //    //Masteries = masteries.Armor,
-    //    //Masteries18 = masteries.Armor18,
-    //    Total = (int.Parse(champion["stats"]["armorperlevel"].ToString()) * 18) + int.Parse(champion["stats"]["armor"].ToString()) + items.Armor /*+ runes.Armor + masteries.Armor*/
-    //  };
-    //  stats.Add(stat);
-    //}
 
     private void bindEmptyLists() {
       mBuildManager.clear();
@@ -240,46 +210,5 @@ namespace com.jcandksolutions.lol {
       mView.updateItemSetsDropdown(mBuildManager.ItemSetsList);
       mView.updateBuildsDropdown(mBuildManager.BuildsList);
     }
-
-    //private string[] getItemsFromItemSet(JObject itemSet) {
-    //  return (from items in mItems
-    //          where itemSet.Properties().Select(x => x.Value.ToString()).ToList().Contains(items["id"].ToString())
-    //          orderby items["name"].ToString() ascending
-    //          select (string)items["name"]).ToArray();
-    //}
-
-    //private List<JObject> getItemsById(List<string> finalItemsNames) {
-    //  return mItems.Where(x => finalItemsNames.Contains(x["name"].ToString())).Select(x => (JObject)x).ToList();
-    //}
-
-    //private dynamic extractStatInfoFromItems(List<JObject> finalItems) {
-    //  var armor = finalItems.Where(x => x["stats"]["FlatArmorMod"] != null).Sum(x => int.Parse(x["stats"]["FlatArmorMod"].ToString()));
-    //  var abilityPower = finalItems.Where(x => x["stats"]["FlatMagicDamageMod"] != null).Sum(x => int.Parse(x["stats"]["FlatMagicDamageMod"].ToString()));
-    //  var attackDamage = finalItems.Where(x => x["stats"]["FlatPhysicalDamageMod"] != null).Sum(x => int.Parse(x["stats"]["FlatPhysicalDamageMod"].ToString()));
-    //  var attackSpeed = finalItems.Where(x => x["stats"]["PercentAttackSpeedMod"] != null).Sum(x => int.Parse(x["stats"]["PercentAttackSpeedMod"].ToString()));
-    //  var crit = finalItems.Where(x => x["stats"]["FlatCritChanceMod"] != null).Sum(x => int.Parse(x["stats"]["FlatCritChanceMod"].ToString()));
-    //  var hp = finalItems.Where(x => x["stats"]["FlatHPPoolMod"] != null).Sum(x => int.Parse(x["stats"]["FlatHPPoolMod"].ToString()));
-    //  var hpRegen = finalItems.Where(x => x["stats"]["FlatHPRegenMod"] != null).Sum(x => int.Parse(x["stats"]["FlatHPRegenMod"].ToString()));
-    //  var mana = finalItems.Where(x => x["stats"]["FlatMPPoolMod"] != null).Sum(x => int.Parse(x["stats"]["FlatMPPoolMod"].ToString()));
-    //  var manaRegen = finalItems.Where(x => x["stats"]["FlatMPRegenMod"] != null).Sum(x => int.Parse(x["stats"]["FlatMPRegenMod"].ToString()));
-    //  var magicResist = finalItems.Where(x => x["stats"]["FlatSpellBlockMod"] != null).Sum(x => int.Parse(x["stats"]["FlatSpellBlockMod"].ToString()));
-    //  var moveSpeed = finalItems.Where(x => x["stats"]["FlatMovementSpeedMod"] != null).Sum(x => int.Parse(x["stats"]["FlatMovementSpeedMod"].ToString()));
-    //  var percentMoveSpeed = finalItems.Where(x => x["stats"]["PercentMovementSpeedMod"] != null).Sum(x => int.Parse(x["stats"]["PercentMovementSpeedMod"].ToString()));
-    //  return new {
-    //    Armor = armor,
-    //    AbilityPower = abilityPower,
-    //    AttackDamage = attackDamage,
-    //    AttackSpeed = attackSpeed,
-    //    Crit = crit,
-    //    HP = hp,
-    //    HPRegen = hpRegen,
-    //    Mana = mana,
-    //    ManaRegen = manaRegen,
-    //    MagicResist = magicResist,
-    //    AttackRange = 0,
-    //    MoveSpeed = moveSpeed,
-    //    PercentMoveSpeed = percentMoveSpeed
-    //  };
-    //}
   }
 }

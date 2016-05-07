@@ -2,10 +2,6 @@
 
 namespace com.jcandksolutions.lol {
   public partial class NameDialog : Form {
-    public NameDialog() {
-      InitializeComponent();
-    }
-
     public string ItemName {
       get {
         return NameTextBox.Text;
@@ -13,6 +9,10 @@ namespace com.jcandksolutions.lol {
       set {
         NameTextBox.Text = value;
       }
+    }
+
+    public NameDialog() {
+      InitializeComponent();
     }
   }
 }

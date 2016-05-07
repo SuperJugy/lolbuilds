@@ -14,7 +14,7 @@ namespace com.jcandksolutions.lol {
     }
     public string Tooltip {
       get {
-        return Name + "\n\rCost: "+ Gold + "\n\r" + Description;
+        return Name + "\n\rCost: " + Gold + "\n\r" + Description;
       }
     }
 

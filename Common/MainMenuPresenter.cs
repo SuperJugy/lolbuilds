@@ -4,7 +4,7 @@ using System.IO;
 
 namespace com.jcandksolutions.lol {
   public class MainMenuPresenter {
-    private MainMenuView mView;
+    private readonly MainMenuView mView;
     public string APIKey {
       get {
         return ConfigurationManager.AppSettings["apikey"];

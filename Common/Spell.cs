@@ -4,8 +4,8 @@ using System.Linq;
 
 namespace com.jcandksolutions.lol {
   public class Spell {
-    private string mTooltip;
     private string mResource;
+    private string mTooltip;
     public string Name { get; set; }
     public string Description { get; set; }
     public string Cooldown { get; set; }

@@ -4,18 +4,19 @@ using System.Windows.Forms;
 
 namespace com.jcandksolutions.lol {
   public partial class EditorViewImpl : Form, EditorView {
-    private EditorPresenter mPresenter;
-    private Dictionary<string, Button> mMasteryButtons = new Dictionary<string, Button>();
+    private readonly Dictionary<string, Button> mMasteryButtons = new Dictionary<string, Button>();
+    private readonly EditorPresenter mPresenter;
     private Build mCurrentBuild;
+    private ItemSet mCurrentItemSet;
     private MasteryPage mCurrentMasteryPage;
     private RunePage mCurrentRunePage;
-    private ItemSet mCurrentItemSet;
-    public bool ShouldPauseBinding { get; set; }
 
     public EditorViewImpl() {
       InitializeComponent();
       mPresenter = new EditorPresenter(this);
     }
+
+    public bool shouldPauseBinding { get; set; }
 
     public void showErrorMessage(string message) {
       MessageBox.Show(message, "Error", MessageBoxButtons.OK);
@@ -133,7 +134,13 @@ namespace com.jcandksolutions.lol {
       foreach (Branch branch in branches) {
         int i = 1;
         MasteriesTable.RowCount = branch.Tiers.Count + 1;
-        MasteriesTable.Controls.Add(new Label() { Text = branch.Name, AutoSize = true, Anchor = AnchorStyles.None }, j, 0);
+        MasteriesTable.Controls.Add(new Label {
+          Text = branch.Name,
+          AutoSize = true,
+          Anchor = AnchorStyles.None
+        },
+          j,
+          0);
         foreach (Tier tier in branch.Tiers) {
           var tierTable = new TableLayoutPanel();
           tierTable.RowCount = 1;
@@ -143,17 +150,17 @@ namespace com.jcandksolutions.lol {
           foreach (Mastery mastery in tier.Masteries) {
             var but = new Button();
             if (tier.Limit == 1) {
-              but.Click += new EventHandler(Mastery1Button_Click);
+              but.Click += Mastery1Button_Click;
             } else {
-              but.Click += new EventHandler(Mastery5Button_Click);
+              but.Click += Mastery5Button_Click;
             }
-            but.MouseUp += new MouseEventHandler(MasteryButton_MouseUp);
+            but.MouseUp += MasteryButton_MouseUp;
             ToolTip.SetToolTip(but, mastery.Name + "\r\n" + mastery.Description);
             but.AutoSize = true;
             but.AutoSizeMode = AutoSizeMode.GrowAndShrink;
             but.Anchor = AnchorStyles.None;
             but.Tag = new MasteryPageBind(mastery);
-            but.TextChanged += new EventHandler(MasteryPageChanged);
+            but.TextChanged += MasteryPageChanged;
             mMasteryButtons.Add(mastery.ID, but);
             var r = new ColumnStyle();
             r.SizeType = SizeType.Percent;
@@ -319,21 +326,39 @@ namespace com.jcandksolutions.lol {
     }
 
     public string askForSaveFilePath() {
-      if (saveFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
-        return saveFileDialog.FileName;
-      }
-      return null;
+      return saveFileDialog.ShowDialog() == DialogResult.OK ? saveFileDialog.FileName : null;
     }
 
     public string askForOpenFilePath() {
-      if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
-        return openFileDialog.FileName;
-      }
-      return null;
+      return openFileDialog.ShowDialog() == DialogResult.OK ? openFileDialog.FileName : null;
+    }
 
     public string askForName() {
       NameDialog nameDialog = new NameDialog();
       return nameDialog.ShowDialog() == DialogResult.OK ? nameDialog.ItemName : null;
+    }
+
+    public void addBuild(Build newBuild) {
+      BuildName.Items.Add(newBuild.BuildName);
+      checkBuildsCount(false);
+    }
+
+    public void addMasteryPage(MasteryPage newMasteryPage) {
+      MasteryPage.Items.Add(newMasteryPage["name"]);
+      MasteryPageName.Items.Add(newMasteryPage["name"]);
+      checkMasteryPagesCount(false);
+    }
+
+    public void addRunePage(RunePage newRunePage) {
+      RunePage.Items.Add(newRunePage.RunePageName);
+      RunePageName.Items.Add(newRunePage.RunePageName);
+      checkRunePagesCount(false);
+    }
+
+    public void addItemSet(ItemSet newItemSet) {
+      ItemSet.Items.Add(newItemSet.ItemSetName);
+      ItemSetName.Items.Add(newItemSet.ItemSetName);
+      checkItemSetsCount(false);
     }
 
     private void checkBuildsCount(bool selectFirst) {
@@ -409,7 +434,6 @@ namespace com.jcandksolutions.lol {
           partner2 = mMasteryButtons[mastery.Partners[1]];
         }
       }
-
       HandleMasteryClick(mainBut, partner1, partner2, 1);
     }
 
@@ -424,7 +448,6 @@ namespace com.jcandksolutions.lol {
           partner2 = mMasteryButtons[mastery.Partners[1]];
         }
       }
-
       HandleMasteryClick(mainBut, partner1, partner2, 5);
     }
 
@@ -472,29 +495,6 @@ namespace com.jcandksolutions.lol {
       mPresenter.onAddItemSet();
     }
 
-    public void addBuild(Build newBuild) {
-      BuildName.Items.Add(newBuild.BuildName);
-      checkBuildsCount(false);
-    }
-
-    public void addMasteryPage(MasteryPage newMasteryPage) {
-      MasteryPage.Items.Add(newMasteryPage["name"]);
-      MasteryPageName.Items.Add(newMasteryPage["name"]);
-      checkMasteryPagesCount(false);
-    }
-
-    public void addRunePage(RunePage newRunePage) {
-      RunePage.Items.Add(newRunePage.RunePageName);
-      RunePageName.Items.Add(newRunePage.RunePageName);
-      checkRunePagesCount(false);
-    }
-
-    public void addItemSet(ItemSet newItemSet) {
-      ItemSet.Items.Add(newItemSet.ItemSetName);
-      ItemSetName.Items.Add(newItemSet.ItemSetName);
-      checkItemSetsCount(false);
-    }
-
     private void Builder_FormClosing(object sender, FormClosingEventArgs e) {
       if (mPresenter.shouldCancelFormClosing()) {
         e.Cancel = true;
@@ -529,25 +529,25 @@ namespace com.jcandksolutions.lol {
     }
 
     private void BuildName_SelectedIndexChanged(object sender, EventArgs e) {
-      if (!ShouldPauseBinding) {
+      if (!shouldPauseBinding) {
         mPresenter.onSelectedBuildChanged((string)BuildName.SelectedItem);
       }
     }
 
     private void MasteryPageName_SelectedIndexChanged(object sender, EventArgs e) {
-      if (!ShouldPauseBinding) {
+      if (!shouldPauseBinding) {
         mPresenter.onSelectedMasteryPageChanged((string)MasteryPageName.SelectedItem);
       }
     }
 
     private void RunePageName_SelectedIndexChanged(object sender, EventArgs e) {
-      if (!ShouldPauseBinding) {
+      if (!shouldPauseBinding) {
         mPresenter.onSelectedRunePageChanged((string)RunePageName.SelectedItem);
       }
     }
 
     private void ItemSetName_SelectedIndexChanged(object sender, EventArgs e) {
-      if (!ShouldPauseBinding) {
+      if (!shouldPauseBinding) {
         mPresenter.onSelectedItemSetChanged((string)ItemSetName.SelectedItem);
       }
     }
@@ -585,7 +585,7 @@ namespace com.jcandksolutions.lol {
     }
 
     private void BuildChanged(object sender, EventArgs e) {
-      if (!ShouldPauseBinding) {
+      if (!shouldPauseBinding) {
         var control = (Control)sender;
         var bind = (BuildBind)control.Tag;
         bind.updateProperty(mCurrentBuild, control);
@@ -594,7 +594,7 @@ namespace com.jcandksolutions.lol {
     }
 
     private void MasteryPageChanged(object sender, EventArgs e) {
-      if (!ShouldPauseBinding) {
+      if (!shouldPauseBinding) {
         var control = (Control)sender;
         var bind = (MasteryPageBind)control.Tag;
         bind.updateProperty(mCurrentMasteryPage, control);
@@ -603,7 +603,7 @@ namespace com.jcandksolutions.lol {
     }
 
     private void RunePageChanged(object sender, EventArgs e) {
-      if (!ShouldPauseBinding) {
+      if (!shouldPauseBinding) {
         var control = (Control)sender;
         var bind = (RunePageBind)control.Tag;
         bind.updateProperty(mCurrentRunePage, control);
@@ -612,7 +612,7 @@ namespace com.jcandksolutions.lol {
     }
 
     private void ItemSetChanged(object sender, EventArgs e) {
-      if (!ShouldPauseBinding) {
+      if (!shouldPauseBinding) {
         var control = (Control)sender;
         var bind = (ItemSetBind)control.Tag;
         bind.updateProperty(mCurrentItemSet, control);

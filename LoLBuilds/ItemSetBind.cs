@@ -26,7 +26,8 @@
       Item23,
       Item24
     }
-    private Prop mProp;
+
+    private readonly Prop mProp;
 
     public ItemSetBind(Prop prop) {
       mProp = prop;

@@ -2,9 +2,9 @@
 
 namespace com.jcandksolutions.lol {
   public class BrowserPresenter {
-    private BrowserView mView;
+    private readonly BuildManager mBuildManager;
+    private readonly BrowserView mView;
     private string mBuildsPath;
-    private BuildManager mBuildManager;
 
     public BrowserPresenter(BrowserView view) {
       mView = view;
@@ -18,7 +18,6 @@ namespace com.jcandksolutions.lol {
       } catch (Exception ex) {
         mView.showErrorMessage(ex.Message + "\n\r" + ex.StackTrace);
         mView.Close();
-        return;
       }
     }
 

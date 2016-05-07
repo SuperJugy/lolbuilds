@@ -51,7 +51,7 @@
       label2.Location = new System.Drawing.Point(12, 35);
       label2.Name = "label2";
       label2.Size = new System.Drawing.Size(39, 13);
-      label2.TabIndex = 2;
+      label2.TabIndex = 0;
       label2.Text = "Locale";
       // 
       // label3
@@ -60,7 +60,7 @@
       label3.Location = new System.Drawing.Point(12, 61);
       label3.Name = "label3";
       label3.Size = new System.Drawing.Size(38, 13);
-      label3.TabIndex = 4;
+      label3.TabIndex = 0;
       label3.Text = "Server";
       // 
       // APIKeyTextBox
@@ -75,14 +75,14 @@
       this.LocaleTextBox.Location = new System.Drawing.Point(63, 32);
       this.LocaleTextBox.Name = "LocaleTextBox";
       this.LocaleTextBox.Size = new System.Drawing.Size(170, 20);
-      this.LocaleTextBox.TabIndex = 3;
+      this.LocaleTextBox.TabIndex = 2;
       // 
       // ServerTextBox
       // 
       this.ServerTextBox.Location = new System.Drawing.Point(63, 58);
       this.ServerTextBox.Name = "ServerTextBox";
       this.ServerTextBox.Size = new System.Drawing.Size(170, 20);
-      this.ServerTextBox.TabIndex = 5;
+      this.ServerTextBox.TabIndex = 3;
       // 
       // mOKButton
       // 
@@ -90,7 +90,7 @@
       this.mOKButton.Location = new System.Drawing.Point(40, 84);
       this.mOKButton.Name = "mOKButton";
       this.mOKButton.Size = new System.Drawing.Size(75, 23);
-      this.mOKButton.TabIndex = 6;
+      this.mOKButton.TabIndex = 4;
       this.mOKButton.Text = "OK";
       this.mOKButton.UseVisualStyleBackColor = true;
       // 
@@ -100,14 +100,16 @@
       this.mCancelButton.Location = new System.Drawing.Point(132, 84);
       this.mCancelButton.Name = "mCancelButton";
       this.mCancelButton.Size = new System.Drawing.Size(75, 23);
-      this.mCancelButton.TabIndex = 7;
+      this.mCancelButton.TabIndex = 5;
       this.mCancelButton.Text = "Cancel";
       this.mCancelButton.UseVisualStyleBackColor = true;
       // 
       // SettingsDialog
       // 
+      this.AcceptButton = this.mOKButton;
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
       this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+      this.CancelButton = this.mCancelButton;
       this.ClientSize = new System.Drawing.Size(247, 121);
       this.Controls.Add(this.mCancelButton);
       this.Controls.Add(this.mOKButton);
@@ -118,7 +120,7 @@
       this.Controls.Add(this.APIKeyTextBox);
       this.Controls.Add(label1);
       this.Name = "SettingsDialog";
-      this.Text = "SettingsDialog";
+      this.Text = "Settings";
       this.ResumeLayout(false);
       this.PerformLayout();
 

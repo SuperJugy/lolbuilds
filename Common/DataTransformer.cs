@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -48,27 +49,42 @@ namespace com.jcandksolutions.lol {
       string key = (string)extractToken(prop["id"]);
       string image = (string)extractToken(prop["image"]["full"]);
       Caller.downloadItemImage(image);
-      return new Dictionary<string, object>() {
-        {"id", key},
-        {"description", extractToken(prop["sanitizedDescription"])},
-        {"gold", extractToken(prop["gold"]["total"])},
-        {"name", enchantmentMap.ContainsKey(key) && enchantmentMap[key] != "" ? enchantmentMap[key] + " - " + extractToken(prop["name"]) : extractToken(prop["name"])},
-        {"stats", extractToken(prop["stats"])},
-        {"image", image}
+      return new Dictionary<string, object> {
+        {
+          "id", key
+        }, {
+          "description", extractToken(prop["sanitizedDescription"])
+        }, {
+          "gold", extractToken(prop["gold"]["total"])
+        }, {
+          "name", enchantmentMap.ContainsKey(key) && enchantmentMap[key] != "" ? enchantmentMap[key] + " - " + extractToken(prop["name"]) : extractToken(prop["name"])
+        }, {
+          "stats", extractToken(prop["stats"])
+        }, {
+          "image", image
+        }
       };
     }
 
     private Dictionary<string, object> extractChampion(JObject prop) {
       string image = extractToken(prop["image"]["full"]).ToString();
       Caller.downloadChampionImage(image);
-      return new Dictionary<string, object>() {
-        {"id", extractToken(prop["id"])},
-        {"name", extractToken(prop["name"])},
-        {"secondBarType", extractToken(prop["partype"])},
-        {"stats", extractToken(prop["stats"])},
-        {"image", image},
-        {"passive", extractPassive((JObject)prop["passive"])},
-        {"spells", extractSpells((JArray)prop["spells"])}
+      return new Dictionary<string, object> {
+        {
+          "id", extractToken(prop["id"])
+        }, {
+          "name", extractToken(prop["name"])
+        }, {
+          "secondBarType", extractToken(prop["partype"])
+        }, {
+          "stats", extractToken(prop["stats"])
+        }, {
+          "image", image
+        }, {
+          "passive", extractPassive((JObject)prop["passive"])
+        }, {
+          "spells", extractSpells((JArray)prop["spells"])
+        }
       };
     }
 
@@ -79,58 +95,88 @@ namespace com.jcandksolutions.lol {
     private Dictionary<string, object> extractSpell(JObject prop) {
       string image = (string)extractToken(prop["image"]["full"]);
       Caller.downloadSpellImage(image);
-      return new Dictionary<string, object>() {
-        {"name", extractToken(prop["name"])},
-        {"description", extractToken(prop["sanitizedDescription"])},
-        {"tooltip", extractToken(prop["sanitizedTooltip"])},
-        {"resource", extractToken(prop["resource"])},
-        {"maxrank", extractToken(prop["maxrank"])},
-        {"costType", extractToken(prop["costType"])},
-        {"cooldown", extractToken(prop["cooldownBurn"])},
-        {"effect", extractToken(prop["effectBurn"])},
-        {"range", extractToken(prop["rangeBurn"])},
-        {"cost", extractToken(prop["costBurn"])},
-        {"vars", extractToken(prop["vars"])},
-        {"image", image}
+      return new Dictionary<string, object> {
+        {
+          "name", extractToken(prop["name"])
+        }, {
+          "description", extractToken(prop["sanitizedDescription"])
+        }, {
+          "tooltip", extractToken(prop["sanitizedTooltip"])
+        }, {
+          "resource", extractToken(prop["resource"])
+        }, {
+          "maxrank", extractToken(prop["maxrank"])
+        }, {
+          "costType", extractToken(prop["costType"])
+        }, {
+          "cooldown", extractToken(prop["cooldownBurn"])
+        }, {
+          "effect", extractToken(prop["effectBurn"])
+        }, {
+          "range", extractToken(prop["rangeBurn"])
+        }, {
+          "cost", extractToken(prop["costBurn"])
+        }, {
+          "vars", extractToken(prop["vars"])
+        }, {
+          "image", image
+        }
       };
     }
 
     private Dictionary<string, object> extractPassive(JObject prop) {
       string image = (string)extractToken(prop["image"]["full"]);
       Caller.downloadPassiveImage(image);
-      return new Dictionary<string, object>() {
-        {"name", extractToken(prop["name"])},
-        {"description", extractToken(prop["sanitizedDescription"])},
-        {"image", image}
+      return new Dictionary<string, object> {
+        {
+          "name", extractToken(prop["name"])
+        }, {
+          "description", extractToken(prop["sanitizedDescription"])
+        }, {
+          "image", image
+        }
       };
     }
 
     private Dictionary<string, object> extractRune(JObject prop) {
       string image = (string)extractToken(prop["image"]["full"]);
       Caller.downloadRuneImage(image);
-      return new Dictionary<string, object>() {
-        {"id", extractToken(prop["id"])},
-        {"name", extractToken(prop["name"])},
-        {"description", extractToken(prop["sanitizedDescription"])},
-        {"type", extractToken(prop["rune"]["type"])},
-        {"stats", extractToken(prop["stats"])},
-        {"image", image}
+      return new Dictionary<string, object> {
+        {
+          "id", extractToken(prop["id"])
+        }, {
+          "name", extractToken(prop["name"])
+        }, {
+          "description", extractToken(prop["sanitizedDescription"])
+        }, {
+          "type", extractToken(prop["rune"]["type"])
+        }, {
+          "stats", extractToken(prop["stats"])
+        }, {
+          "image", image
+        }
       };
     }
 
     private Dictionary<string, object> extractBranch(JProperty branch, JObject masteryData) {
       bool hasLimit5 = false;
-      return new Dictionary<string, object>() {
-        {"name", branch.Name},
-        {"tiers", branch.Value.Select(tier => extractTier(tier, ref hasLimit5, masteryData)).ToList()}
+      return new Dictionary<string, object> {
+        {
+          "name", branch.Name
+        }, {
+          "tiers", branch.Value.Select(tier => extractTier(tier, ref hasLimit5, masteryData)).ToList()
+        }
       };
     }
 
     private Dictionary<string, object> extractTier(JToken tier, ref bool hasLimit5, JObject masteryData) {
       hasLimit5 = !hasLimit5;
-      return new Dictionary<string, object>() {
-        {"limit", hasLimit5 ? "5" : "1"},
-        {"masteries", tier["masteryTreeItems"].Where(mastery => mastery.Type != JTokenType.Null).Select(mastery => extractMastery(mastery, masteryData)).ToList()}
+      return new Dictionary<string, object> {
+        {
+          "limit", hasLimit5 ? "5" : "1"
+        }, {
+          "masteries", tier["masteryTreeItems"].Where(mastery => mastery.Type != JTokenType.Null).Select(mastery => extractMastery(mastery, masteryData)).ToList()
+        }
       };
     }
 
@@ -139,11 +185,16 @@ namespace com.jcandksolutions.lol {
       var find = masteryData.Properties().Where(x => x.Value["id"].ToString().Equals(id)).Select(x => x.Value).First();
       string image = find["image"]["full"].ToString();
       Caller.downloadMasteryImage(image);
-      return new Dictionary<string, object>() {
-        {"id", id},
-        {"name", extractToken(find["name"])},
-        {"description", extractToken(find["sanitizedDescription"])},
-        {"image", image}
+      return new Dictionary<string, object> {
+        {
+          "id", id
+        }, {
+          "name", extractToken(find["name"])
+        }, {
+          "description", extractToken(find["sanitizedDescription"])
+        }, {
+          "image", image
+        }
       };
     }
 
@@ -153,30 +204,39 @@ namespace com.jcandksolutions.lol {
 
     private List<dynamic> extractEnchantablesList(JObject itemData, List<string> enchantments) {
       return itemData.Properties().Where(itDa => itDa.Value["into"] != null && itDa.Value["into"].All(it => enchantments.Contains(it.ToString()))).Select(itDa => new {
-          Id = itDa.Value["id"].ToString(),
-          Name = itDa.Value["name"].ToString(),
-          Into = itDa.Value["into"].Select(it => it.ToString()).ToList()
-        }).ToList<dynamic>();
+        Id = itDa.Value["id"].ToString(),
+        Name = itDa.Value["name"].ToString(),
+        Into = itDa.Value["into"].Select(it => it.ToString()).ToList()
+      }).ToList<dynamic>();
     }
 
     private List<string> extractEnchantmentsIDs(JObject itemData) {
-      return itemData.Properties().Where(itDa => itDa.Value["name"] != null && itDa.Value["name"].ToString().StartsWith("Enchantment")).Select(itDa => itDa.Value["id"].ToString()).ToList();
+      return
+        itemData.Properties()
+          .Where(itDa => itDa.Value["name"] != null && itDa.Value["name"].ToString().StartsWith("Enchantment"))
+          .Select(itDa => itDa.Value["id"].ToString())
+          .ToList();
     }
 
     private string findEnchantableForEnchantment(string enchantment, List<string> enchantments, List<dynamic> enchantables) {
-      return enchantables.Where(enchantable => enchantable.Into.Contains(enchantment)).Select(enchantable => enchantments.Contains(enchantable.Id) ? findEnchantableForEnchantment(enchantable.Id, enchantments, enchantables) : enchantable.Name).DefaultIfEmpty("").First();
+      return
+        enchantables.Where(enchantable => enchantable.Into.Contains(enchantment))
+          .Select(enchantable => enchantments.Contains(enchantable.Id) ? findEnchantableForEnchantment(enchantable.Id, enchantments, enchantables) : enchantable.Name)
+          .DefaultIfEmpty("")
+          .First();
     }
 
     private object extractToken(JToken token) {
       if (token == null || token.Type == JTokenType.Null) {
         return null;
-      } else if (token.Type == JTokenType.Object) {
-        return extractObject((JObject)token);
-      } else if (token.Type == JTokenType.Array) {
-        return extractArray((JArray)token);
-      } else {
-        return token.ToString();
       }
+      if (token.Type == JTokenType.Object) {
+        return extractObject((JObject)token);
+      }
+      if (token.Type == JTokenType.Array) {
+        return extractArray((JArray)token);
+      }
+      return token.ToString();
     }
 
     private Dictionary<string, object> extractObject(JObject obj) {

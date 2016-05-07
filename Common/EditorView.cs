@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-
-namespace com.jcandksolutions.lol {
+﻿namespace com.jcandksolutions.lol {
   public interface EditorView : BuildView {
-    bool ShouldPauseBinding { get; set; }
+    bool shouldPauseBinding { get; set; }
     void updateBuildsDropdown(string[] buildsList);
     void updateMasteryPagesDropdown(string[] masteryPagesList);
     void updateRunePagesDropdown(string[] runePagesList);

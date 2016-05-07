@@ -3,8 +3,23 @@ using System.ComponentModel;
 
 namespace com.jcandksolutions.lol {
   public class MasteryPagePropertyDescriptor : PropertyDescriptor {
-    public MasteryPagePropertyDescriptor(string name)
-      : base(name, null) {
+    public override Type ComponentType {
+      get {
+        return typeof(MasteryPage);
+      }
+    }
+    public override bool IsReadOnly {
+      get {
+        return false;
+      }
+    }
+    public override Type PropertyType {
+      get {
+        return typeof(string);
+      }
+    }
+
+    public MasteryPagePropertyDescriptor(string name) : base(name, null) {
     }
 
     public override object GetValue(object component) {
@@ -26,24 +41,5 @@ namespace com.jcandksolutions.lol {
     public override bool ShouldSerializeValue(object component) {
       return ((MasteryPage)component)[Name] != null;
     }
-
-    public override Type ComponentType {
-      get {
-        return typeof(MasteryPage);
-      }
-    }
-
-    public override bool IsReadOnly {
-      get {
-        return false;
-      }
-    }
-
-    public override Type PropertyType {
-      get {
-        return typeof(string);
-      }
-    }
   }
 }
-

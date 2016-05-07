@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace com.jcandksolutions.lol {
   public class Mastery {
-    private HashSet<string> mPartners = new HashSet<string>();
+    private readonly HashSet<string> mPartners = new HashSet<string>();
     public string ID { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }

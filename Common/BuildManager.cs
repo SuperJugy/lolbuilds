@@ -1,28 +1,30 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using Newtonsoft.Json.Linq;
 
 namespace com.jcandksolutions.lol {
   public class BuildManager {
-    private List<Item> mItems;
-    private List<Rune> mMarks;
-    private List<Rune> mSeals;
-    private List<Rune> mGlyphs;
-    private List<Rune> mQuints;
-    private List<Champion> mChampions;
-    private List<Branch> mMasteries;
-    private JArray mItemSets = new JArray();
-    private JArray mRunePages = new JArray();
-    private JArray mMasteryPages = new JArray();
+    private readonly List<Rune> mGlyphs;
+    private readonly List<Item> mItems;
+    private readonly List<Rune> mMarks;
+    private readonly List<Rune> mQuints;
+    private readonly List<Rune> mSeals;
     private JArray mBuilds = new JArray();
-    private Rune mEmptyRune;
-    private Item mEmptyItem;
     private Champion mEmptyChampion;
+    private Item mEmptyItem;
+    private Rune mEmptyRune;
+    private JArray mItemSets = new JArray();
+    private JArray mMasteryPages = new JArray();
+    private JArray mRunePages = new JArray();
     public Rune EmptyRune {
       get {
         if (mEmptyRune == null) {
-          mEmptyRune = new Rune() { ID = "-1", Name = "" };
+          mEmptyRune = new Rune {
+            ID = "-1",
+            Name = ""
+          };
         }
         return mEmptyRune;
       }
@@ -30,7 +32,10 @@ namespace com.jcandksolutions.lol {
     public Item EmptyItem {
       get {
         if (mEmptyItem == null) {
-          mEmptyItem = new Item() { ID = "-1", Name = "" };
+          mEmptyItem = new Item {
+            ID = "-1",
+            Name = ""
+          };
         }
         return mEmptyItem;
       }
@@ -38,16 +43,15 @@ namespace com.jcandksolutions.lol {
     public Champion EmptyChampion {
       get {
         if (mEmptyChampion == null) {
-          mEmptyChampion = new Champion() { ID = "-1", Name = "" };
+          mEmptyChampion = new Champion {
+            ID = "-1",
+            Name = ""
+          };
         }
         return mEmptyChampion;
       }
     }
-    public List<Branch> MasteriesTree {
-      get {
-        return mMasteries;
-      }
-    }
+    public List<Branch> MasteriesTree { get; private set; }
     public Rune[] MarksList {
       get {
         return mMarks.ToArray();
@@ -95,7 +99,7 @@ namespace com.jcandksolutions.lol {
     }
     public string[] ChampionsList {
       get {
-        return mChampions.Select(x => x.Name).ToArray();
+        return ChampionsData.Select(x => x.Name).ToArray();
       }
     }
     public List<Build> BuildsData {
@@ -107,7 +111,7 @@ namespace com.jcandksolutions.lol {
           ItemSet = B["itemSet"].ToString(),
           StartAbilities = B["startAbilities"].ToString(),
           MaxOrder = B["maxOrder"].ToString(),
-          Champion = mChampions.Where(CH => B["champion"].ToString() == CH.ID).Select(CH => CH.Name).FirstOrDefault() ?? "Champion Not Found"
+          Champion = ChampionsData.Where(CH => B["champion"].ToString() == CH.ID).Select(CH => CH.Name).FirstOrDefault() ?? "Champion Not Found"
         }).ToList();
       }
     }
@@ -159,11 +163,7 @@ namespace com.jcandksolutions.lol {
         }).ToList();
       }
     }
-    public List<Champion> ChampionsData {
-      get {
-        return mChampions;
-      }
-    }
+    public List<Champion> ChampionsData { get; private set; }
     public List<ItemSet> ItemSetsData {
       get {
         return mItemSets.Select(IS => new ItemSet {
@@ -216,9 +216,9 @@ namespace com.jcandksolutions.lol {
       mSeals.Add(EmptyRune);
       mGlyphs.Add(EmptyRune);
       mQuints.Add(EmptyRune);
-      mChampions = champions.Select(x => extractChampion(x)).OrderBy(x => x.Name).ToList();
-      mChampions.Add(EmptyChampion);
-      mMasteries = masteries.Select(x => extractBranch(x)).OrderBy(x => x.Name).ToList();
+      ChampionsData = champions.Select(x => extractChampion(x)).OrderBy(x => x.Name).ToList();
+      ChampionsData.Add(EmptyChampion);
+      MasteriesTree = masteries.Select(x => extractBranch(x)).OrderBy(x => x.Name).ToList();
     }
 
     public void loadBuild(string path) {
@@ -257,7 +257,7 @@ namespace com.jcandksolutions.lol {
         ItemSet = B["itemSet"].ToString(),
         StartAbilities = B["startAbilities"].ToString(),
         MaxOrder = B["maxOrder"].ToString(),
-        Champion = mChampions.Where(CH => B["champion"].ToString() == CH.ID).Select(CH => CH.Name).FirstOrDefault() ?? "Champion Not Found"
+        Champion = ChampionsData.Where(CH => B["champion"].ToString() == CH.ID).Select(CH => CH.Name).FirstOrDefault() ?? "Champion Not Found"
       }).First();
     }
 
@@ -344,7 +344,7 @@ namespace com.jcandksolutions.lol {
       build["itemSet"] = d.ItemSet;
       build["startAbilities"] = d.StartAbilities;
       build["maxOrder"] = d.MaxOrder;
-      build["champion"] = mChampions.Where(i => i.Name == d.Champion).Select(i => i.ID).First();
+      build["champion"] = ChampionsData.Where(i => i.Name == d.Champion).Select(i => i.ID).First();
     }
 
     public void updateItemSet(ItemSet d) {
@@ -424,7 +424,7 @@ namespace com.jcandksolutions.lol {
       build["itemSet"] = d.ItemSet;
       build["startAbilities"] = d.StartAbilities;
       build["maxOrder"] = d.MaxOrder;
-      build["champion"] = mChampions.Where(i => i.Name == d.Champion).Select(i => i.ID).First();
+      build["champion"] = ChampionsData.Where(i => i.Name == d.Champion).Select(i => i.ID).First();
       mBuilds.Add(build);
     }
 
@@ -543,14 +543,14 @@ namespace com.jcandksolutions.lol {
     }
 
     private Branch extractBranch(JToken b) {
-      return new Branch() {
+      return new Branch {
         Name = b["name"].ToString(),
         Tiers = b["tiers"].Select(x => extractTier(x)).ToList()
       };
     }
 
     private Tier extractTier(JToken t) {
-      return new Tier() {
+      return new Tier {
         Limit = int.Parse(t["limit"].ToString()),
         Masteries = t["masteries"].Select(x => extractMastery(x)).ToList()
       };
@@ -558,7 +558,7 @@ namespace com.jcandksolutions.lol {
 
     private Mastery extractMastery(JToken m) {
       MasteryPage.MasteryNames.Add(m["id"].ToString());
-      return new Mastery() {
+      return new Mastery {
         ID = m["id"].ToString(),
         Name = m["name"].ToString(),
         Description = m["description"].ToString(),
@@ -567,7 +567,7 @@ namespace com.jcandksolutions.lol {
     }
 
     private Rune extractRune(JToken r) {
-      return new Rune() {
+      return new Rune {
         Name = r["name"].ToString(),
         ID = r["id"].ToString(),
         Type = r["type"].ToString(),
@@ -577,7 +577,7 @@ namespace com.jcandksolutions.lol {
     }
 
     private Champion extractChampion(JToken ch) {
-      return new Champion() {
+      return new Champion {
         ID = ch["id"].ToString(),
         Name = ch["name"].ToString(),
         Passive = extractPassive(ch["passive"]),
@@ -590,7 +590,7 @@ namespace com.jcandksolutions.lol {
     }
 
     private Spell extractSpell(JToken spell) {
-      return new Spell() {
+      return new Spell {
         Name = spell["name"].ToString(),
         Description = spell["description"].ToString(),
         Tooltip = spell["tooltip"].ToString(),
@@ -606,7 +606,7 @@ namespace com.jcandksolutions.lol {
     }
 
     private Var extractVar(JToken var) {
-      return new Var() {
+      return new Var {
         Key = var["key"].ToString(),
         Type = var["link"].ToString(),
         Value = var["coeff"].Aggregate((i, j) => i.ToString() + "/" + j.ToString()).ToString()
@@ -614,7 +614,7 @@ namespace com.jcandksolutions.lol {
     }
 
     private Passive extractPassive(JToken passive) {
-      return new Passive() {
+      return new Passive {
         Name = passive["name"].ToString(),
         Description = passive["description"].ToString(),
         ImageURL = passive["image"].ToString()
@@ -622,7 +622,7 @@ namespace com.jcandksolutions.lol {
     }
 
     private Item extractItem(JToken item) {
-      return new Item() {
+      return new Item {
         Name = item["name"].ToString(),
         ID = item["id"].ToString(),
         Description = item["description"].ToString(),
