@@ -361,6 +361,30 @@ namespace com.jcandksolutions.lol {
       checkItemSetsCount(false);
     }
 
+    public void updateBuildName(string name) {
+      BuildName.Items.Remove(mCurrentBuild.BuildName);
+      BuildName.Items.Add(name);
+      BuildName.SelectedItem = name;
+    }
+
+    public void updateMasteryPageName(string name) {
+      MasteryPageName.Items.Remove(mCurrentMasteryPage["name"]);
+      MasteryPageName.Items.Add(name);
+      MasteryPageName.SelectedItem = name;
+    }
+
+    public void updateRunePageName(string name) {
+      RunePageName.Items.Remove(mCurrentRunePage.RunePageName);
+      RunePageName.Items.Add(name);
+      RunePageName.SelectedItem = name;
+    }
+
+    public void updateItemSetName(string name) {
+      ItemSetName.Items.Remove(mCurrentItemSet.ItemSetName);
+      ItemSetName.Items.Add(name);
+      ItemSetName.SelectedItem = name;
+    }
+
     private void checkBuildsCount(bool selectFirst) {
       DeleteBuildButton.Enabled = BuildGroupBox.Enabled = BuildName.Items.Count != 0;
       if (BuildGroupBox.Enabled) {
@@ -495,12 +519,6 @@ namespace com.jcandksolutions.lol {
       mPresenter.onAddItemSet();
     }
 
-    private void Builder_FormClosing(object sender, FormClosingEventArgs e) {
-      if (mPresenter.shouldCancelFormClosing()) {
-        e.Cancel = true;
-      }
-    }
-
     private void DeleteBuildButton_Click(object sender, EventArgs e) {
       mPresenter.onDeleteItem(mCurrentBuild);
       BuildName.Items.Remove(mCurrentBuild.BuildName);
@@ -528,6 +546,22 @@ namespace com.jcandksolutions.lol {
       checkItemSetsCount(true);
     }
 
+    private void RenameBuildButton_Click(object sender, EventArgs e) {
+      mPresenter.onRenameBuild(mCurrentBuild);
+    }
+
+    private void RenameMasteryPageButton_Click(object sender, EventArgs e) {
+      mPresenter.onRenameMasteryPage(mCurrentMasteryPage);
+    }
+
+    private void RenameRunePageButton_Click(object sender, EventArgs e) {
+      mPresenter.onRenameRunePage(mCurrentRunePage);
+    }
+
+    private void RenameItemSetButton_Click(object sender, EventArgs e) {
+      mPresenter.onRenameItemSet(mCurrentItemSet);
+    }
+
     private void BuildName_SelectedIndexChanged(object sender, EventArgs e) {
       if (!shouldPauseBinding) {
         mPresenter.onSelectedBuildChanged((string)BuildName.SelectedItem);
@@ -552,22 +586,6 @@ namespace com.jcandksolutions.lol {
       }
     }
 
-    private void BuildName_TextUpdate(object sender, EventArgs e) {
-      mPresenter.onSelectedItemChangedName(mCurrentBuild, BuildName.Text);
-    }
-
-    private void MasteryPageName_TextUpdate(object sender, EventArgs e) {
-      mPresenter.onSelectedItemChangedName(mCurrentMasteryPage, MasteryPageName.Text);
-    }
-
-    private void RunePageName_TextUpdate(object sender, EventArgs e) {
-      mPresenter.onSelectedItemChangedName(mCurrentRunePage, RunePageName.Text);
-    }
-
-    private void ItemSetName_TextUpdate(object sender, EventArgs e) {
-      mPresenter.onSelectedItemChangedName(mCurrentItemSet, ItemSetName.Text);
-    }
-
     private void SaveMenuItem_Click(object sender, EventArgs e) {
       mPresenter.onSaveFileClicked(false);
     }
@@ -582,6 +600,12 @@ namespace com.jcandksolutions.lol {
 
     private void OpenMenuItem_Click(object sender, EventArgs e) {
       mPresenter.onOpenFileClicked();
+    }
+
+    private void Builder_FormClosing(object sender, FormClosingEventArgs e) {
+      if (mPresenter.shouldCancelFormClosing()) {
+        e.Cancel = true;
+      }
     }
 
     private void BuildChanged(object sender, EventArgs e) {

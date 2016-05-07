@@ -20,5 +20,9 @@
     void addMasteryPage(MasteryPage masteryPage);
     void addRunePage(RunePage runePage);
     void addItemSet(ItemSet runePage);
+    void updateBuildName(string name);
+    void updateMasteryPageName(string name);
+    void updateRunePageName(string name);
+    void updateItemSetName(string name);
   }
 }

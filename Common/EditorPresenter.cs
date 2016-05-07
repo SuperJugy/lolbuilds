@@ -112,20 +112,56 @@ namespace com.jcandksolutions.lol {
       mView.shouldPauseBinding = false;
     }
 
-    public void onSelectedItemChangedName(object data, string newName) {
+    public void onRenameBuild(Build data) {
+      var name = mView.askForName();
+      if (name == null) {
+        return;
+      }
       mView.setSaveEnabled(true);
       mShouldSaveBeforeExit = true;
-      if (data is Build) {
-        mBuildManager.updateBuildName((Build)data, newName);
-      } else if (data is MasteryPage) {
-        mBuildManager.updateMasteryPageName((MasteryPage)data, newName);
-      } else if (data is RunePage) {
-        mBuildManager.updateRunePageName((RunePage)data, newName);
-      } else if (data is ItemSet) {
-        mBuildManager.updateItemSetName((ItemSet)data, newName);
-      } else {
-        throw new InvalidOperationException("Not recognized data changed");
+      mView.shouldPauseBinding = true;
+      mView.updateBuildName(name);
+      mView.shouldPauseBinding = false;
+      mBuildManager.updateBuildName(data, name);
+    }
+
+    public void onRenameMasteryPage(MasteryPage data) {
+      var name = mView.askForName();
+      if (name == null) {
+        return;
       }
+      mView.setSaveEnabled(true);
+      mShouldSaveBeforeExit = true;
+      mView.shouldPauseBinding = true;
+      mView.updateMasteryPageName(name);
+      mView.shouldPauseBinding = false;
+      mBuildManager.updateMasteryPageName(data, name);
+    }
+
+    public void onRenameRunePage(RunePage data) {
+      var name = mView.askForName();
+      if (name == null) {
+        return;
+      }
+      mView.setSaveEnabled(true);
+      mShouldSaveBeforeExit = true;
+      mView.shouldPauseBinding = true;
+      mView.updateRunePageName(name);
+      mView.shouldPauseBinding = false;
+      mBuildManager.updateRunePageName(data, name);
+    }
+
+    public void onRenameItemSet(ItemSet data) {
+      var name = mView.askForName();
+      if (name == null) {
+        return;
+      }
+      mView.setSaveEnabled(true);
+      mShouldSaveBeforeExit = true;
+      mView.shouldPauseBinding = true;
+      mView.updateItemSetName(name);
+      mView.shouldPauseBinding = false;
+      mBuildManager.updateItemSetName(data, name);
     }
 
     public void onDeleteItem(object item) {

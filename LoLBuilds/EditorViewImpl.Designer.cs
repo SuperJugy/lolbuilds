@@ -46,29 +46,47 @@
       System.Windows.Forms.Label label14;
       this.TabsControl = new System.Windows.Forms.TabControl();
       this.BuildsTab = new System.Windows.Forms.TabPage();
+      this.RenameBuildButton = new System.Windows.Forms.Button();
       this.CopyBuildButton = new System.Windows.Forms.Button();
       this.DeleteBuildButton = new System.Windows.Forms.Button();
       this.AddBuildButton = new System.Windows.Forms.Button();
       this.BuildGroupBox = new System.Windows.Forms.GroupBox();
-      this.BuildName = new com.jcandksolutions.lol.ComboBox();
       this.MaxOrder = new System.Windows.Forms.TextBox();
-      this.Champion = new com.jcandksolutions.lol.ComboBox();
-      this.ItemSet = new com.jcandksolutions.lol.ComboBox();
       this.StartAbilities = new System.Windows.Forms.TextBox();
-      this.RunePage = new com.jcandksolutions.lol.ComboBox();
-      this.MasteryPage = new com.jcandksolutions.lol.ComboBox();
       this.MasteryPagesTab = new System.Windows.Forms.TabPage();
+      this.RenameMasteryPageButton = new System.Windows.Forms.Button();
       this.CopyMasteryPageButton = new System.Windows.Forms.Button();
       this.DeleteMasteryPageButton = new System.Windows.Forms.Button();
       this.AddMasteryPageButton = new System.Windows.Forms.Button();
       this.MasteryPageGroupBox = new System.Windows.Forms.GroupBox();
       this.MasteriesTable = new System.Windows.Forms.TableLayoutPanel();
-      this.MasteryPageName = new com.jcandksolutions.lol.ComboBox();
       this.RunePagesTab = new System.Windows.Forms.TabPage();
+      this.RenameRunePageButton = new System.Windows.Forms.Button();
       this.CopyRunePageButton = new System.Windows.Forms.Button();
       this.DeleteRunePageButton = new System.Windows.Forms.Button();
       this.AddRunePageButton = new System.Windows.Forms.Button();
       this.RunePageGroupBox = new System.Windows.Forms.GroupBox();
+      this.ItemSetsTab = new System.Windows.Forms.TabPage();
+      this.RenameItemSetButton = new System.Windows.Forms.Button();
+      this.CopyItemSetButton = new System.Windows.Forms.Button();
+      this.DeleteItemSetButton = new System.Windows.Forms.Button();
+      this.AddItemSetButton = new System.Windows.Forms.Button();
+      this.ItemSetGroupBox = new System.Windows.Forms.GroupBox();
+      this.MainMenu = new System.Windows.Forms.MenuStrip();
+      this.FileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.NewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.OpenMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.SaveMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.SaveAsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+      this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
+      this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
+      this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
+      this.BuildName = new com.jcandksolutions.lol.ComboBox();
+      this.Champion = new com.jcandksolutions.lol.ComboBox();
+      this.ItemSet = new com.jcandksolutions.lol.ComboBox();
+      this.RunePage = new com.jcandksolutions.lol.ComboBox();
+      this.MasteryPage = new com.jcandksolutions.lol.ComboBox();
+      this.MasteryPageName = new com.jcandksolutions.lol.ComboBox();
       this.RunePageName = new com.jcandksolutions.lol.ComboBox();
       this.Mark1 = new com.jcandksolutions.lol.ComboBox();
       this.Quint3 = new com.jcandksolutions.lol.ComboBox();
@@ -100,11 +118,6 @@
       this.Seal6 = new com.jcandksolutions.lol.ComboBox();
       this.Seal8 = new com.jcandksolutions.lol.ComboBox();
       this.Seal7 = new com.jcandksolutions.lol.ComboBox();
-      this.ItemSetsTab = new System.Windows.Forms.TabPage();
-      this.CopyItemSetButton = new System.Windows.Forms.Button();
-      this.DeleteItemSetButton = new System.Windows.Forms.Button();
-      this.AddItemSetButton = new System.Windows.Forms.Button();
-      this.ItemSetGroupBox = new System.Windows.Forms.GroupBox();
       this.ItemSetName = new com.jcandksolutions.lol.ComboBox();
       this.Item24 = new com.jcandksolutions.lol.ComboBox();
       this.Item1 = new com.jcandksolutions.lol.ComboBox();
@@ -130,15 +143,6 @@
       this.Item13 = new com.jcandksolutions.lol.ComboBox();
       this.Item11 = new com.jcandksolutions.lol.ComboBox();
       this.Item12 = new com.jcandksolutions.lol.ComboBox();
-      this.MainMenu = new System.Windows.Forms.MenuStrip();
-      this.FileMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.NewMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.OpenMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.SaveMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.SaveAsMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-      this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
-      this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
-      this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
       label17 = new System.Windows.Forms.Label();
       label23 = new System.Windows.Forms.Label();
       label18 = new System.Windows.Forms.Label();
@@ -366,6 +370,7 @@
       // 
       // BuildsTab
       // 
+      this.BuildsTab.Controls.Add(this.RenameBuildButton);
       this.BuildsTab.Controls.Add(this.CopyBuildButton);
       this.BuildsTab.Controls.Add(this.DeleteBuildButton);
       this.BuildsTab.Controls.Add(this.AddBuildButton);
@@ -377,6 +382,16 @@
       this.BuildsTab.TabIndex = 0;
       this.BuildsTab.Text = "Builds";
       this.BuildsTab.UseVisualStyleBackColor = true;
+      // 
+      // RenameBuildButton
+      // 
+      this.RenameBuildButton.Location = new System.Drawing.Point(249, 121);
+      this.RenameBuildButton.Name = "RenameBuildButton";
+      this.RenameBuildButton.Size = new System.Drawing.Size(96, 23);
+      this.RenameBuildButton.TabIndex = 23;
+      this.RenameBuildButton.Text = "Rename Build";
+      this.RenameBuildButton.UseVisualStyleBackColor = true;
+      this.RenameBuildButton.Click += new System.EventHandler(this.RenameBuildButton_Click);
       // 
       // CopyBuildButton
       // 
@@ -433,15 +448,6 @@
       this.BuildGroupBox.TabStop = false;
       this.BuildGroupBox.Text = "Build:";
       // 
-      // BuildName
-      // 
-      this.BuildName.Location = new System.Drawing.Point(79, 19);
-      this.BuildName.Name = "BuildName";
-      this.BuildName.Size = new System.Drawing.Size(200, 21);
-      this.BuildName.TabIndex = 2;
-      this.BuildName.SelectedIndexChanged += new System.EventHandler(this.BuildName_SelectedIndexChanged);
-      this.BuildName.TextUpdate += new System.EventHandler(this.BuildName_TextUpdate);
-      // 
       // MaxOrder
       // 
       this.MaxOrder.Location = new System.Drawing.Point(347, 73);
@@ -449,26 +455,6 @@
       this.MaxOrder.Size = new System.Drawing.Size(200, 20);
       this.MaxOrder.TabIndex = 15;
       this.MaxOrder.TextChanged += new System.EventHandler(this.BuildChanged);
-      // 
-      // Champion
-      // 
-      this.Champion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-      this.Champion.FormattingEnabled = true;
-      this.Champion.Location = new System.Drawing.Point(347, 19);
-      this.Champion.Name = "Champion";
-      this.Champion.Size = new System.Drawing.Size(200, 21);
-      this.Champion.TabIndex = 5;
-      this.Champion.SelectedIndexChanged += new System.EventHandler(this.BuildChanged);
-      // 
-      // ItemSet
-      // 
-      this.ItemSet.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-      this.ItemSet.FormattingEnabled = true;
-      this.ItemSet.Location = new System.Drawing.Point(79, 46);
-      this.ItemSet.Name = "ItemSet";
-      this.ItemSet.Size = new System.Drawing.Size(200, 21);
-      this.ItemSet.TabIndex = 6;
-      this.ItemSet.SelectedIndexChanged += new System.EventHandler(this.BuildChanged);
       // 
       // StartAbilities
       // 
@@ -478,28 +464,9 @@
       this.StartAbilities.TabIndex = 13;
       this.StartAbilities.TextChanged += new System.EventHandler(this.BuildChanged);
       // 
-      // RunePage
-      // 
-      this.RunePage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-      this.RunePage.FormattingEnabled = true;
-      this.RunePage.Location = new System.Drawing.Point(347, 46);
-      this.RunePage.Name = "RunePage";
-      this.RunePage.Size = new System.Drawing.Size(200, 21);
-      this.RunePage.TabIndex = 8;
-      this.RunePage.SelectedIndexChanged += new System.EventHandler(this.BuildChanged);
-      // 
-      // MasteryPage
-      // 
-      this.MasteryPage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-      this.MasteryPage.FormattingEnabled = true;
-      this.MasteryPage.Location = new System.Drawing.Point(611, 46);
-      this.MasteryPage.Name = "MasteryPage";
-      this.MasteryPage.Size = new System.Drawing.Size(200, 21);
-      this.MasteryPage.TabIndex = 10;
-      this.MasteryPage.SelectedIndexChanged += new System.EventHandler(this.BuildChanged);
-      // 
       // MasteryPagesTab
       // 
+      this.MasteryPagesTab.Controls.Add(this.RenameMasteryPageButton);
       this.MasteryPagesTab.Controls.Add(this.CopyMasteryPageButton);
       this.MasteryPagesTab.Controls.Add(this.DeleteMasteryPageButton);
       this.MasteryPagesTab.Controls.Add(this.AddMasteryPageButton);
@@ -511,6 +478,16 @@
       this.MasteryPagesTab.TabIndex = 1;
       this.MasteryPagesTab.Text = "Mastery Pages";
       this.MasteryPagesTab.UseVisualStyleBackColor = true;
+      // 
+      // RenameMasteryPageButton
+      // 
+      this.RenameMasteryPageButton.Location = new System.Drawing.Point(393, 371);
+      this.RenameMasteryPageButton.Name = "RenameMasteryPageButton";
+      this.RenameMasteryPageButton.Size = new System.Drawing.Size(123, 23);
+      this.RenameMasteryPageButton.TabIndex = 51;
+      this.RenameMasteryPageButton.Text = "Rename Mastery Page";
+      this.RenameMasteryPageButton.UseVisualStyleBackColor = true;
+      this.RenameMasteryPageButton.Click += new System.EventHandler(this.RenameMasteryPageButton_Click);
       // 
       // CopyMasteryPageButton
       // 
@@ -567,17 +544,9 @@
       this.MasteriesTable.Size = new System.Drawing.Size(500, 300);
       this.MasteriesTable.TabIndex = 46;
       // 
-      // MasteryPageName
-      // 
-      this.MasteryPageName.Location = new System.Drawing.Point(115, 19);
-      this.MasteryPageName.Name = "MasteryPageName";
-      this.MasteryPageName.Size = new System.Drawing.Size(200, 21);
-      this.MasteryPageName.TabIndex = 0;
-      this.MasteryPageName.SelectedIndexChanged += new System.EventHandler(this.MasteryPageName_SelectedIndexChanged);
-      this.MasteryPageName.TextUpdate += new System.EventHandler(this.MasteryPageName_TextUpdate);
-      // 
       // RunePagesTab
       // 
+      this.RunePagesTab.Controls.Add(this.RenameRunePageButton);
       this.RunePagesTab.Controls.Add(this.CopyRunePageButton);
       this.RunePagesTab.Controls.Add(this.DeleteRunePageButton);
       this.RunePagesTab.Controls.Add(this.AddRunePageButton);
@@ -589,6 +558,16 @@
       this.RunePagesTab.TabIndex = 2;
       this.RunePagesTab.Text = "Rune Pages";
       this.RunePagesTab.UseVisualStyleBackColor = true;
+      // 
+      // RenameRunePageButton
+      // 
+      this.RenameRunePageButton.Location = new System.Drawing.Point(354, 318);
+      this.RenameRunePageButton.Name = "RenameRunePageButton";
+      this.RenameRunePageButton.Size = new System.Drawing.Size(115, 23);
+      this.RenameRunePageButton.TabIndex = 41;
+      this.RenameRunePageButton.Text = "Rename Rune Page";
+      this.RenameRunePageButton.UseVisualStyleBackColor = true;
+      this.RenameRunePageButton.Click += new System.EventHandler(this.RenameRunePageButton_Click);
       // 
       // CopyRunePageButton
       // 
@@ -667,14 +646,235 @@
       this.RunePageGroupBox.TabStop = false;
       this.RunePageGroupBox.Text = "Rune Page";
       // 
+      // ItemSetsTab
+      // 
+      this.ItemSetsTab.Controls.Add(this.RenameItemSetButton);
+      this.ItemSetsTab.Controls.Add(this.CopyItemSetButton);
+      this.ItemSetsTab.Controls.Add(this.DeleteItemSetButton);
+      this.ItemSetsTab.Controls.Add(this.AddItemSetButton);
+      this.ItemSetsTab.Controls.Add(this.ItemSetGroupBox);
+      this.ItemSetsTab.Location = new System.Drawing.Point(4, 22);
+      this.ItemSetsTab.Name = "ItemSetsTab";
+      this.ItemSetsTab.Padding = new System.Windows.Forms.Padding(3);
+      this.ItemSetsTab.Size = new System.Drawing.Size(1276, 412);
+      this.ItemSetsTab.TabIndex = 3;
+      this.ItemSetsTab.Text = "Item Sets";
+      this.ItemSetsTab.UseVisualStyleBackColor = true;
+      // 
+      // RenameItemSetButton
+      // 
+      this.RenameItemSetButton.Location = new System.Drawing.Point(291, 304);
+      this.RenameItemSetButton.Name = "RenameItemSetButton";
+      this.RenameItemSetButton.Size = new System.Drawing.Size(99, 23);
+      this.RenameItemSetButton.TabIndex = 39;
+      this.RenameItemSetButton.Text = "Rename Item Set";
+      this.RenameItemSetButton.UseVisualStyleBackColor = true;
+      this.RenameItemSetButton.Click += new System.EventHandler(this.RenameItemSetButton_Click);
+      // 
+      // CopyItemSetButton
+      // 
+      this.CopyItemSetButton.Location = new System.Drawing.Point(196, 304);
+      this.CopyItemSetButton.Name = "CopyItemSetButton";
+      this.CopyItemSetButton.Size = new System.Drawing.Size(89, 23);
+      this.CopyItemSetButton.TabIndex = 38;
+      this.CopyItemSetButton.Text = "Copy Item Set";
+      this.CopyItemSetButton.UseVisualStyleBackColor = true;
+      this.CopyItemSetButton.Click += new System.EventHandler(this.ItemSetsNavigatorCopyItem_Click);
+      // 
+      // DeleteItemSetButton
+      // 
+      this.DeleteItemSetButton.Enabled = false;
+      this.DeleteItemSetButton.Location = new System.Drawing.Point(101, 304);
+      this.DeleteItemSetButton.Name = "DeleteItemSetButton";
+      this.DeleteItemSetButton.Size = new System.Drawing.Size(89, 23);
+      this.DeleteItemSetButton.TabIndex = 37;
+      this.DeleteItemSetButton.Text = "Delete Item Set";
+      this.DeleteItemSetButton.UseVisualStyleBackColor = true;
+      this.DeleteItemSetButton.Click += new System.EventHandler(this.DeleteItemSetButton_Click);
+      // 
+      // AddItemSetButton
+      // 
+      this.AddItemSetButton.Location = new System.Drawing.Point(6, 304);
+      this.AddItemSetButton.Name = "AddItemSetButton";
+      this.AddItemSetButton.Size = new System.Drawing.Size(89, 23);
+      this.AddItemSetButton.TabIndex = 36;
+      this.AddItemSetButton.Text = "Add Item Set";
+      this.AddItemSetButton.UseVisualStyleBackColor = true;
+      this.AddItemSetButton.Click += new System.EventHandler(this.AddItemSetButton_Click);
+      // 
+      // ItemSetGroupBox
+      // 
+      this.ItemSetGroupBox.Controls.Add(label10);
+      this.ItemSetGroupBox.Controls.Add(this.ItemSetName);
+      this.ItemSetGroupBox.Controls.Add(this.Item24);
+      this.ItemSetGroupBox.Controls.Add(this.Item1);
+      this.ItemSetGroupBox.Controls.Add(this.Item23);
+      this.ItemSetGroupBox.Controls.Add(this.Item2);
+      this.ItemSetGroupBox.Controls.Add(this.Item22);
+      this.ItemSetGroupBox.Controls.Add(this.Item3);
+      this.ItemSetGroupBox.Controls.Add(this.Item21);
+      this.ItemSetGroupBox.Controls.Add(this.Item4);
+      this.ItemSetGroupBox.Controls.Add(label16);
+      this.ItemSetGroupBox.Controls.Add(label11);
+      this.ItemSetGroupBox.Controls.Add(this.Item20);
+      this.ItemSetGroupBox.Controls.Add(label12);
+      this.ItemSetGroupBox.Controls.Add(this.Item19);
+      this.ItemSetGroupBox.Controls.Add(this.Item5);
+      this.ItemSetGroupBox.Controls.Add(this.Item18);
+      this.ItemSetGroupBox.Controls.Add(this.Item6);
+      this.ItemSetGroupBox.Controls.Add(this.Item17);
+      this.ItemSetGroupBox.Controls.Add(this.Item7);
+      this.ItemSetGroupBox.Controls.Add(label15);
+      this.ItemSetGroupBox.Controls.Add(this.Item8);
+      this.ItemSetGroupBox.Controls.Add(this.Item16);
+      this.ItemSetGroupBox.Controls.Add(label13);
+      this.ItemSetGroupBox.Controls.Add(this.Item15);
+      this.ItemSetGroupBox.Controls.Add(this.Item9);
+      this.ItemSetGroupBox.Controls.Add(this.Item14);
+      this.ItemSetGroupBox.Controls.Add(this.Item10);
+      this.ItemSetGroupBox.Controls.Add(this.Item13);
+      this.ItemSetGroupBox.Controls.Add(this.Item11);
+      this.ItemSetGroupBox.Controls.Add(label14);
+      this.ItemSetGroupBox.Controls.Add(this.Item12);
+      this.ItemSetGroupBox.Enabled = false;
+      this.ItemSetGroupBox.Location = new System.Drawing.Point(6, 6);
+      this.ItemSetGroupBox.Name = "ItemSetGroupBox";
+      this.ItemSetGroupBox.Size = new System.Drawing.Size(1234, 292);
+      this.ItemSetGroupBox.TabIndex = 35;
+      this.ItemSetGroupBox.TabStop = false;
+      this.ItemSetGroupBox.Text = "Item Set";
+      // 
+      // MainMenu
+      // 
+      this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.FileMenuItem});
+      this.MainMenu.Location = new System.Drawing.Point(0, 0);
+      this.MainMenu.Name = "MainMenu";
+      this.MainMenu.Size = new System.Drawing.Size(1284, 24);
+      this.MainMenu.TabIndex = 17;
+      this.MainMenu.Text = "menuStrip1";
+      // 
+      // FileMenuItem
+      // 
+      this.FileMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.NewMenuItem,
+            this.OpenMenuItem,
+            this.SaveMenuItem,
+            this.SaveAsMenuItem});
+      this.FileMenuItem.Name = "FileMenuItem";
+      this.FileMenuItem.Size = new System.Drawing.Size(37, 20);
+      this.FileMenuItem.Text = "File";
+      // 
+      // NewMenuItem
+      // 
+      this.NewMenuItem.Name = "NewMenuItem";
+      this.NewMenuItem.Size = new System.Drawing.Size(123, 22);
+      this.NewMenuItem.Text = "New";
+      this.NewMenuItem.Click += new System.EventHandler(this.NewMenuItem_Click);
+      // 
+      // OpenMenuItem
+      // 
+      this.OpenMenuItem.Name = "OpenMenuItem";
+      this.OpenMenuItem.Size = new System.Drawing.Size(123, 22);
+      this.OpenMenuItem.Text = "Open...";
+      this.OpenMenuItem.Click += new System.EventHandler(this.OpenMenuItem_Click);
+      // 
+      // SaveMenuItem
+      // 
+      this.SaveMenuItem.Name = "SaveMenuItem";
+      this.SaveMenuItem.Size = new System.Drawing.Size(123, 22);
+      this.SaveMenuItem.Text = "Save";
+      this.SaveMenuItem.Click += new System.EventHandler(this.SaveMenuItem_Click);
+      // 
+      // SaveAsMenuItem
+      // 
+      this.SaveAsMenuItem.Name = "SaveAsMenuItem";
+      this.SaveAsMenuItem.Size = new System.Drawing.Size(123, 22);
+      this.SaveAsMenuItem.Text = "Save As...";
+      this.SaveAsMenuItem.Click += new System.EventHandler(this.SaveAsMenuItem_Click);
+      // 
+      // ToolTip
+      // 
+      this.ToolTip.AutoPopDelay = 32000;
+      this.ToolTip.InitialDelay = 500;
+      this.ToolTip.ReshowDelay = 0;
+      // 
+      // saveFileDialog
+      // 
+      this.saveFileDialog.DefaultExt = "json";
+      this.saveFileDialog.Filter = "JSON files (*.json)|*.json";
+      // 
+      // openFileDialog
+      // 
+      this.openFileDialog.DefaultExt = "json";
+      this.openFileDialog.Filter = "JSON files (*.json)|*.json";
+      // 
+      // BuildName
+      // 
+      this.BuildName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.BuildName.Location = new System.Drawing.Point(79, 19);
+      this.BuildName.Name = "BuildName";
+      this.BuildName.Size = new System.Drawing.Size(200, 21);
+      this.BuildName.TabIndex = 2;
+      this.BuildName.SelectedIndexChanged += new System.EventHandler(this.BuildName_SelectedIndexChanged);
+      // 
+      // Champion
+      // 
+      this.Champion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.Champion.FormattingEnabled = true;
+      this.Champion.Location = new System.Drawing.Point(347, 19);
+      this.Champion.Name = "Champion";
+      this.Champion.Size = new System.Drawing.Size(200, 21);
+      this.Champion.TabIndex = 5;
+      this.Champion.SelectedIndexChanged += new System.EventHandler(this.BuildChanged);
+      // 
+      // ItemSet
+      // 
+      this.ItemSet.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.ItemSet.FormattingEnabled = true;
+      this.ItemSet.Location = new System.Drawing.Point(79, 46);
+      this.ItemSet.Name = "ItemSet";
+      this.ItemSet.Size = new System.Drawing.Size(200, 21);
+      this.ItemSet.TabIndex = 6;
+      this.ItemSet.SelectedIndexChanged += new System.EventHandler(this.BuildChanged);
+      // 
+      // RunePage
+      // 
+      this.RunePage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.RunePage.FormattingEnabled = true;
+      this.RunePage.Location = new System.Drawing.Point(347, 46);
+      this.RunePage.Name = "RunePage";
+      this.RunePage.Size = new System.Drawing.Size(200, 21);
+      this.RunePage.TabIndex = 8;
+      this.RunePage.SelectedIndexChanged += new System.EventHandler(this.BuildChanged);
+      // 
+      // MasteryPage
+      // 
+      this.MasteryPage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.MasteryPage.FormattingEnabled = true;
+      this.MasteryPage.Location = new System.Drawing.Point(611, 46);
+      this.MasteryPage.Name = "MasteryPage";
+      this.MasteryPage.Size = new System.Drawing.Size(200, 21);
+      this.MasteryPage.TabIndex = 10;
+      this.MasteryPage.SelectedIndexChanged += new System.EventHandler(this.BuildChanged);
+      // 
+      // MasteryPageName
+      // 
+      this.MasteryPageName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.MasteryPageName.Location = new System.Drawing.Point(115, 19);
+      this.MasteryPageName.Name = "MasteryPageName";
+      this.MasteryPageName.Size = new System.Drawing.Size(200, 21);
+      this.MasteryPageName.TabIndex = 0;
+      this.MasteryPageName.SelectedIndexChanged += new System.EventHandler(this.MasteryPageName_SelectedIndexChanged);
+      // 
       // RunePageName
       // 
+      this.RunePageName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.RunePageName.Location = new System.Drawing.Point(104, 19);
       this.RunePageName.Name = "RunePageName";
       this.RunePageName.Size = new System.Drawing.Size(200, 21);
       this.RunePageName.TabIndex = 1;
       this.RunePageName.SelectedIndexChanged += new System.EventHandler(this.RunePageName_SelectedIndexChanged);
-      this.RunePageName.TextUpdate += new System.EventHandler(this.RunePageName_TextUpdate);
       // 
       // Mark1
       // 
@@ -976,101 +1176,14 @@
       this.Seal7.TabIndex = 18;
       this.Seal7.SelectedIndexChanged += new System.EventHandler(this.RunePageChanged);
       // 
-      // ItemSetsTab
-      // 
-      this.ItemSetsTab.Controls.Add(this.CopyItemSetButton);
-      this.ItemSetsTab.Controls.Add(this.DeleteItemSetButton);
-      this.ItemSetsTab.Controls.Add(this.AddItemSetButton);
-      this.ItemSetsTab.Controls.Add(this.ItemSetGroupBox);
-      this.ItemSetsTab.Location = new System.Drawing.Point(4, 22);
-      this.ItemSetsTab.Name = "ItemSetsTab";
-      this.ItemSetsTab.Padding = new System.Windows.Forms.Padding(3);
-      this.ItemSetsTab.Size = new System.Drawing.Size(1276, 412);
-      this.ItemSetsTab.TabIndex = 3;
-      this.ItemSetsTab.Text = "Item Sets";
-      this.ItemSetsTab.UseVisualStyleBackColor = true;
-      // 
-      // CopyItemSetButton
-      // 
-      this.CopyItemSetButton.Location = new System.Drawing.Point(196, 304);
-      this.CopyItemSetButton.Name = "CopyItemSetButton";
-      this.CopyItemSetButton.Size = new System.Drawing.Size(89, 23);
-      this.CopyItemSetButton.TabIndex = 38;
-      this.CopyItemSetButton.Text = "Copy Item Set";
-      this.CopyItemSetButton.UseVisualStyleBackColor = true;
-      this.CopyItemSetButton.Click += new System.EventHandler(this.ItemSetsNavigatorCopyItem_Click);
-      // 
-      // DeleteItemSetButton
-      // 
-      this.DeleteItemSetButton.Enabled = false;
-      this.DeleteItemSetButton.Location = new System.Drawing.Point(101, 304);
-      this.DeleteItemSetButton.Name = "DeleteItemSetButton";
-      this.DeleteItemSetButton.Size = new System.Drawing.Size(89, 23);
-      this.DeleteItemSetButton.TabIndex = 37;
-      this.DeleteItemSetButton.Text = "Delete Item Set";
-      this.DeleteItemSetButton.UseVisualStyleBackColor = true;
-      this.DeleteItemSetButton.Click += new System.EventHandler(this.DeleteItemSetButton_Click);
-      // 
-      // AddItemSetButton
-      // 
-      this.AddItemSetButton.Location = new System.Drawing.Point(6, 304);
-      this.AddItemSetButton.Name = "AddItemSetButton";
-      this.AddItemSetButton.Size = new System.Drawing.Size(89, 23);
-      this.AddItemSetButton.TabIndex = 36;
-      this.AddItemSetButton.Text = "Add Item Set";
-      this.AddItemSetButton.UseVisualStyleBackColor = true;
-      this.AddItemSetButton.Click += new System.EventHandler(this.AddItemSetButton_Click);
-      // 
-      // ItemSetGroupBox
-      // 
-      this.ItemSetGroupBox.Controls.Add(label10);
-      this.ItemSetGroupBox.Controls.Add(this.ItemSetName);
-      this.ItemSetGroupBox.Controls.Add(this.Item24);
-      this.ItemSetGroupBox.Controls.Add(this.Item1);
-      this.ItemSetGroupBox.Controls.Add(this.Item23);
-      this.ItemSetGroupBox.Controls.Add(this.Item2);
-      this.ItemSetGroupBox.Controls.Add(this.Item22);
-      this.ItemSetGroupBox.Controls.Add(this.Item3);
-      this.ItemSetGroupBox.Controls.Add(this.Item21);
-      this.ItemSetGroupBox.Controls.Add(this.Item4);
-      this.ItemSetGroupBox.Controls.Add(label16);
-      this.ItemSetGroupBox.Controls.Add(label11);
-      this.ItemSetGroupBox.Controls.Add(this.Item20);
-      this.ItemSetGroupBox.Controls.Add(label12);
-      this.ItemSetGroupBox.Controls.Add(this.Item19);
-      this.ItemSetGroupBox.Controls.Add(this.Item5);
-      this.ItemSetGroupBox.Controls.Add(this.Item18);
-      this.ItemSetGroupBox.Controls.Add(this.Item6);
-      this.ItemSetGroupBox.Controls.Add(this.Item17);
-      this.ItemSetGroupBox.Controls.Add(this.Item7);
-      this.ItemSetGroupBox.Controls.Add(label15);
-      this.ItemSetGroupBox.Controls.Add(this.Item8);
-      this.ItemSetGroupBox.Controls.Add(this.Item16);
-      this.ItemSetGroupBox.Controls.Add(label13);
-      this.ItemSetGroupBox.Controls.Add(this.Item15);
-      this.ItemSetGroupBox.Controls.Add(this.Item9);
-      this.ItemSetGroupBox.Controls.Add(this.Item14);
-      this.ItemSetGroupBox.Controls.Add(this.Item10);
-      this.ItemSetGroupBox.Controls.Add(this.Item13);
-      this.ItemSetGroupBox.Controls.Add(this.Item11);
-      this.ItemSetGroupBox.Controls.Add(label14);
-      this.ItemSetGroupBox.Controls.Add(this.Item12);
-      this.ItemSetGroupBox.Enabled = false;
-      this.ItemSetGroupBox.Location = new System.Drawing.Point(6, 6);
-      this.ItemSetGroupBox.Name = "ItemSetGroupBox";
-      this.ItemSetGroupBox.Size = new System.Drawing.Size(1234, 292);
-      this.ItemSetGroupBox.TabIndex = 35;
-      this.ItemSetGroupBox.TabStop = false;
-      this.ItemSetGroupBox.Text = "Item Set";
-      // 
       // ItemSetName
       // 
+      this.ItemSetName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.ItemSetName.Location = new System.Drawing.Point(89, 19);
       this.ItemSetName.Name = "ItemSetName";
       this.ItemSetName.Size = new System.Drawing.Size(200, 21);
       this.ItemSetName.TabIndex = 3;
       this.ItemSetName.SelectedIndexChanged += new System.EventHandler(this.ItemSetName_SelectedIndexChanged);
-      this.ItemSetName.TextUpdate += new System.EventHandler(this.ItemSetName_TextUpdate);
       // 
       // Item24
       // 
@@ -1312,71 +1425,6 @@
       this.Item12.TabIndex = 18;
       this.Item12.SelectedIndexChanged += new System.EventHandler(this.ItemSetChanged);
       // 
-      // MainMenu
-      // 
-      this.MainMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.FileMenuItem});
-      this.MainMenu.Location = new System.Drawing.Point(0, 0);
-      this.MainMenu.Name = "MainMenu";
-      this.MainMenu.Size = new System.Drawing.Size(1284, 24);
-      this.MainMenu.TabIndex = 17;
-      this.MainMenu.Text = "menuStrip1";
-      // 
-      // FileMenuItem
-      // 
-      this.FileMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.NewMenuItem,
-            this.OpenMenuItem,
-            this.SaveMenuItem,
-            this.SaveAsMenuItem});
-      this.FileMenuItem.Name = "FileMenuItem";
-      this.FileMenuItem.Size = new System.Drawing.Size(37, 20);
-      this.FileMenuItem.Text = "File";
-      // 
-      // NewMenuItem
-      // 
-      this.NewMenuItem.Name = "NewMenuItem";
-      this.NewMenuItem.Size = new System.Drawing.Size(123, 22);
-      this.NewMenuItem.Text = "New";
-      this.NewMenuItem.Click += new System.EventHandler(this.NewMenuItem_Click);
-      // 
-      // OpenMenuItem
-      // 
-      this.OpenMenuItem.Name = "OpenMenuItem";
-      this.OpenMenuItem.Size = new System.Drawing.Size(123, 22);
-      this.OpenMenuItem.Text = "Open...";
-      this.OpenMenuItem.Click += new System.EventHandler(this.OpenMenuItem_Click);
-      // 
-      // SaveMenuItem
-      // 
-      this.SaveMenuItem.Name = "SaveMenuItem";
-      this.SaveMenuItem.Size = new System.Drawing.Size(123, 22);
-      this.SaveMenuItem.Text = "Save";
-      this.SaveMenuItem.Click += new System.EventHandler(this.SaveMenuItem_Click);
-      // 
-      // SaveAsMenuItem
-      // 
-      this.SaveAsMenuItem.Name = "SaveAsMenuItem";
-      this.SaveAsMenuItem.Size = new System.Drawing.Size(123, 22);
-      this.SaveAsMenuItem.Text = "Save As...";
-      this.SaveAsMenuItem.Click += new System.EventHandler(this.SaveAsMenuItem_Click);
-      // 
-      // ToolTip
-      // 
-      this.ToolTip.AutoPopDelay = 32000;
-      this.ToolTip.InitialDelay = 500;
-      this.ToolTip.ReshowDelay = 0;
-      // 
-      // saveFileDialog
-      // 
-      this.saveFileDialog.DefaultExt = "json";
-      this.saveFileDialog.Filter = "JSON files (*.json)|*.json";
-      // 
-      // openFileDialog
-      // 
-      this.openFileDialog.DefaultExt = "json";
-      this.openFileDialog.Filter = "JSON files (*.json)|*.json";
-      // 
       // EditorViewImpl
       // 
       this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1507,6 +1555,10 @@
     private System.Windows.Forms.Button CopyItemSetButton;
     private System.Windows.Forms.Button DeleteItemSetButton;
     private System.Windows.Forms.Button AddItemSetButton;
+    private System.Windows.Forms.Button RenameBuildButton;
+    private System.Windows.Forms.Button RenameMasteryPageButton;
+    private System.Windows.Forms.Button RenameRunePageButton;
+    private System.Windows.Forms.Button RenameItemSetButton;
   }
 }
 
