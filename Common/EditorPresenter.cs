@@ -67,20 +67,29 @@ namespace com.jcandksolutions.lol {
       mBuildManager.save(mBuildsPath);
     }
 
-    public void onDataChanged(object value) {
+    private void onDataChanged() {
       mView.setSaveEnabled(true);
       mShouldSaveBeforeExit = true;
-      if (value is Build) {
-        mBuildManager.updateBuild((Build)value);
-      } else if (value is MasteryPage) {
-        mBuildManager.updateMasteryPage((MasteryPage)value);
-      } else if (value is RunePage) {
-        mBuildManager.updateRunePage((RunePage)value);
-      } else if (value is ItemSet) {
-        mBuildManager.updateItemSet((ItemSet)value);
-      } else {
-        throw new InvalidOperationException("Not recognized data changed");
-      }
+    }
+
+    public void onRunePageChanged(RunePage value) {
+      onDataChanged();
+      mBuildManager.updateRunePage(value);
+    }
+
+    public void onBuildChanged(Build value) {
+      onDataChanged();
+      mBuildManager.updateBuild(value);
+    }
+
+    public void onMasteryPageChanged(MasteryPage value) {
+      onDataChanged();
+      mBuildManager.updateMasteryPage(value);
+    }
+
+    public void onItemSetChanged(ItemSet value) {
+      onDataChanged();
+      mBuildManager.updateItemSet(value);
     }
 
     public bool shouldCancelFormClosing() {

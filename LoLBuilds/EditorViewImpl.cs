@@ -589,7 +589,7 @@ namespace com.jcandksolutions.lol {
         var control = (Control)sender;
         var bind = (BuildBind)control.Tag;
         bind.updateProperty(mCurrentBuild, control);
-        mPresenter.onDataChanged(mCurrentBuild);
+        mPresenter.onBuildChanged(mCurrentBuild);
       }
     }
 
@@ -598,7 +598,7 @@ namespace com.jcandksolutions.lol {
         var control = (Control)sender;
         var bind = (MasteryPageBind)control.Tag;
         bind.updateProperty(mCurrentMasteryPage, control);
-        mPresenter.onDataChanged(mCurrentMasteryPage);
+        mPresenter.onMasteryPageChanged(mCurrentMasteryPage);
       }
     }
 
@@ -607,7 +607,7 @@ namespace com.jcandksolutions.lol {
         var control = (Control)sender;
         var bind = (RunePageBind)control.Tag;
         bind.updateProperty(mCurrentRunePage, control);
-        mPresenter.onDataChanged(mCurrentRunePage);
+        mPresenter.onRunePageChanged(mCurrentRunePage);
       }
     }
 
@@ -616,7 +616,7 @@ namespace com.jcandksolutions.lol {
         var control = (Control)sender;
         var bind = (ItemSetBind)control.Tag;
         bind.updateProperty(mCurrentItemSet, control);
-        mPresenter.onDataChanged(mCurrentItemSet);
+        mPresenter.onItemSetChanged(mCurrentItemSet);
       }
     }
   }
