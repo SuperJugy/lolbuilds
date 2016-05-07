@@ -160,7 +160,7 @@ namespace com.jcandksolutions.lol {
     }
 
     private List<string> extractEnchantmentsIDs(JObject itemData) {
-      return itemData.Properties().Where(itDa => itDa.Value["name"].ToString().StartsWith("Enchantment")).Select(itDa => itDa.Value["id"].ToString()).ToList();
+      return itemData.Properties().Where(itDa => itDa.Value["name"] != null && itDa.Value["name"].ToString().StartsWith("Enchantment")).Select(itDa => itDa.Value["id"].ToString()).ToList();
     }
 
     private string findEnchantableForEnchantment(string enchantment, List<string> enchantments, List<dynamic> enchantables) {
