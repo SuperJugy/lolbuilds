@@ -372,18 +372,24 @@ namespace com.jcandksolutions.lol {
     }
 
     public void updateMasteryPageName(string name) {
+      MasteryPage.Items.Remove(mCurrentMasteryPage["name"]);
+      MasteryPage.Items.Add(name);
       MasteryPageName.Items.Remove(mCurrentMasteryPage["name"]);
       MasteryPageName.Items.Add(name);
       MasteryPageName.SelectedItem = name;
     }
 
     public void updateRunePageName(string name) {
+      RunePage.Items.Remove(mCurrentRunePage.RunePageName);
+      RunePage.Items.Add(name);
       RunePageName.Items.Remove(mCurrentRunePage.RunePageName);
       RunePageName.Items.Add(name);
       RunePageName.SelectedItem = name;
     }
 
     public void updateItemSetName(string name) {
+      ItemSet.Items.Remove(mCurrentItemSet.ItemSetName);
+      ItemSet.Items.Add(name);
       ItemSetName.Items.Remove(mCurrentItemSet.ItemSetName);
       ItemSetName.Items.Add(name);
       ItemSetName.SelectedItem = name;
