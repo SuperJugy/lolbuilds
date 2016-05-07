@@ -26,8 +26,7 @@ namespace com.jcandksolutions.lol {
     public void onNewFileClicked() {
       if (!mShouldSaveBeforeExit || !mView.confirmNotLoseChanges(CONFIRM_LOSE_CHANGES_MESSAGE, CONFIRM_LOSE_CHANGES_TITLE)) {
         mBuildsPath = null;
-        mShouldSaveBeforeExit = false;
-        mView.setSaveEnabled(false);
+        onDataSaved();
         bindEmptyLists();
       }
     }
@@ -39,8 +38,7 @@ namespace com.jcandksolutions.lol {
           return;
         }
         mBuildsPath = newBuildsPath;
-        mShouldSaveBeforeExit = false;
-        mView.setSaveEnabled(false);
+        onDataSaved();
         mBuildManager.loadBuild(mBuildsPath);
         bindLists();
       }
@@ -54,14 +52,18 @@ namespace com.jcandksolutions.lol {
         }
         mBuildsPath = newBuildsPath;
       }
-      mShouldSaveBeforeExit = false;
-      mView.setSaveEnabled(false);
+      onDataSaved();
       mBuildManager.save(mBuildsPath);
     }
 
     private void onDataChanged() {
       mView.setSaveEnabled(true);
       mShouldSaveBeforeExit = true;
+    }
+
+    private void onDataSaved() {
+      mView.setSaveEnabled(false);
+      mShouldSaveBeforeExit = false;
     }
 
     public void onRunePageChanged(RunePage value) {
@@ -117,8 +119,7 @@ namespace com.jcandksolutions.lol {
       if (name == null) {
         return;
       }
-      mView.setSaveEnabled(true);
-      mShouldSaveBeforeExit = true;
+      onDataChanged();
       mView.shouldPauseBinding = true;
       mView.updateBuildName(name);
       mView.shouldPauseBinding = false;
@@ -130,8 +131,7 @@ namespace com.jcandksolutions.lol {
       if (name == null) {
         return;
       }
-      mView.setSaveEnabled(true);
-      mShouldSaveBeforeExit = true;
+      onDataChanged();
       mView.shouldPauseBinding = true;
       mView.updateMasteryPageName(name);
       mView.shouldPauseBinding = false;
@@ -143,8 +143,7 @@ namespace com.jcandksolutions.lol {
       if (name == null) {
         return;
       }
-      mView.setSaveEnabled(true);
-      mShouldSaveBeforeExit = true;
+      onDataChanged();
       mView.shouldPauseBinding = true;
       mView.updateRunePageName(name);
       mView.shouldPauseBinding = false;
@@ -156,8 +155,7 @@ namespace com.jcandksolutions.lol {
       if (name == null) {
         return;
       }
-      mView.setSaveEnabled(true);
-      mShouldSaveBeforeExit = true;
+      onDataChanged();
       mView.shouldPauseBinding = true;
       mView.updateItemSetName(name);
       mView.shouldPauseBinding = false;
@@ -165,8 +163,7 @@ namespace com.jcandksolutions.lol {
     }
 
     public void onDeleteItem(object item) {
-      mView.setSaveEnabled(true);
-      mShouldSaveBeforeExit = true;
+      onDataChanged();
       if (item is Build) {
         mBuildManager.removeBuild((Build)item);
       } else if (item is MasteryPage) {
@@ -185,8 +182,7 @@ namespace com.jcandksolutions.lol {
       if (name == null) {
         return;
       }
-      mView.setSaveEnabled(true);
-      mShouldSaveBeforeExit = true;
+      onDataChanged();
       var build = new Build {
         BuildName = name
       };
@@ -199,8 +195,7 @@ namespace com.jcandksolutions.lol {
       if (name == null) {
         return;
       }
-      mView.setSaveEnabled(true);
-      mShouldSaveBeforeExit = true;
+      onDataChanged();
       var masteryPage = new MasteryPage();
       masteryPage["name"] = name;
       mBuildManager.addMasteryPage(masteryPage);
@@ -212,8 +207,7 @@ namespace com.jcandksolutions.lol {
       if (name == null) {
         return;
       }
-      mView.setSaveEnabled(true);
-      mShouldSaveBeforeExit = true;
+      onDataChanged();
       var runePage = new RunePage {
         RunePageName = name
       };
@@ -226,8 +220,7 @@ namespace com.jcandksolutions.lol {
       if (name == null) {
         return;
       }
-      mView.setSaveEnabled(true);
-      mShouldSaveBeforeExit = true;
+      onDataChanged();
       var itemSet = new ItemSet {
         ItemSetName = name
       };

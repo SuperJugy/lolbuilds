@@ -142,9 +142,10 @@ namespace com.jcandksolutions.lol {
           j,
           0);
         foreach (Tier tier in branch.Tiers) {
-          var tierTable = new TableLayoutPanel();
-          tierTable.RowCount = 1;
-          tierTable.ColumnCount = tier.Masteries.Count;
+          var tierTable = new TableLayoutPanel {
+            RowCount = 1,
+            ColumnCount = tier.Masteries.Count
+          };
           MasteriesTable.Controls.Add(tierTable, j, i);
           int k = 0;
           foreach (Mastery mastery in tier.Masteries) {
@@ -162,9 +163,10 @@ namespace com.jcandksolutions.lol {
             but.Tag = new MasteryPageBind(mastery);
             but.TextChanged += MasteryPageChanged;
             mMasteryButtons.Add(mastery.ID, but);
-            var r = new ColumnStyle();
-            r.SizeType = SizeType.Percent;
-            r.Width = 100F / tierTable.ColumnCount;
+            var r = new ColumnStyle {
+              SizeType = SizeType.Percent,
+              Width = 100F / tierTable.ColumnCount
+            };
             tierTable.ColumnStyles.Add(r);
             tierTable.Controls.Add(but, k, 0);
             ++k;
@@ -174,15 +176,17 @@ namespace com.jcandksolutions.lol {
         ++j;
       }
       for (int i = 0; i < MasteriesTable.RowCount; ++i) {
-        var r = new RowStyle();
-        r.SizeType = SizeType.Percent;
-        r.Height = 100F / MasteriesTable.RowCount;
+        var r = new RowStyle {
+          SizeType = SizeType.Percent,
+          Height = 100F / MasteriesTable.RowCount
+        };
         MasteriesTable.RowStyles.Add(r);
       }
       for (int i = 0; i < MasteriesTable.ColumnCount; ++i) {
-        var r = new ColumnStyle();
-        r.SizeType = SizeType.Percent;
-        r.Width = 100F / MasteriesTable.ColumnCount;
+        var r = new ColumnStyle {
+          SizeType = SizeType.Percent,
+          Width = 100F / MasteriesTable.ColumnCount
+        };
         MasteriesTable.ColumnStyles.Add(r);
       }
     }
