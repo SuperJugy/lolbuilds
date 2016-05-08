@@ -20,35 +20,26 @@ namespace com.jcandksolutions.lol {
     private JArray mRunePages = new JArray();
     public Rune EmptyRune {
       get {
-        if (mEmptyRune == null) {
-          mEmptyRune = new Rune {
-            ID = "-1",
-            Name = ""
-          };
-        }
-        return mEmptyRune;
+        return mEmptyRune ?? (mEmptyRune = new Rune {
+          ID = "-1",
+          Name = ""
+        });
       }
     }
     public Item EmptyItem {
       get {
-        if (mEmptyItem == null) {
-          mEmptyItem = new Item {
-            ID = "-1",
-            Name = ""
-          };
-        }
-        return mEmptyItem;
+        return mEmptyItem ?? (mEmptyItem = new Item {
+          ID = "-1",
+          Name = ""
+        });
       }
     }
-    public Champion EmptyChampion {
+    private Champion EmptyChampion {
       get {
-        if (mEmptyChampion == null) {
-          mEmptyChampion = new Champion {
-            ID = "-1",
-            Name = ""
-          };
-        }
-        return mEmptyChampion;
+        return mEmptyChampion ?? (mEmptyChampion = new Champion {
+          ID = "-1",
+          Name = ""
+        });
       }
     }
     public List<Branch> MasteriesTree { get; private set; }
@@ -130,36 +121,36 @@ namespace com.jcandksolutions.lol {
       get {
         return mRunePages.Select(RP => new RunePage {
           RunePageName = RP["name"].ToString(),
-          Mark1 = mMarks.Where(I => RP["mark1"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-          Mark2 = mMarks.Where(I => RP["mark2"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-          Mark3 = mMarks.Where(I => RP["mark3"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-          Mark4 = mMarks.Where(I => RP["mark4"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-          Mark5 = mMarks.Where(I => RP["mark5"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-          Mark6 = mMarks.Where(I => RP["mark6"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-          Mark7 = mMarks.Where(I => RP["mark7"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-          Mark8 = mMarks.Where(I => RP["mark8"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-          Mark9 = mMarks.Where(I => RP["mark9"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-          Seal1 = mSeals.Where(I => RP["seal1"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-          Seal2 = mSeals.Where(I => RP["seal2"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-          Seal3 = mSeals.Where(I => RP["seal3"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-          Seal4 = mSeals.Where(I => RP["seal4"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-          Seal5 = mSeals.Where(I => RP["seal5"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-          Seal6 = mSeals.Where(I => RP["seal6"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-          Seal7 = mSeals.Where(I => RP["seal7"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-          Seal8 = mSeals.Where(I => RP["seal8"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-          Seal9 = mSeals.Where(I => RP["seal9"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-          Glyph1 = mGlyphs.Where(I => RP["glyph1"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-          Glyph2 = mGlyphs.Where(I => RP["glyph2"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-          Glyph3 = mGlyphs.Where(I => RP["glyph3"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-          Glyph4 = mGlyphs.Where(I => RP["glyph4"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-          Glyph5 = mGlyphs.Where(I => RP["glyph5"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-          Glyph6 = mGlyphs.Where(I => RP["glyph6"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-          Glyph7 = mGlyphs.Where(I => RP["glyph7"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-          Glyph8 = mGlyphs.Where(I => RP["glyph8"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-          Glyph9 = mGlyphs.Where(I => RP["glyph9"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-          Quint1 = mQuints.Where(I => RP["quint1"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-          Quint2 = mQuints.Where(I => RP["quint1"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-          Quint3 = mQuints.Where(I => RP["quint1"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune
+          Mark1 = mMarks.FirstOrDefault(I => RP["mark1"].ToString() == I.ID) ?? EmptyRune,
+          Mark2 = mMarks.FirstOrDefault(I => RP["mark2"].ToString() == I.ID) ?? EmptyRune,
+          Mark3 = mMarks.FirstOrDefault(I => RP["mark3"].ToString() == I.ID) ?? EmptyRune,
+          Mark4 = mMarks.FirstOrDefault(I => RP["mark4"].ToString() == I.ID) ?? EmptyRune,
+          Mark5 = mMarks.FirstOrDefault(I => RP["mark5"].ToString() == I.ID) ?? EmptyRune,
+          Mark6 = mMarks.FirstOrDefault(I => RP["mark6"].ToString() == I.ID) ?? EmptyRune,
+          Mark7 = mMarks.FirstOrDefault(I => RP["mark7"].ToString() == I.ID) ?? EmptyRune,
+          Mark8 = mMarks.FirstOrDefault(I => RP["mark8"].ToString() == I.ID) ?? EmptyRune,
+          Mark9 = mMarks.FirstOrDefault(I => RP["mark9"].ToString() == I.ID) ?? EmptyRune,
+          Seal1 = mSeals.FirstOrDefault(I => RP["seal1"].ToString() == I.ID) ?? EmptyRune,
+          Seal2 = mSeals.FirstOrDefault(I => RP["seal2"].ToString() == I.ID) ?? EmptyRune,
+          Seal3 = mSeals.FirstOrDefault(I => RP["seal3"].ToString() == I.ID) ?? EmptyRune,
+          Seal4 = mSeals.FirstOrDefault(I => RP["seal4"].ToString() == I.ID) ?? EmptyRune,
+          Seal5 = mSeals.FirstOrDefault(I => RP["seal5"].ToString() == I.ID) ?? EmptyRune,
+          Seal6 = mSeals.FirstOrDefault(I => RP["seal6"].ToString() == I.ID) ?? EmptyRune,
+          Seal7 = mSeals.FirstOrDefault(I => RP["seal7"].ToString() == I.ID) ?? EmptyRune,
+          Seal8 = mSeals.FirstOrDefault(I => RP["seal8"].ToString() == I.ID) ?? EmptyRune,
+          Seal9 = mSeals.FirstOrDefault(I => RP["seal9"].ToString() == I.ID) ?? EmptyRune,
+          Glyph1 = mGlyphs.FirstOrDefault(I => RP["glyph1"].ToString() == I.ID) ?? EmptyRune,
+          Glyph2 = mGlyphs.FirstOrDefault(I => RP["glyph2"].ToString() == I.ID) ?? EmptyRune,
+          Glyph3 = mGlyphs.FirstOrDefault(I => RP["glyph3"].ToString() == I.ID) ?? EmptyRune,
+          Glyph4 = mGlyphs.FirstOrDefault(I => RP["glyph4"].ToString() == I.ID) ?? EmptyRune,
+          Glyph5 = mGlyphs.FirstOrDefault(I => RP["glyph5"].ToString() == I.ID) ?? EmptyRune,
+          Glyph6 = mGlyphs.FirstOrDefault(I => RP["glyph6"].ToString() == I.ID) ?? EmptyRune,
+          Glyph7 = mGlyphs.FirstOrDefault(I => RP["glyph7"].ToString() == I.ID) ?? EmptyRune,
+          Glyph8 = mGlyphs.FirstOrDefault(I => RP["glyph8"].ToString() == I.ID) ?? EmptyRune,
+          Glyph9 = mGlyphs.FirstOrDefault(I => RP["glyph9"].ToString() == I.ID) ?? EmptyRune,
+          Quint1 = mQuints.FirstOrDefault(I => RP["quint1"].ToString() == I.ID) ?? EmptyRune,
+          Quint2 = mQuints.FirstOrDefault(I => RP["quint1"].ToString() == I.ID) ?? EmptyRune,
+          Quint3 = mQuints.FirstOrDefault(I => RP["quint1"].ToString() == I.ID) ?? EmptyRune
         }).ToList();
       }
     }
@@ -168,30 +159,30 @@ namespace com.jcandksolutions.lol {
       get {
         return mItemSets.Select(IS => new ItemSet {
           ItemSetName = IS["name"].ToString(),
-          Item1 = mItems.Where(I => IS["item1"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-          Item2 = mItems.Where(I => IS["item2"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-          Item3 = mItems.Where(I => IS["item3"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-          Item4 = mItems.Where(I => IS["item4"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-          Item5 = mItems.Where(I => IS["item5"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-          Item6 = mItems.Where(I => IS["item6"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-          Item7 = mItems.Where(I => IS["item7"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-          Item8 = mItems.Where(I => IS["item8"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-          Item9 = mItems.Where(I => IS["item9"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-          Item10 = mItems.Where(I => IS["item10"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-          Item11 = mItems.Where(I => IS["item11"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-          Item12 = mItems.Where(I => IS["item12"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-          Item13 = mItems.Where(I => IS["item13"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-          Item14 = mItems.Where(I => IS["item14"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-          Item15 = mItems.Where(I => IS["item15"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-          Item16 = mItems.Where(I => IS["item16"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-          Item17 = mItems.Where(I => IS["item17"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-          Item18 = mItems.Where(I => IS["item18"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-          Item19 = mItems.Where(I => IS["item19"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-          Item20 = mItems.Where(I => IS["item20"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-          Item21 = mItems.Where(I => IS["item21"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-          Item22 = mItems.Where(I => IS["item22"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-          Item23 = mItems.Where(I => IS["item23"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-          Item24 = mItems.Where(I => IS["item24"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem
+          Item1 = mItems.FirstOrDefault(I => IS["item1"].ToString() == I.ID) ?? EmptyItem,
+          Item2 = mItems.FirstOrDefault(I => IS["item2"].ToString() == I.ID) ?? EmptyItem,
+          Item3 = mItems.FirstOrDefault(I => IS["item3"].ToString() == I.ID) ?? EmptyItem,
+          Item4 = mItems.FirstOrDefault(I => IS["item4"].ToString() == I.ID) ?? EmptyItem,
+          Item5 = mItems.FirstOrDefault(I => IS["item5"].ToString() == I.ID) ?? EmptyItem,
+          Item6 = mItems.FirstOrDefault(I => IS["item6"].ToString() == I.ID) ?? EmptyItem,
+          Item7 = mItems.FirstOrDefault(I => IS["item7"].ToString() == I.ID) ?? EmptyItem,
+          Item8 = mItems.FirstOrDefault(I => IS["item8"].ToString() == I.ID) ?? EmptyItem,
+          Item9 = mItems.FirstOrDefault(I => IS["item9"].ToString() == I.ID) ?? EmptyItem,
+          Item10 = mItems.FirstOrDefault(I => IS["item10"].ToString() == I.ID) ?? EmptyItem,
+          Item11 = mItems.FirstOrDefault(I => IS["item11"].ToString() == I.ID) ?? EmptyItem,
+          Item12 = mItems.FirstOrDefault(I => IS["item12"].ToString() == I.ID) ?? EmptyItem,
+          Item13 = mItems.FirstOrDefault(I => IS["item13"].ToString() == I.ID) ?? EmptyItem,
+          Item14 = mItems.FirstOrDefault(I => IS["item14"].ToString() == I.ID) ?? EmptyItem,
+          Item15 = mItems.FirstOrDefault(I => IS["item15"].ToString() == I.ID) ?? EmptyItem,
+          Item16 = mItems.FirstOrDefault(I => IS["item16"].ToString() == I.ID) ?? EmptyItem,
+          Item17 = mItems.FirstOrDefault(I => IS["item17"].ToString() == I.ID) ?? EmptyItem,
+          Item18 = mItems.FirstOrDefault(I => IS["item18"].ToString() == I.ID) ?? EmptyItem,
+          Item19 = mItems.FirstOrDefault(I => IS["item19"].ToString() == I.ID) ?? EmptyItem,
+          Item20 = mItems.FirstOrDefault(I => IS["item20"].ToString() == I.ID) ?? EmptyItem,
+          Item21 = mItems.FirstOrDefault(I => IS["item21"].ToString() == I.ID) ?? EmptyItem,
+          Item22 = mItems.FirstOrDefault(I => IS["item22"].ToString() == I.ID) ?? EmptyItem,
+          Item23 = mItems.FirstOrDefault(I => IS["item23"].ToString() == I.ID) ?? EmptyItem,
+          Item24 = mItems.FirstOrDefault(I => IS["item24"].ToString() == I.ID) ?? EmptyItem
         }).ToList();
       }
     }
@@ -205,9 +196,9 @@ namespace com.jcandksolutions.lol {
       if (items == null || runes == null || masteries == null || champions == null) {
         throw new FormatException("The database file has wrong format or is corrupted");
       }
-      mItems = items.Select(x => extractItem(x)).OrderBy(x => x.Name).ToList();
+      mItems = items.Select(extractItem).OrderBy(x => x.Name).ToList();
       mItems.Add(EmptyItem);
-      var tempRunes = runes.Select(x => extractRune(x)).OrderBy(x => x.Name).ToArray();
+      var tempRunes = runes.Select(extractRune).OrderBy(x => x.Name).ToArray();
       mMarks = tempRunes.Where(x => x.Type == "red").ToList();
       mSeals = tempRunes.Where(x => x.Type == "yellow").ToList();
       mGlyphs = tempRunes.Where(x => x.Type == "blue").ToList();
@@ -216,9 +207,9 @@ namespace com.jcandksolutions.lol {
       mSeals.Add(EmptyRune);
       mGlyphs.Add(EmptyRune);
       mQuints.Add(EmptyRune);
-      ChampionsData = champions.Select(x => extractChampion(x)).OrderBy(x => x.Name).ToList();
+      ChampionsData = champions.Select(extractChampion).OrderBy(x => x.Name).ToList();
       ChampionsData.Add(EmptyChampion);
-      MasteriesTree = masteries.Select(x => extractBranch(x)).OrderBy(x => x.Name).ToList();
+      MasteriesTree = masteries.Select(extractBranch).OrderBy(x => x.Name).ToList();
     }
 
     public void loadBuild(string path) {
@@ -274,71 +265,71 @@ namespace com.jcandksolutions.lol {
     public RunePage getRunePageByName(string index) {
       return mRunePages.Where(RP => RP["name"].ToString() == index).Select(RP => new RunePage {
         RunePageName = RP["name"].ToString(),
-        Mark1 = mMarks.Where(I => RP["mark1"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-        Mark2 = mMarks.Where(I => RP["mark2"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-        Mark3 = mMarks.Where(I => RP["mark3"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-        Mark4 = mMarks.Where(I => RP["mark4"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-        Mark5 = mMarks.Where(I => RP["mark5"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-        Mark6 = mMarks.Where(I => RP["mark6"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-        Mark7 = mMarks.Where(I => RP["mark7"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-        Mark8 = mMarks.Where(I => RP["mark8"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-        Mark9 = mMarks.Where(I => RP["mark9"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-        Seal1 = mSeals.Where(I => RP["seal1"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-        Seal2 = mSeals.Where(I => RP["seal2"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-        Seal3 = mSeals.Where(I => RP["seal3"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-        Seal4 = mSeals.Where(I => RP["seal4"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-        Seal5 = mSeals.Where(I => RP["seal5"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-        Seal6 = mSeals.Where(I => RP["seal6"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-        Seal7 = mSeals.Where(I => RP["seal7"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-        Seal8 = mSeals.Where(I => RP["seal8"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-        Seal9 = mSeals.Where(I => RP["seal9"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-        Glyph1 = mGlyphs.Where(I => RP["glyph1"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-        Glyph2 = mGlyphs.Where(I => RP["glyph2"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-        Glyph3 = mGlyphs.Where(I => RP["glyph3"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-        Glyph4 = mGlyphs.Where(I => RP["glyph4"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-        Glyph5 = mGlyphs.Where(I => RP["glyph5"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-        Glyph6 = mGlyphs.Where(I => RP["glyph6"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-        Glyph7 = mGlyphs.Where(I => RP["glyph7"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-        Glyph8 = mGlyphs.Where(I => RP["glyph8"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-        Glyph9 = mGlyphs.Where(I => RP["glyph9"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-        Quint1 = mQuints.Where(I => RP["quint1"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-        Quint2 = mQuints.Where(I => RP["quint1"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune,
-        Quint3 = mQuints.Where(I => RP["quint1"].ToString() == I.ID).FirstOrDefault() ?? EmptyRune
+        Mark1 = mMarks.FirstOrDefault(I => RP["mark1"].ToString() == I.ID) ?? EmptyRune,
+        Mark2 = mMarks.FirstOrDefault(I => RP["mark2"].ToString() == I.ID) ?? EmptyRune,
+        Mark3 = mMarks.FirstOrDefault(I => RP["mark3"].ToString() == I.ID) ?? EmptyRune,
+        Mark4 = mMarks.FirstOrDefault(I => RP["mark4"].ToString() == I.ID) ?? EmptyRune,
+        Mark5 = mMarks.FirstOrDefault(I => RP["mark5"].ToString() == I.ID) ?? EmptyRune,
+        Mark6 = mMarks.FirstOrDefault(I => RP["mark6"].ToString() == I.ID) ?? EmptyRune,
+        Mark7 = mMarks.FirstOrDefault(I => RP["mark7"].ToString() == I.ID) ?? EmptyRune,
+        Mark8 = mMarks.FirstOrDefault(I => RP["mark8"].ToString() == I.ID) ?? EmptyRune,
+        Mark9 = mMarks.FirstOrDefault(I => RP["mark9"].ToString() == I.ID) ?? EmptyRune,
+        Seal1 = mSeals.FirstOrDefault(I => RP["seal1"].ToString() == I.ID) ?? EmptyRune,
+        Seal2 = mSeals.FirstOrDefault(I => RP["seal2"].ToString() == I.ID) ?? EmptyRune,
+        Seal3 = mSeals.FirstOrDefault(I => RP["seal3"].ToString() == I.ID) ?? EmptyRune,
+        Seal4 = mSeals.FirstOrDefault(I => RP["seal4"].ToString() == I.ID) ?? EmptyRune,
+        Seal5 = mSeals.FirstOrDefault(I => RP["seal5"].ToString() == I.ID) ?? EmptyRune,
+        Seal6 = mSeals.FirstOrDefault(I => RP["seal6"].ToString() == I.ID) ?? EmptyRune,
+        Seal7 = mSeals.FirstOrDefault(I => RP["seal7"].ToString() == I.ID) ?? EmptyRune,
+        Seal8 = mSeals.FirstOrDefault(I => RP["seal8"].ToString() == I.ID) ?? EmptyRune,
+        Seal9 = mSeals.FirstOrDefault(I => RP["seal9"].ToString() == I.ID) ?? EmptyRune,
+        Glyph1 = mGlyphs.FirstOrDefault(I => RP["glyph1"].ToString() == I.ID) ?? EmptyRune,
+        Glyph2 = mGlyphs.FirstOrDefault(I => RP["glyph2"].ToString() == I.ID) ?? EmptyRune,
+        Glyph3 = mGlyphs.FirstOrDefault(I => RP["glyph3"].ToString() == I.ID) ?? EmptyRune,
+        Glyph4 = mGlyphs.FirstOrDefault(I => RP["glyph4"].ToString() == I.ID) ?? EmptyRune,
+        Glyph5 = mGlyphs.FirstOrDefault(I => RP["glyph5"].ToString() == I.ID) ?? EmptyRune,
+        Glyph6 = mGlyphs.FirstOrDefault(I => RP["glyph6"].ToString() == I.ID) ?? EmptyRune,
+        Glyph7 = mGlyphs.FirstOrDefault(I => RP["glyph7"].ToString() == I.ID) ?? EmptyRune,
+        Glyph8 = mGlyphs.FirstOrDefault(I => RP["glyph8"].ToString() == I.ID) ?? EmptyRune,
+        Glyph9 = mGlyphs.FirstOrDefault(I => RP["glyph9"].ToString() == I.ID) ?? EmptyRune,
+        Quint1 = mQuints.FirstOrDefault(I => RP["quint1"].ToString() == I.ID) ?? EmptyRune,
+        Quint2 = mQuints.FirstOrDefault(I => RP["quint1"].ToString() == I.ID) ?? EmptyRune,
+        Quint3 = mQuints.FirstOrDefault(I => RP["quint1"].ToString() == I.ID) ?? EmptyRune
       }).First();
     }
 
     public ItemSet getItemSetByName(string index) {
       return mItemSets.Where(IS => IS["name"].ToString() == index).Select(IS => new ItemSet {
         ItemSetName = IS["name"].ToString(),
-        Item1 = mItems.Where(I => IS["item1"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-        Item2 = mItems.Where(I => IS["item2"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-        Item3 = mItems.Where(I => IS["item3"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-        Item4 = mItems.Where(I => IS["item4"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-        Item5 = mItems.Where(I => IS["item5"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-        Item6 = mItems.Where(I => IS["item6"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-        Item7 = mItems.Where(I => IS["item7"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-        Item8 = mItems.Where(I => IS["item8"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-        Item9 = mItems.Where(I => IS["item9"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-        Item10 = mItems.Where(I => IS["item10"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-        Item11 = mItems.Where(I => IS["item11"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-        Item12 = mItems.Where(I => IS["item12"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-        Item13 = mItems.Where(I => IS["item13"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-        Item14 = mItems.Where(I => IS["item14"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-        Item15 = mItems.Where(I => IS["item15"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-        Item16 = mItems.Where(I => IS["item16"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-        Item17 = mItems.Where(I => IS["item17"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-        Item18 = mItems.Where(I => IS["item18"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-        Item19 = mItems.Where(I => IS["item19"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-        Item20 = mItems.Where(I => IS["item20"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-        Item21 = mItems.Where(I => IS["item21"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-        Item22 = mItems.Where(I => IS["item22"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-        Item23 = mItems.Where(I => IS["item23"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem,
-        Item24 = mItems.Where(I => IS["item24"].ToString() == I.ID).FirstOrDefault() ?? EmptyItem
+        Item1 = mItems.FirstOrDefault(I => IS["item1"].ToString() == I.ID) ?? EmptyItem,
+        Item2 = mItems.FirstOrDefault(I => IS["item2"].ToString() == I.ID) ?? EmptyItem,
+        Item3 = mItems.FirstOrDefault(I => IS["item3"].ToString() == I.ID) ?? EmptyItem,
+        Item4 = mItems.FirstOrDefault(I => IS["item4"].ToString() == I.ID) ?? EmptyItem,
+        Item5 = mItems.FirstOrDefault(I => IS["item5"].ToString() == I.ID) ?? EmptyItem,
+        Item6 = mItems.FirstOrDefault(I => IS["item6"].ToString() == I.ID) ?? EmptyItem,
+        Item7 = mItems.FirstOrDefault(I => IS["item7"].ToString() == I.ID) ?? EmptyItem,
+        Item8 = mItems.FirstOrDefault(I => IS["item8"].ToString() == I.ID) ?? EmptyItem,
+        Item9 = mItems.FirstOrDefault(I => IS["item9"].ToString() == I.ID) ?? EmptyItem,
+        Item10 = mItems.FirstOrDefault(I => IS["item10"].ToString() == I.ID) ?? EmptyItem,
+        Item11 = mItems.FirstOrDefault(I => IS["item11"].ToString() == I.ID) ?? EmptyItem,
+        Item12 = mItems.FirstOrDefault(I => IS["item12"].ToString() == I.ID) ?? EmptyItem,
+        Item13 = mItems.FirstOrDefault(I => IS["item13"].ToString() == I.ID) ?? EmptyItem,
+        Item14 = mItems.FirstOrDefault(I => IS["item14"].ToString() == I.ID) ?? EmptyItem,
+        Item15 = mItems.FirstOrDefault(I => IS["item15"].ToString() == I.ID) ?? EmptyItem,
+        Item16 = mItems.FirstOrDefault(I => IS["item16"].ToString() == I.ID) ?? EmptyItem,
+        Item17 = mItems.FirstOrDefault(I => IS["item17"].ToString() == I.ID) ?? EmptyItem,
+        Item18 = mItems.FirstOrDefault(I => IS["item18"].ToString() == I.ID) ?? EmptyItem,
+        Item19 = mItems.FirstOrDefault(I => IS["item19"].ToString() == I.ID) ?? EmptyItem,
+        Item20 = mItems.FirstOrDefault(I => IS["item20"].ToString() == I.ID) ?? EmptyItem,
+        Item21 = mItems.FirstOrDefault(I => IS["item21"].ToString() == I.ID) ?? EmptyItem,
+        Item22 = mItems.FirstOrDefault(I => IS["item22"].ToString() == I.ID) ?? EmptyItem,
+        Item23 = mItems.FirstOrDefault(I => IS["item23"].ToString() == I.ID) ?? EmptyItem,
+        Item24 = mItems.FirstOrDefault(I => IS["item24"].ToString() == I.ID) ?? EmptyItem
       }).First();
     }
 
     public void updateBuild(Build d) {
-      var build = mBuilds.Where(x => x["name"].ToString() == d.BuildName).First();
+      var build = mBuilds.First(x => x["name"].ToString() == d.BuildName);
       build["runePage"] = d.RunePage;
       build["masteryPage"] = d.MasteryPage;
       build["itemSet"] = d.ItemSet;
@@ -348,7 +339,7 @@ namespace com.jcandksolutions.lol {
     }
 
     public void updateItemSet(ItemSet d) {
-      var itemSet = mItemSets.Where(x => x["name"].ToString() == d.ItemSetName).First();
+      var itemSet = mItemSets.First(x => x["name"].ToString() == d.ItemSetName);
       itemSet["item1"] = mItems.Where(i => i == d.Item1).Select(i => i.ID).First();
       itemSet["item2"] = mItems.Where(i => i == d.Item2).Select(i => i.ID).First();
       itemSet["item3"] = mItems.Where(i => i == d.Item3).Select(i => i.ID).First();
@@ -376,7 +367,7 @@ namespace com.jcandksolutions.lol {
     }
 
     public void updateRunePage(RunePage d) {
-      var runePage = mRunePages.Where(x => x["name"].ToString() == d.RunePageName).First();
+      var runePage = mRunePages.First(x => x["name"].ToString() == d.RunePageName);
       runePage["mark1"] = mMarks.Where(i => i == d.Mark1).Select(i => i.ID).First();
       runePage["mark2"] = mMarks.Where(i => i == d.Mark2).Select(i => i.ID).First();
       runePage["mark3"] = mMarks.Where(i => i == d.Mark3).Select(i => i.ID).First();
@@ -410,7 +401,7 @@ namespace com.jcandksolutions.lol {
     }
 
     public void updateMasteryPage(MasteryPage d) {
-      var masteryPage = mMasteryPages.Where(x => x["name"].ToString() == d["name"]).First();
+      var masteryPage = mMasteryPages.First(x => x["name"].ToString() == d["name"]);
       foreach (var prop in d.Properties) {
         masteryPage[prop.Key] = prop.Value;
       }
@@ -503,41 +494,41 @@ namespace com.jcandksolutions.lol {
     }
 
     public void removeBuild(Build d) {
-      mBuilds.Where(x => x["name"].ToString() == d.BuildName).First().Remove();
+      mBuilds.First(x => x["name"].ToString() == d.BuildName).Remove();
     }
 
     public void removeItemSet(ItemSet d) {
-      mItemSets.Where(x => x["name"].ToString() == d.ItemSetName).First().Remove();
+      mItemSets.First(x => x["name"].ToString() == d.ItemSetName).Remove();
     }
 
     public void removeRunePage(RunePage d) {
-      mRunePages.Where(x => x["name"].ToString() == d.RunePageName).First().Remove();
+      mRunePages.First(x => x["name"].ToString() == d.RunePageName).Remove();
     }
 
     public void removeMasteryPage(MasteryPage d) {
-      mMasteryPages.Where(x => x["name"].ToString() == d["name"]).First().Remove();
+      mMasteryPages.First(x => x["name"].ToString() == d["name"]).Remove();
     }
 
     public void updateBuildName(Build d, string newName) {
-      var build = mBuilds.Where(x => x["name"].ToString() == d.BuildName).First();
+      var build = mBuilds.First(x => x["name"].ToString() == d.BuildName);
       build["name"] = newName;
       d.BuildName = newName;
     }
 
     public void updateItemSetName(ItemSet d, string newName) {
-      var itemSet = mItemSets.Where(x => x["name"].ToString() == d.ItemSetName).First();
+      var itemSet = mItemSets.First(x => x["name"].ToString() == d.ItemSetName);
       itemSet["name"] = newName;
       d.ItemSetName = newName;
     }
 
     public void updateRunePageName(RunePage d, string newName) {
-      var runePage = mRunePages.Where(x => x["name"].ToString() == d.RunePageName).First();
+      var runePage = mRunePages.First(x => x["name"].ToString() == d.RunePageName);
       runePage["name"] = newName;
       d.RunePageName = newName;
     }
 
     public void updateMasteryPageName(MasteryPage d, string newName) {
-      var masteryPage = mMasteryPages.Where(x => x["name"].ToString() == d["name"]).First();
+      var masteryPage = mMasteryPages.First(x => x["name"].ToString() == d["name"]);
       masteryPage["name"] = newName;
       d["name"] = newName;
     }
@@ -545,14 +536,14 @@ namespace com.jcandksolutions.lol {
     private Branch extractBranch(JToken b) {
       return new Branch {
         Name = b["name"].ToString(),
-        Tiers = b["tiers"].Select(x => extractTier(x)).ToList()
+        Tiers = b["tiers"].Select(extractTier).ToList()
       };
     }
 
     private Tier extractTier(JToken t) {
       return new Tier {
         Limit = int.Parse(t["limit"].ToString()),
-        Masteries = t["masteries"].Select(x => extractMastery(x)).ToList()
+        Masteries = t["masteries"].Select(extractMastery).ToList()
       };
     }
 
@@ -600,7 +591,7 @@ namespace com.jcandksolutions.lol {
         Effect = spell["effect"].Select(x => x.ToString()).ToList(),
         Range = spell["range"].ToString(),
         Cost = spell["cost"].ToString(),
-        Vars = spell["vars"] == null ? null : spell["vars"].Select(var => extractVar(var)).ToList(),
+        Vars = spell["vars"] == null ? null : spell["vars"].Select(extractVar).ToList(),
         ImageURL = spell["image"].ToString()
       };
     }

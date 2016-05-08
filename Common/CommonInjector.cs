@@ -1,5 +1,5 @@
 ﻿namespace com.jcandksolutions.lol {
-  public class CommonInjector {
+  public static class CommonInjector {
     private static CommonProvider mProvider;
 
     public static void setProvider(CommonProvider provider) {

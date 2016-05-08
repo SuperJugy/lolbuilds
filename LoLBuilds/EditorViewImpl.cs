@@ -16,7 +16,7 @@ namespace com.jcandksolutions.lol {
       mPresenter = new EditorPresenter(this);
     }
 
-    public bool shouldPauseBinding { get; set; }
+    public bool shouldPauseBinding { private get; set; }
 
     public void showErrorMessage(string message) {
       MessageBox.Show(message, "Error", MessageBoxButtons.OK);

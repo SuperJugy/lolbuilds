@@ -4,10 +4,7 @@
     private IOManager mIOManager;
 
     public IOManager provideIOManager() {
-      if (mIOManager == null) {
-        mIOManager = new IOManager();
-      }
-      return mIOManager;
+      return mIOManager ?? (mIOManager = new IOManager());
     }
 
     public APICaller provideAPICaller() {
@@ -19,10 +16,7 @@
     }
 
     public BuildManager provideBuildManager() {
-      if (mBuildManager == null) {
-        mBuildManager = new BuildManager();
-      }
-      return mBuildManager;
+      return mBuildManager ?? (mBuildManager = new BuildManager());
     }
 
     public DBUpdater provideDBUpdater() {

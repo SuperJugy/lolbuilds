@@ -59,14 +59,16 @@ namespace com.jcandksolutions.lol {
           j,
           0);
         foreach (Tier tier in branch.Tiers) {
-          var tierTable = new TableLayoutPanel();
-          tierTable.RowCount = 1;
-          tierTable.ColumnCount = tier.Masteries.Count;
+          var tierTable = new TableLayoutPanel {
+            RowCount = 1,
+            ColumnCount = tier.Masteries.Count
+          };
           MasteriesTable.Controls.Add(tierTable, j, i);
           int k = 0;
           foreach (Mastery mastery in tier.Masteries) {
-            var img = new PictureBox();
-            img.Tag = mastery;
+            var img = new PictureBox {
+              Tag = mastery
+            };
             ToolTip.SetToolTip(img, mastery.Name + "\r\n" + mastery.Description);
             img.Anchor = AnchorStyles.None;
             img.SizeMode = PictureBoxSizeMode.AutoSize;
@@ -79,9 +81,10 @@ namespace com.jcandksolutions.lol {
             lab.ForeColor = Color.White;
             lab.Font = new Font(lab.Font.FontFamily, 12, FontStyle.Bold);
             img.Controls.Add(lab);
-            var r = new ColumnStyle();
-            r.SizeType = SizeType.Percent;
-            r.Width = 100F / tierTable.ColumnCount;
+            var r = new ColumnStyle {
+              SizeType = SizeType.Percent,
+              Width = 100F / tierTable.ColumnCount
+            };
             tierTable.ColumnStyles.Add(r);
             tierTable.Controls.Add(img, k, 0);
             ++k;
@@ -91,15 +94,17 @@ namespace com.jcandksolutions.lol {
         ++j;
       }
       for (int i = 0; i < MasteriesTable.RowCount; ++i) {
-        var r = new RowStyle();
-        r.SizeType = SizeType.Percent;
-        r.Height = 100F / MasteriesTable.RowCount;
+        var r = new RowStyle {
+          SizeType = SizeType.Percent,
+          Height = 100F / MasteriesTable.RowCount
+        };
         MasteriesTable.RowStyles.Add(r);
       }
       for (int i = 0; i < MasteriesTable.ColumnCount; ++i) {
-        var r = new ColumnStyle();
-        r.SizeType = SizeType.Percent;
-        r.Width = 100F / MasteriesTable.ColumnCount;
+        var r = new ColumnStyle {
+          SizeType = SizeType.Percent,
+          Width = 100F / MasteriesTable.ColumnCount
+        };
         MasteriesTable.ColumnStyles.Add(r);
       }
     }
@@ -193,14 +198,13 @@ namespace com.jcandksolutions.lol {
     private void ImageBinding_Format(object sender, ConvertEventArgs e) {
       Binding binding = (Binding)sender;
       PictureBox box = (PictureBox)binding.Control;
-      if (box.Image != null) {
+      if (box != null && box.Image != null) {
         box.Image.Dispose();
       }
     }
 
     private void setDataBindings() {
-      Binding binding;
-      binding = new Binding("Image", ChampionBindingSource, "PassiveImage", true);
+      Binding binding = new Binding("Image", ChampionBindingSource, "PassiveImage", true);
       binding.Format += ImageBinding_Format;
       Passive.DataBindings.Add(binding);
       binding = new Binding("Image", ChampionBindingSource, "Spell1Image", true);

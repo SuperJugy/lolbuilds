@@ -16,15 +16,12 @@ namespace com.jcandksolutions.lol {
     private const string SPELL_TYPE = "img/spell/";
     private string mDownloadURL;
     private string mQueryURL;
-    public string APIKey { get; set; }
-    public string Server { get; set; }
-    public string Locale { get; set; }
+    public string APIKey { private get; set; }
+    public string Server { private get; set; }
+    public string Locale { private get; set; }
     private string QueryURL {
       get {
-        if (mQueryURL == null) {
-          mQueryURL = string.Format("https://global.api.pvp.net/api/lol/static-data/{0}/v1.2/{1}api_key={2}&locale={3}", Server, "{0}", APIKey, Locale);
-        }
-        return mQueryURL;
+        return mQueryURL ?? (mQueryURL = string.Format("https://global.api.pvp.net/api/lol/static-data/{0}/v1.2/{1}api_key={2}&locale={3}", Server, "{0}", APIKey, Locale));
       }
     }
     private string DownloadURL {

@@ -1,6 +1,6 @@
 ﻿namespace com.jcandksolutions.lol {
   public interface EditorView : BuildView {
-    bool shouldPauseBinding { get; set; }
+    bool shouldPauseBinding { set; }
     void updateBuildsDropdown(string[] buildsList);
     void updateMasteryPagesDropdown(string[] masteryPagesList);
     void updateRunePagesDropdown(string[] runePagesList);

@@ -19,7 +19,7 @@ namespace com.jcandksolutions.lol {
     }
     public string this[string fieldName] {
       get {
-        string value = null;
+        string value;
         mMasteries.TryGetValue(fieldName, out value);
         return value;
       }
@@ -51,7 +51,7 @@ namespace com.jcandksolutions.lol {
 
     public event PropertyChangedEventHandler PropertyChanged;
 
-    protected virtual void OnPropertyChanged(PropertyChangedEventArgs e) {
+    private void OnPropertyChanged(PropertyChangedEventArgs e) {
       if (null != PropertyChanged) {
         PropertyChanged(this, e);
       }

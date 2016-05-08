@@ -66,12 +66,12 @@ namespace com.jcandksolutions.lol {
       mView.setUpdateDBEnabled(!string.IsNullOrWhiteSpace(apikey));
     }
 
-    public void saveSettings(string APIKey, string locale, string server) {
+    public void saveSettings(string apiKey, string locale, string server) {
       Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
       config.AppSettings.Settings.Remove("apikey");
       config.AppSettings.Settings.Remove("locale");
       config.AppSettings.Settings.Remove("server");
-      config.AppSettings.Settings.Add("apikey", APIKey);
+      config.AppSettings.Settings.Add("apikey", apiKey);
       config.AppSettings.Settings.Add("locale", locale);
       config.AppSettings.Settings.Add("server", server);
       config.Save(ConfigurationSaveMode.Minimal);

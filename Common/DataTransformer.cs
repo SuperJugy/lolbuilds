@@ -6,7 +6,7 @@ using Newtonsoft.Json.Linq;
 
 namespace com.jcandksolutions.lol {
   public class DataTransformer {
-    public APICaller Caller { get; set; }
+    public APICaller Caller { private get; set; }
 
     public string extractDB() {
       var root = new {
@@ -244,7 +244,7 @@ namespace com.jcandksolutions.lol {
     }
 
     private List<object> extractArray(JArray array) {
-      return array.Select(obj => extractToken(obj)).ToList();
+      return array.Select(extractToken).ToList();
     }
   }
 }

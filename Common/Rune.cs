@@ -5,8 +5,8 @@ namespace com.jcandksolutions.lol {
     public string ID { get; set; }
     public string Name { get; set; }
     public string Type { get; set; }
-    public string ImageURL { get; set; }
-    public string Description { get; set; }
+    public string ImageURL { private get; set; }
+    public string Description { private get; set; }
     public string Tooltip {
       get {
         return Name + "\n\r" + Description;

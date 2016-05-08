@@ -22,8 +22,8 @@ namespace com.jcandksolutions.lol {
       InitializeComponent();
     }
 
-    public void setSettings(string APIKey, string locale, string server) {
-      APIKeyTextBox.Text = APIKey;
+    public void setSettings(string apiKey, string locale, string server) {
+      APIKeyTextBox.Text = apiKey;
       LocaleTextBox.Text = locale;
       ServerTextBox.Text = server;
     }
