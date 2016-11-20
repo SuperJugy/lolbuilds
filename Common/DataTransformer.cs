@@ -46,20 +46,20 @@ namespace com.jcandksolutions.lol {
     }
 
     private Dictionary<string, object> extractItem(Dictionary<string, string> enchantmentMap, JObject prop) {
-      string key = (string)extractToken(prop["id"]);
-      string image = (string)extractToken(prop["image"]["full"]);
+      string key = prop["id"].ToString();
+      string image = prop["image"]["full"].ToString();
       Caller.downloadItemImage(image);
       return new Dictionary<string, object> {
         {
           "id", key
         }, {
-          "description", extractToken(prop["sanitizedDescription"])
+          "description", extractString(prop["sanitizedDescription"])
         }, {
-          "gold", extractToken(prop["gold"]["total"])
+          "gold", extractString(prop["gold"]["total"])
         }, {
-          "name", enchantmentMap.ContainsKey(key) && enchantmentMap[key] != "" ? enchantmentMap[key] + " - " + extractToken(prop["name"]) : extractToken(prop["name"])
+          "name", enchantmentMap.ContainsKey(key) && enchantmentMap[key] != "" ? enchantmentMap[key] + " - " + extractString(prop["name"]) : extractString(prop["name"])
         }, {
-          "stats", extractToken(prop["stats"])
+          "stats", extractStats((JObject)prop["stats"])
         }, {
           "image", image
         }
@@ -67,15 +67,15 @@ namespace com.jcandksolutions.lol {
     }
 
     private Dictionary<string, object> extractChampion(JObject prop) {
-      string image = extractToken(prop["image"]["full"]).ToString();
+      string image = prop["image"]["full"].ToString();
       Caller.downloadChampionImage(image);
       return new Dictionary<string, object> {
         {
-          "id", extractToken(prop["id"])
+          "id", prop["id"].ToString()
         }, {
-          "name", extractToken(prop["name"])
+          "name", prop["name"].ToString()
         }, {
-          "secondBarType", extractToken(prop["partype"])
+          "secondBarType", extractString(prop["partype"])
         }, {
           "stats", extractToken(prop["stats"])
         }, {
@@ -93,29 +93,29 @@ namespace com.jcandksolutions.lol {
     }
 
     private Dictionary<string, object> extractSpell(JObject prop) {
-      string image = (string)extractToken(prop["image"]["full"]);
+      string image = prop["image"]["full"].ToString();
       Caller.downloadSpellImage(image);
       return new Dictionary<string, object> {
         {
-          "name", extractToken(prop["name"])
+          "name", prop["name"].ToString()
         }, {
-          "description", extractToken(prop["sanitizedDescription"])
+          "description", extractString(prop["sanitizedDescription"])
         }, {
-          "tooltip", extractToken(prop["sanitizedTooltip"])
+          "tooltip", extractString(prop["sanitizedTooltip"])
         }, {
-          "resource", extractToken(prop["resource"])
+          "resource", extractString(prop["resource"])
         }, {
-          "maxrank", extractToken(prop["maxrank"])
+          "maxrank", extractString(prop["maxrank"])
         }, {
-          "costType", extractToken(prop["costType"])
+          "costType", extractString(prop["costType"])
         }, {
-          "cooldown", extractToken(prop["cooldownBurn"])
+          "cooldown", extractString(prop["cooldownBurn"])
         }, {
           "effect", extractToken(prop["effectBurn"])
         }, {
-          "range", extractToken(prop["rangeBurn"])
+          "range", extractString(prop["rangeBurn"])
         }, {
-          "cost", extractToken(prop["costBurn"])
+          "cost", extractString(prop["costBurn"])
         }, {
           "vars", extractVars((JArray)prop["vars"])
         }, {
@@ -139,25 +139,25 @@ namespace com.jcandksolutions.lol {
         {
           "coeff", extractToken(prop["coeff"])
         }, {
-          "dyn", extractToken(prop["dyn"])
+          "dyn", extractString(prop["dyn"])
         }, {
-          "key", extractToken(prop["key"])
+          "key", extractString(prop["key"])
         }, {
-          "link", extractToken(prop["link"])
+          "link", extractString(prop["link"])
         }, {
-          "ranksWith", extractToken(prop["ranksWith"])
+          "ranksWith", extractString(prop["ranksWith"])
         }
       };
     }
 
     private Dictionary<string, object> extractPassive(JObject prop) {
-      string image = (string)extractToken(prop["image"]["full"]);
+      string image = prop["image"]["full"].ToString();
       Caller.downloadPassiveImage(image);
       return new Dictionary<string, object> {
         {
-          "name", extractToken(prop["name"])
+          "name", prop["name"].ToString()
         }, {
-          "description", extractToken(prop["sanitizedDescription"])
+          "description", extractString(prop["sanitizedDescription"])
         }, {
           "image", image
         }
@@ -165,19 +165,19 @@ namespace com.jcandksolutions.lol {
     }
 
     private Dictionary<string, object> extractRune(JObject prop) {
-      string image = (string)extractToken(prop["image"]["full"]);
+      string image = prop["image"]["full"].ToString();
       Caller.downloadRuneImage(image);
       return new Dictionary<string, object> {
         {
-          "id", extractToken(prop["id"])
+          "id", prop["id"].ToString()
         }, {
-          "name", extractToken(prop["name"])
+          "name", prop["name"].ToString()
         }, {
-          "description", extractToken(prop["sanitizedDescription"])
+          "description", extractString(prop["sanitizedDescription"])
         }, {
-          "type", extractToken(prop["rune"]["type"])
+          "type", extractString(prop["rune"]["type"])
         }, {
-          "stats", extractToken(prop["stats"])
+          "stats", extractStats((JObject)prop["stats"])
         }, {
           "image", image
         }
@@ -215,7 +215,7 @@ namespace com.jcandksolutions.lol {
         {
           "id", id
         }, {
-          "name", extractToken(find["name"])
+          "name", find["name"].ToString()
         }, {
           "description", extractToken(find["sanitizedDescription"])
         }, {
@@ -263,6 +263,21 @@ namespace com.jcandksolutions.lol {
         return extractArray((JArray)token);
       }
       return token.ToString();
+    }
+
+    private string extractString(JToken token) {
+      if (token == null || token.Type == JTokenType.Null) {
+        return "";
+      }
+      return token.ToString();
+    }
+
+    private List<object> extractStats(JObject obj) {
+      return obj.Properties().Select(prop => new Dictionary<string, string> {
+        {
+          prop.Name, prop.Value.ToString()
+        }
+      }).ToList<object>();
     }
 
     private Dictionary<string, object> extractObject(JObject obj) {
