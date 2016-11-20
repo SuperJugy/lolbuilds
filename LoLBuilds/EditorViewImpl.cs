@@ -322,7 +322,7 @@ namespace com.jcandksolutions.lol {
     }
 
     public bool confirmNotLoseChanges(string message, string title) {
-      return MessageBox.Show(message, title, MessageBoxButtons.YesNo, MessageBoxIcon.Information) == DialogResult.No;
+      return MessageBox.Show(message, title, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.No;
     }
 
     public void setSaveEnabled(bool enabled) {
