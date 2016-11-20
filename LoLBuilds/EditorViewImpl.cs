@@ -498,19 +498,19 @@ namespace com.jcandksolutions.lol {
     }
 
     private void BuildsNavigatorCopyItem_Click(object sender, EventArgs e) {
-      addBuild(new Build(mCurrentBuild));
+      mPresenter.onCopyBuild(mCurrentBuild);
     }
 
     private void MasteryPagesNavigatorCopyItem_Click(object sender, EventArgs e) {
-      addMasteryPage(new MasteryPage(mCurrentMasteryPage));
+      mPresenter.onCopyMasteryPage(mCurrentMasteryPage);
     }
 
     private void RunePagesNavigatorCopyItem_Click(object sender, EventArgs e) {
-      addRunePage(new RunePage(mCurrentRunePage));
+      mPresenter.onCopyRunePage(mCurrentRunePage);
     }
 
     private void ItemSetsNavigatorCopyItem_Click(object sender, EventArgs e) {
-      addItemSet(new ItemSet(mCurrentItemSet));
+      mPresenter.onCopyItemSet(mCurrentItemSet);
     }
 
     private void AddBuildButton_Click(object sender, EventArgs e) {

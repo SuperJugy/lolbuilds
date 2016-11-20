@@ -231,6 +231,57 @@
       mView.addItemSet(itemSet);
     }
 
+    public void onCopyBuild(Build oldBuild) {
+      var name = mView.askForName();
+      if (name == null) {
+        return;
+      }
+      onDataChanged();
+      var build = new Build(oldBuild) {
+        BuildName = name
+      };
+      mBuildManager.addBuild(build);
+      mView.addBuild(build);
+    }
+
+    public void onCopyMasteryPage(MasteryPage oldMasteryPage) {
+      var name = mView.askForName();
+      if (name == null) {
+        return;
+      }
+      onDataChanged();
+      var masteryPage = new MasteryPage(oldMasteryPage);
+      masteryPage["name"] = name;
+      mBuildManager.addMasteryPage(masteryPage);
+      mView.addMasteryPage(masteryPage);
+    }
+
+    public void onCopyRunePage(RunePage oldRunepage) {
+      var name = mView.askForName();
+      if (name == null) {
+        return;
+      }
+      onDataChanged();
+      var runePage = new RunePage(oldRunepage) {
+        RunePageName = name
+      };
+      mBuildManager.addRunePage(runePage);
+      mView.addRunePage(runePage);
+    }
+
+    public void onCopyItemSet(ItemSet oldItemset) {
+      var name = mView.askForName();
+      if (name == null) {
+        return;
+      }
+      onDataChanged();
+      var itemSet = new ItemSet(oldItemset) {
+        ItemSetName = name
+      };
+      mBuildManager.addItemSet(itemSet);
+      mView.addItemSet(itemSet);
+    }
+
     private void bindEmptyLists() {
       mBuildManager.clear();
       bindLists();
