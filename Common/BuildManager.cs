@@ -12,12 +12,12 @@ namespace com.jcandksolutions.lol {
     private readonly List<Rune> mQuints;
     private readonly List<Rune> mSeals;
     private JArray mBuilds = new JArray();
-    private Champion mEmptyChampion;
-    private Item mEmptyItem;
-    private Rune mEmptyRune;
     private JArray mItemSets = new JArray();
     private JArray mMasteryPages = new JArray();
     private JArray mRunePages = new JArray();
+    private Champion mEmptyChampion;
+    private Item mEmptyItem;
+    private Rune mEmptyRune;
     public Rune EmptyRune {
       get {
         return mEmptyRune ?? (mEmptyRune = new Rune {
