@@ -62,6 +62,12 @@
     <Compile Include="ComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="DBEditorViewImpl.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DBEditorViewImpl.Designer.cs">
+      <DependentUpon>DBEditorViewImpl.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditorViewImpl.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -96,6 +102,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CalculatorViewImpl.resx">
       <DependentUpon>CalculatorViewImpl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DBEditorViewImpl.resx">
+      <DependentUpon>DBEditorViewImpl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="EditorViewImpl.resx">
       <DependentUpon>EditorViewImpl.cs</DependentUpon>

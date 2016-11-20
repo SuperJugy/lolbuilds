@@ -18,6 +18,10 @@ namespace com.jcandksolutions.lol {
       MessageBox.Show(message, "Success", MessageBoxButtons.OK);
     }
 
+    public bool confirmDBOverwrite(string message, string title) {
+      return MessageBox.Show(message, title, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes;
+    }
+    
     public void showEditorWindow() {
       var editor = new EditorViewImpl();
       Hide();
@@ -39,8 +43,15 @@ namespace com.jcandksolutions.lol {
       Show();
     }
 
+    public void showDBEditorWindow() {
+      var dbEditor = new DBEditorViewImpl();
+      Hide();
+      dbEditor.ShowDialog();
+      Show();
+    }
+
     public void setUpdateDBEnabled(bool enabled) {
-      UpdateDBButton.Enabled = enabled;
+      CreateDBButton.Enabled = enabled;
     }
 
     public void setBuildBrowserEnabled(bool enabled) {
@@ -51,10 +62,14 @@ namespace com.jcandksolutions.lol {
       BuildEditorButton.Enabled = enabled;
     }
 
+    public void setEditDBEnabled(bool enabled) {
+      EditDBButton.Enabled = enabled;
+    }
+
     public void setCalculatorEnabled(bool enabled) {
       CalculatorButton.Enabled = enabled;
     }
-
+    
     private void UpdateDBButton_Click(object sender, EventArgs e) {
       mPresenter.onUpdateDBButtonClicked();
     }
@@ -69,6 +84,10 @@ namespace com.jcandksolutions.lol {
 
     private void CalculatorButton_Click(object sender, EventArgs e) {
       mPresenter.onCalculatorButtonClicked();
+    }
+
+    private void CreateDBButton_Click(object sender, EventArgs e) {
+      mPresenter.onCreateDBButtonClicked();
     }
 
     private void MainMenuView_Load(object sender, EventArgs e) {

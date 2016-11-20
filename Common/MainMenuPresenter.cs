@@ -25,28 +25,33 @@ namespace com.jcandksolutions.lol {
       mView = view;
     }
 
-    public void onUpdateDBButtonClicked() {
-      try {
-        var updater = CommonInjector.provideDBUpdater();
-        updater.update();
-        mView.showSuccessMessage("DB Updated correctly");
-        verifyDBFile();
-      } catch (Exception ex) {
-        mView.showErrorMessage(ex.Message + "\n\r" + ex.StackTrace);
-        mView.Close();
-      }
+    public void onBuildBrowserButtonClicked() {
+      mView.showBrowserWindow();
     }
 
     public void onBuildEditorButtonClicked() {
       mView.showEditorWindow();
     }
 
-    public void onBuildBrowserButtonClicked() {
-      mView.showBrowserWindow();
+    public void onUpdateDBButtonClicked() {
+      mView.showDBEditorWindow();
     }
 
     public void onCalculatorButtonClicked() {
       mView.showCalculatorWindow();
+    }
+
+    public void onCreateDBButtonClicked() {
+      if (mView.confirmDBOverwrite("This will create a new DB file, overwriting any existing DB. Do you wish to continue?", "Confirm Overwrite")) {
+        try {
+          var updater = CommonInjector.provideDBUpdater();
+          updater.update();
+          mView.showSuccessMessage("DB Updated correctly");
+          verifyDBFile();
+        } catch (Exception ex) {
+          mView.showErrorMessage(ex.Message + "\n\r" + ex.StackTrace);
+        }
+      }
     }
 
     public void start() {
@@ -58,6 +63,7 @@ namespace com.jcandksolutions.lol {
       bool enabled = File.Exists("./db.json");
       mView.setBuildBrowserEnabled(enabled);
       mView.setBuildEditorEnabled(enabled);
+      mView.setEditDBEnabled(enabled);
       mView.setCalculatorEnabled(enabled);
     }
 

@@ -72,6 +72,8 @@
     <Compile Include="CommonInjector.cs" />
     <Compile Include="CommonProvider.cs" />
     <Compile Include="DataTransformer.cs" />
+    <Compile Include="DBEditorPresenter.cs" />
+    <Compile Include="DBEditorView.cs" />
     <Compile Include="DBUpdater.cs" />
     <Compile Include="EditorPresenter.cs" />
     <Compile Include="EditorView.cs" />
