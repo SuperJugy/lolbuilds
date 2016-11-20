@@ -139,8 +139,6 @@ namespace com.jcandksolutions.lol {
         {
           "coeff", extractToken(prop["coeff"])
         }, {
-          "dyn", extractString(prop["dyn"])
-        }, {
           "key", extractString(prop["key"])
         }, {
           "link", extractString(prop["link"])

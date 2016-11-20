@@ -600,6 +600,7 @@ namespace com.jcandksolutions.lol {
       return new Var {
         Key = var["key"].ToString(),
         Type = var["link"].ToString(),
+        RanksWith = var["ranksWith"].ToString(),
         Value = var["coeff"].Aggregate((i, j) => i.ToString() + "/" + j.ToString()).ToString()
       };
     }

@@ -3,15 +3,16 @@
     public string Key { get; set; }
     public string Type { private get; set; }
     public string Value { private get; set; }
+    public string RanksWith { private get; set; }
     public string Text {
       get {
         switch (Type) {
           case "spelldamage":
             return Value + " AP";
           case "@dynamic.attackdamage":
-            return Value + " AD";
+            return "+" + Value + " AD";
           case "@dynamic.abilitypower":
-            return Value + " AP";
+            return "+" + Value + " AP";
           case "attackdamage":
             return Value + " AD";
           case "@stacks":
@@ -26,6 +27,8 @@
             return Value + " Armor";
           case "@cooldownchampion":
             return Value + " CDR";
+          case "@text":
+            return string.IsNullOrEmpty(RanksWith) ? Value : Value + " (Ranks With " + RanksWith + ")";
           default:
             return Value;
         }
