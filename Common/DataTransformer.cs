@@ -117,9 +117,35 @@ namespace com.jcandksolutions.lol {
         }, {
           "cost", extractToken(prop["costBurn"])
         }, {
-          "vars", extractToken(prop["vars"])
+          "vars", extractVars((JArray)prop["vars"])
         }, {
           "image", image
+        }
+      };
+    }
+
+    private List<object> extractVars(JArray array)
+    {
+      if (array == null) {
+        return new List<object>();
+      } else {
+        return array.Select(obj => extractVar((JObject)obj)).ToList<object>();
+      }
+    }
+
+    private Dictionary<string, object> extractVar(JObject prop)
+    {
+        return new Dictionary<string, object> {
+        {
+          "coeff", extractToken(prop["coeff"])
+        }, {
+          "dyn", extractToken(prop["dyn"])
+        }, {
+          "key", extractToken(prop["key"])
+        }, {
+          "link", extractToken(prop["link"])
+        }, {
+          "ranksWith", extractToken(prop["ranksWith"])
         }
       };
     }
@@ -228,7 +254,7 @@ namespace com.jcandksolutions.lol {
 
     private object extractToken(JToken token) {
       if (token == null || token.Type == JTokenType.Null) {
-        return null;
+        return "";
       }
       if (token.Type == JTokenType.Object) {
         return extractObject((JObject)token);
