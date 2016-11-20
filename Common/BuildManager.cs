@@ -149,8 +149,8 @@ namespace com.jcandksolutions.lol {
           Glyph8 = mGlyphs.FirstOrDefault(I => RP["glyph8"].ToString() == I.ID) ?? EmptyRune,
           Glyph9 = mGlyphs.FirstOrDefault(I => RP["glyph9"].ToString() == I.ID) ?? EmptyRune,
           Quint1 = mQuints.FirstOrDefault(I => RP["quint1"].ToString() == I.ID) ?? EmptyRune,
-          Quint2 = mQuints.FirstOrDefault(I => RP["quint1"].ToString() == I.ID) ?? EmptyRune,
-          Quint3 = mQuints.FirstOrDefault(I => RP["quint1"].ToString() == I.ID) ?? EmptyRune
+          Quint2 = mQuints.FirstOrDefault(I => RP["quint2"].ToString() == I.ID) ?? EmptyRune,
+          Quint3 = mQuints.FirstOrDefault(I => RP["quint3"].ToString() == I.ID) ?? EmptyRune
         }).ToList();
       }
     }
@@ -293,8 +293,8 @@ namespace com.jcandksolutions.lol {
         Glyph8 = mGlyphs.FirstOrDefault(I => RP["glyph8"].ToString() == I.ID) ?? EmptyRune,
         Glyph9 = mGlyphs.FirstOrDefault(I => RP["glyph9"].ToString() == I.ID) ?? EmptyRune,
         Quint1 = mQuints.FirstOrDefault(I => RP["quint1"].ToString() == I.ID) ?? EmptyRune,
-        Quint2 = mQuints.FirstOrDefault(I => RP["quint1"].ToString() == I.ID) ?? EmptyRune,
-        Quint3 = mQuints.FirstOrDefault(I => RP["quint1"].ToString() == I.ID) ?? EmptyRune
+        Quint2 = mQuints.FirstOrDefault(I => RP["quint2"].ToString() == I.ID) ?? EmptyRune,
+        Quint3 = mQuints.FirstOrDefault(I => RP["quint3"].ToString() == I.ID) ?? EmptyRune
       }).First();
     }
 
