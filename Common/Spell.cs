@@ -12,6 +12,7 @@ namespace com.jcandksolutions.lol {
     public string Cooldown { private get; set; }
     public string Range { private get; set; }
     public string Cost { private get; set; }
+    public string CostType { private get; set; }
     public string ImageURL { private get; set; }
     public int MaxRank { get; set; }
     public List<string> Effect { private get; set; }

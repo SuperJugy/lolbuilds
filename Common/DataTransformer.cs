@@ -273,7 +273,10 @@ namespace com.jcandksolutions.lol {
     private List<object> extractStats(JObject obj) {
       return obj.Properties().Select(prop => new Dictionary<string, string> {
         {
-          prop.Name, prop.Value.ToString()
+          "name", prop.Name
+        },
+        {
+          "value", prop.Value.ToString()
         }
       }).ToList<object>();
     }

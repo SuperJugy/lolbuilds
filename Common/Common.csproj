@@ -92,6 +92,8 @@
     <Compile Include="Rune.cs" />
     <Compile Include="RunePage.cs" />
     <Compile Include="Spell.cs" />
+    <Compile Include="Stat.cs" />
+    <Compile Include="Stats.cs" />
     <Compile Include="Tier.cs" />
     <Compile Include="Var.cs" />
   </ItemGroup>

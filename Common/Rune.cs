@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Collections.Generic;
 
 namespace com.jcandksolutions.lol {
   public class Rune {
@@ -7,6 +8,7 @@ namespace com.jcandksolutions.lol {
     public string Type { get; set; }
     public string ImageURL { private get; set; }
     public string Description { private get; set; }
+    public List<Stat> Stats { private get; set; }
     public string Tooltip {
       get {
         return Name + "\n\r" + Description;

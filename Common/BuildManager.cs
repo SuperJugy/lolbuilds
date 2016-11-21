@@ -563,6 +563,7 @@ namespace com.jcandksolutions.lol {
         ID = r["id"].ToString(),
         Type = r["type"].ToString(),
         Description = r["description"].ToString(),
+        Stats = r["stats"].Select(extractStat).ToList(),
         ImageURL = r["image"].ToString()
       };
     }
@@ -571,13 +572,41 @@ namespace com.jcandksolutions.lol {
       return new Champion {
         ID = ch["id"].ToString(),
         Name = ch["name"].ToString(),
+        Resource = ch["secondBarType"].ToString(),
+        Stats = extractStats(ch["stats"]),
         Passive = extractPassive(ch["passive"]),
-        Spell1 = extractSpell(ch["spells"][0]),
-        Spell2 = extractSpell(ch["spells"][1]),
-        Spell3 = extractSpell(ch["spells"][2]),
-        Spell4 = extractSpell(ch["spells"][3]),
+        Spells = extractSpells((JArray)ch["spells"]),
         ImageURL = ch["image"].ToString()
       };
+    }
+
+    private Stats extractStats(JToken spell) {
+      return new Stats {
+        Armor = double.Parse(spell["armor"].ToString()),
+        ArmorPerLevel = double.Parse(spell["armorperlevel"].ToString()),
+        AD = double.Parse(spell["attackdamage"].ToString()),
+        ADPerLevel = double.Parse(spell["attackdamageperlevel"].ToString()),
+        AS = double.Parse(spell["attackspeedoffset"].ToString()),
+        ASPerLevel = double.Parse(spell["attackspeedperlevel"].ToString()),
+        Crit = double.Parse(spell["crit"].ToString()),
+        CritPerLevel = double.Parse(spell["critperlevel"].ToString()),
+        HP = double.Parse(spell["hp"].ToString()),
+        HPPerLevel = double.Parse(spell["hpperlevel"].ToString()),
+        HPRegen = double.Parse(spell["hpregen"].ToString()),
+        HPRegenPerLevel = double.Parse(spell["hpregenperlevel"].ToString()),
+        MP = double.Parse(spell["mp"].ToString()),
+        MPPerLevel = double.Parse(spell["mpperlevel"].ToString()),
+        MPRegen = double.Parse(spell["mpregen"].ToString()),
+        MPRegenPerLevel = double.Parse(spell["mpregenperlevel"].ToString()),
+        MR = double.Parse(spell["spellblock"].ToString()),
+        MRPerLevel = double.Parse(spell["spellblockperlevel"].ToString()),
+        MoveSpeed = double.Parse(spell["movespeed"].ToString()),
+        Range = double.Parse(spell["attackrange"].ToString())
+      };
+    }
+
+    private List<Spell> extractSpells(JArray spells) {
+      return spells.Select(extractSpell).ToList();
     }
 
     private Spell extractSpell(JToken spell) {
@@ -591,7 +620,8 @@ namespace com.jcandksolutions.lol {
         Effect = spell["effect"].Select(x => x.ToString()).ToList(),
         Range = spell["range"].ToString(),
         Cost = spell["cost"].ToString(),
-        Vars = spell["vars"] == null ? null : spell["vars"].Select(extractVar).ToList(),
+        CostType = spell["costType"].ToString(),
+        Vars = spell["vars"].Select(extractVar).ToList(),
         ImageURL = spell["image"].ToString()
       };
     }
@@ -601,7 +631,7 @@ namespace com.jcandksolutions.lol {
         Key = var["key"].ToString(),
         Type = var["link"].ToString(),
         RanksWith = var["ranksWith"].ToString(),
-        Value = var["coeff"].Aggregate((i, j) => i.ToString() + "/" + j.ToString()).ToString()
+        Coeffs = var["coeff"].Select(x => double.Parse(x.ToString())).ToList()
       };
     }
 
@@ -618,11 +648,19 @@ namespace com.jcandksolutions.lol {
         Name = item["name"].ToString(),
         ID = item["id"].ToString(),
         Description = item["description"].ToString(),
-        Gold = item["gold"].ToString(),
+        Gold = int.Parse(item["gold"].ToString()),
+        Stats = item["stats"].Select(extractStat).ToList(),
         ImageURL = item["image"].ToString()
       };
     }
 
+    private Stat extractStat(JToken stat) {
+      return new Stat {
+        Name = stat["name"].ToString(),
+        Value = double.Parse(stat["value"].ToString())
+      };
+    }
+    
     private JObject loadDBData() {
       var ioManager = CommonInjector.provideIOManager();
       return JObject.Parse(ioManager.readFile("./db.json"));
