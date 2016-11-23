@@ -9,216 +9,192 @@ namespace com.jcandksolutions.lol {
     public APICaller Caller { private get; set; }
 
     public string extractDB() {
-      var root = new {
-        items = extractItems(Caller.queryItems()),
-        champions = extractChampions(Caller.queryChampions()),
-        runes = extractRunes(Caller.queryRunes()),
-        masteries = extractMasteries(Caller.queryMasteries())
+      var root = new DBData {
+        Items = extractItems(Caller.queryItems()),
+        Champions = extractChampions(Caller.queryChampions()),
+        Runes = extractRunes(Caller.queryRunes()),
+        Masteries = extractMasteries(Caller.queryMasteries())
       };
       return JsonConvert.SerializeObject(root, Formatting.Indented);
     }
 
-    private List<object> extractItems(JObject data) {
+    private List<Item> extractItems(JObject data) {
       JObject itemData = (JObject)data["data"];
       List<string> enchantments = extractEnchantmentsIDs(itemData);
       List<dynamic> enchantables = extractEnchantablesList(itemData, enchantments);
       Dictionary<string, string> enchantmentMap = buildEnchantmentMap(enchantments, enchantables);
-      List<object> items = itemData.Properties().Select(prop => extractItem(enchantmentMap, (JObject)prop.Value)).ToList<object>();
+      List<Item> items = itemData.Properties().Select(prop => extractItem(enchantmentMap, (JObject)prop.Value)).ToList();
       return items;
     }
 
-    private List<object> extractChampions(JObject data) {
+    private List<Champion> extractChampions(JObject data) {
       JObject championData = (JObject)data["data"];
-      List<object> champions = championData.Properties().Select(prop => extractChampion((JObject)prop.Value)).ToList<object>();
+      List<Champion> champions = championData.Properties().Select(prop => extractChampion((JObject)prop.Value)).ToList();
       return champions;
     }
 
-    private List<object> extractRunes(JObject data) {
+    private List<Rune> extractRunes(JObject data) {
       JObject runeData = (JObject)data["data"];
-      List<object> runes = runeData.Properties().Where(prop => prop.Value["rune"]["tier"].ToString().Equals("3")).Select(prop => extractRune((JObject)prop.Value)).ToList<object>();
+      List<Rune> runes = runeData.Properties().Where(prop => prop.Value["rune"]["tier"].ToString().Equals("3")).Select(prop => extractRune((JObject)prop.Value)).ToList();
       return runes;
     }
 
-    private List<object> extractMasteries(JObject data) {
+    private List<Branch> extractMasteries(JObject data) {
       JObject tree = (JObject)data["tree"];
       JObject masteryData = (JObject)data["data"];
-      return tree.Properties().Select(branch => extractBranch(branch, masteryData)).ToList<object>();
+      return tree.Properties().Select(branch => extractBranch(branch, masteryData)).ToList();
     }
 
-    private Dictionary<string, object> extractItem(Dictionary<string, string> enchantmentMap, JObject prop) {
+    private Item extractItem(Dictionary<string, string> enchantmentMap, JObject prop) {
       string key = prop["id"].ToString();
       string image = prop["image"]["full"].ToString();
       Caller.downloadItemImage(image);
-      return new Dictionary<string, object> {
-        {
-          "id", key
-        }, {
-          "description", extractString(prop["sanitizedDescription"])
-        }, {
-          "gold", extractString(prop["gold"]["total"])
-        }, {
-          "name", enchantmentMap.ContainsKey(key) && enchantmentMap[key] != "" ? enchantmentMap[key] + " - " + extractString(prop["name"]) : extractString(prop["name"])
-        }, {
-          "stats", extractStats((JObject)prop["stats"])
-        }, {
-          "image", image
-        }
+      return new Item {
+        ID = key,
+        Description = extractString(prop["sanitizedDescription"]),
+        Gold= int.Parse(extractString(prop["gold"]["total"])),
+        Name= enchantmentMap.ContainsKey(key) && enchantmentMap[key] != "" ? enchantmentMap[key] + " - " + extractString(prop["name"]) : extractString(prop["name"]),
+        Stats= extractStatList((JObject)prop["stats"]),
+        ImageURL = image
       };
     }
 
-    private Dictionary<string, object> extractChampion(JObject prop) {
+    private Champion extractChampion(JObject prop) {
       string image = prop["image"]["full"].ToString();
       Caller.downloadChampionImage(image);
-      return new Dictionary<string, object> {
-        {
-          "id", prop["id"].ToString()
-        }, {
-          "name", prop["name"].ToString()
-        }, {
-          "secondBarType", extractString(prop["partype"])
-        }, {
-          "stats", extractToken(prop["stats"])
-        }, {
-          "image", image
-        }, {
-          "passive", extractPassive((JObject)prop["passive"])
-        }, {
-          "spells", extractSpells((JArray)prop["spells"])
-        }
+      return new Champion {
+        ID = prop["id"].ToString(),
+        Name = prop["name"].ToString(),
+        Resource = extractString(prop["partype"]),
+        Stats = extractStats(prop["stats"]),
+        ImageURL = image,
+        Passive = extractPassive((JObject)prop["passive"]),
+        Spells = extractSpells((JArray)prop["spells"])
       };
     }
 
-    private List<object> extractSpells(JArray array) {
-      return array.Select(obj => extractSpell((JObject)obj)).ToList<object>();
+    private Stats extractStats(JToken prop) {
+      return new Stats {
+        AD = double.Parse(extractString(prop["attackdamage"])),
+        ADPerLevel = double.Parse(extractString(prop["attackdamageperlevel"])),
+        Armor = double.Parse(extractString(prop["armor"])),
+        ArmorPerLevel = double.Parse(extractString(prop["armorperlevel"])),
+        AS = double.Parse(extractString(prop["attackspeedoffset"])),
+        ASPerLevel = double.Parse(extractString(prop["attackspeedperlevel"])),
+        Crit = double.Parse(extractString(prop["crit"])),
+        CritPerLevel = double.Parse(extractString(prop["critperlevel"])),
+        HP = double.Parse(extractString(prop["hp"])),
+        HPPerLevel = double.Parse(extractString(prop["hpperlevel"])),
+        HPRegen = double.Parse(extractString(prop["hpregen"])),
+        HPRegenPerLevel = double.Parse(extractString(prop["hpregenperlevel"])),
+        MoveSpeed = double.Parse(extractString(prop["movespeed"])),
+        MP = double.Parse(extractString(prop["mp"])),
+        MPPerLevel = double.Parse(extractString(prop["mpperlevel"])),
+        MPRegen = double.Parse(extractString(prop["mpregen"])),
+        MPRegenPerLevel = double.Parse(extractString(prop["mpregenperlevel"])),
+        MR = double.Parse(extractString(prop["spellblock"])),
+        MRPerLevel = double.Parse(extractString(prop["spellblockperlevel"])),
+        Range = double.Parse(extractString(prop["attackrange"])),
+      };
     }
 
-    private Dictionary<string, object> extractSpell(JObject prop) {
+    private List<Spell> extractSpells(JArray array) {
+      return array.Select(obj => extractSpell((JObject)obj)).ToList();
+    }
+
+    private Spell extractSpell(JObject prop) {
       string image = prop["image"]["full"].ToString();
       Caller.downloadSpellImage(image);
-      return new Dictionary<string, object> {
-        {
-          "name", prop["name"].ToString()
-        }, {
-          "description", extractString(prop["sanitizedDescription"])
-        }, {
-          "tooltip", extractString(prop["sanitizedTooltip"])
-        }, {
-          "resource", extractString(prop["resource"])
-        }, {
-          "maxrank", extractString(prop["maxrank"])
-        }, {
-          "costType", extractString(prop["costType"])
-        }, {
-          "cooldown", extractString(prop["cooldownBurn"])
-        }, {
-          "effect", extractToken(prop["effectBurn"])
-        }, {
-          "range", extractString(prop["rangeBurn"])
-        }, {
-          "cost", extractString(prop["costBurn"])
-        }, {
-          "vars", extractVars((JArray)prop["vars"])
-        }, {
-          "image", image
-        }
+      return new Spell {
+        Name = prop["name"].ToString(),
+        Description = extractString(prop["sanitizedDescription"]),
+        Tooltip = extractString(prop["sanitizedTooltip"]),
+        Resource = extractString(prop["resource"]),
+        MaxRank = int.Parse(extractString(prop["maxrank"])),
+        CostType = extractString(prop["costType"]),
+        Cooldown = extractString(prop["cooldownBurn"]),
+        Effect = extractEffects((JArray)prop["effectBurn"]),
+        Range = extractString(prop["rangeBurn"]),
+        Cost = extractString(prop["costBurn"]),
+        Vars = extractVars((JArray)prop["vars"]),
+        ImageURL = image
       };
     }
 
-    private List<object> extractVars(JArray array)
-    {
+    private List<string> extractEffects(JArray array) {
       if (array == null) {
-        return new List<object>();
+        return new List<string>();
       } else {
-        return array.Select(obj => extractVar((JObject)obj)).ToList<object>();
+        return array.Select(obj => extractString(obj)).ToList();
       }
     }
 
-    private Dictionary<string, object> extractVar(JObject prop)
-    {
-        return new Dictionary<string, object> {
-        {
-          "coeff", extractToken(prop["coeff"])
-        }, {
-          "key", extractString(prop["key"])
-        }, {
-          "link", extractString(prop["link"])
-        }, {
-          "ranksWith", extractString(prop["ranksWith"])
-        }
+    private List<Var> extractVars(JArray array) {
+      if (array == null) {
+        return new List<Var>();
+      } else {
+        return array.Select(obj => extractVar((JObject)obj)).ToList();
+      }
+    }
+
+    private Var extractVar(JObject prop) {
+      return new Var {
+        Coeffs = ((JArray)prop["coeff"]).Select(obj => double.Parse(extractString(obj))).ToList(),
+        Key = extractString(prop["key"]),
+        Type = extractString(prop["link"]),
+        RanksWith = extractString(prop["ranksWith"])
       };
     }
 
-    private Dictionary<string, object> extractPassive(JObject prop) {
+    private Passive extractPassive(JObject prop) {
       string image = prop["image"]["full"].ToString();
       Caller.downloadPassiveImage(image);
-      return new Dictionary<string, object> {
-        {
-          "name", prop["name"].ToString()
-        }, {
-          "description", extractString(prop["sanitizedDescription"])
-        }, {
-          "image", image
-        }
+      return new Passive {
+        Name = prop["name"].ToString(),
+        Description = extractString(prop["sanitizedDescription"]),
+        ImageURL = image
       };
     }
 
-    private Dictionary<string, object> extractRune(JObject prop) {
+    private Rune extractRune(JObject prop) {
       string image = prop["image"]["full"].ToString();
       Caller.downloadRuneImage(image);
-      return new Dictionary<string, object> {
-        {
-          "id", prop["id"].ToString()
-        }, {
-          "name", prop["name"].ToString()
-        }, {
-          "description", extractString(prop["sanitizedDescription"])
-        }, {
-          "type", extractString(prop["rune"]["type"])
-        }, {
-          "stats", extractStats((JObject)prop["stats"])
-        }, {
-          "image", image
-        }
+      return new Rune {
+        ID = prop["id"].ToString(),
+        Name = prop["name"].ToString(),
+        Description = extractString(prop["sanitizedDescription"]),
+        Type = extractString(prop["rune"]["type"]),
+        Stats = extractStatList((JObject)prop["stats"]),
+        ImageURL = image
       };
     }
 
-    private Dictionary<string, object> extractBranch(JProperty branch, JObject masteryData) {
+    private Branch extractBranch(JProperty branch, JObject masteryData) {
       bool hasLimit5 = false;
-      return new Dictionary<string, object> {
-        {
-          "name", branch.Name
-        }, {
-          "tiers", branch.Value.Select(tier => extractTier(tier, ref hasLimit5, masteryData)).ToList()
-        }
+      return new Branch {
+        Name = branch.Name,
+        Tiers = branch.Value.Select(tier => extractTier(tier, ref hasLimit5, masteryData)).ToList()
       };
     }
 
-    private Dictionary<string, object> extractTier(JToken tier, ref bool hasLimit5, JObject masteryData) {
+    private Tier extractTier(JToken tier, ref bool hasLimit5, JObject masteryData) {
       hasLimit5 = !hasLimit5;
-      return new Dictionary<string, object> {
-        {
-          "limit", hasLimit5 ? "5" : "1"
-        }, {
-          "masteries", tier["masteryTreeItems"].Where(mastery => mastery.Type != JTokenType.Null).Select(mastery => extractMastery(mastery, masteryData)).ToList()
-        }
+      return new Tier {
+        Limit = hasLimit5 ? 5 : 1,
+        Masteries = tier["masteryTreeItems"].Where(mastery => mastery.Type != JTokenType.Null).Select(mastery => extractMastery(mastery, masteryData)).ToList()
       };
     }
 
-    private Dictionary<string, object> extractMastery(JToken mastery, JObject masteryData) {
+    private Mastery extractMastery(JToken mastery, JObject masteryData) {
       var id = mastery["masteryId"].ToString();
       var find = masteryData.Properties().Where(x => x.Value["id"].ToString().Equals(id)).Select(x => x.Value).First();
       string image = find["image"]["full"].ToString();
       Caller.downloadMasteryImage(image);
-      return new Dictionary<string, object> {
-        {
-          "id", id
-        }, {
-          "name", find["name"].ToString()
-        }, {
-          "description", extractToken(find["sanitizedDescription"])
-        }, {
-          "image", image
-        }
+      return new Mastery {
+        ID = id,
+        Name = find["name"].ToString(),
+        Description = extractString(find["sanitizedDescription"]),
+        ImageURL = image
       };
     }
 
@@ -270,15 +246,11 @@ namespace com.jcandksolutions.lol {
       return token.ToString();
     }
 
-    private List<object> extractStats(JObject obj) {
-      return obj.Properties().Select(prop => new Dictionary<string, string> {
-        {
-          "name", prop.Name
-        },
-        {
-          "value", prop.Value.ToString()
-        }
-      }).ToList<object>();
+    private List<Stat> extractStatList(JObject obj) {
+      return obj.Properties().Select(prop => new Stat {
+        Name = prop.Name,
+        Value = double.Parse(prop.Value.ToString())
+      }).ToList();
     }
 
     private Dictionary<string, object> extractObject(JObject obj) {

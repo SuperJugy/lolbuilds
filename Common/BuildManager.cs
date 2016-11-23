@@ -3,21 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace com.jcandksolutions.lol {
   public class BuildManager {
-    private readonly List<Rune> mGlyphs;
     private readonly List<Item> mItems;
     private readonly List<Rune> mMarks;
-    private readonly List<Rune> mQuints;
     private readonly List<Rune> mSeals;
+    private readonly List<Rune> mGlyphs;
+    private readonly List<Rune> mQuints;
+    private Rune mEmptyRune;
+    private Item mEmptyItem;
+    private Champion mEmptyChampion;
     private JArray mBuilds = new JArray();
     private JArray mItemSets = new JArray();
     private JArray mMasteryPages = new JArray();
     private JArray mRunePages = new JArray();
-    private Champion mEmptyChampion;
-    private Item mEmptyItem;
-    private Rune mEmptyRune;
     public Rune EmptyRune {
       get {
         return mEmptyRune ?? (mEmptyRune = new Rune {
@@ -34,7 +35,7 @@ namespace com.jcandksolutions.lol {
         });
       }
     }
-    private Champion EmptyChampion {
+    public Champion EmptyChampion {
       get {
         return mEmptyChampion ?? (mEmptyChampion = new Champion {
           ID = "-1",
@@ -42,7 +43,6 @@ namespace com.jcandksolutions.lol {
         });
       }
     }
-    public List<Branch> MasteriesTree { get; private set; }
     public Rune[] MarksList {
       get {
         return mMarks.ToArray();
@@ -68,6 +68,11 @@ namespace com.jcandksolutions.lol {
         return mItems.ToArray();
       }
     }
+    public string[] ChampionsList {
+      get {
+        return ChampionsData.Select(x => x.Name).ToArray();
+      }
+    }
     public string[] BuildsList {
       get {
         return mBuilds.OrderBy(x => x["name"].ToString()).Select(x => x["name"].ToString()).ToArray();
@@ -88,11 +93,8 @@ namespace com.jcandksolutions.lol {
         return mMasteryPages.OrderBy(x => x["name"].ToString()).Select(x => x["name"].ToString()).ToArray();
       }
     }
-    public string[] ChampionsList {
-      get {
-        return ChampionsData.Select(x => x.Name).ToArray();
-      }
-    }
+    public List<Branch> MasteriesTree { get; private set; }
+    public List<Champion> ChampionsData { get; private set; }
     public List<Build> BuildsData {
       get {
         return mBuilds.Select(B => new Build {
@@ -154,7 +156,6 @@ namespace com.jcandksolutions.lol {
         }).ToList();
       }
     }
-    public List<Champion> ChampionsData { get; private set; }
     public List<ItemSet> ItemSetsData {
       get {
         return mItemSets.Select(IS => new ItemSet {
@@ -189,16 +190,16 @@ namespace com.jcandksolutions.lol {
 
     public BuildManager() {
       var staticData = loadDBData();
-      var masteries = (JArray)staticData["masteries"];
-      var runes = (JArray)staticData["runes"];
-      var items = (JArray)staticData["items"];
-      var champions = (JArray)staticData["champions"];
+      var masteries = staticData.Masteries;
+      var runes = staticData.Runes;
+      var items = staticData.Items;
+      var champions = staticData.Champions;
       if (items == null || runes == null || masteries == null || champions == null) {
         throw new FormatException("The database file has wrong format or is corrupted");
       }
-      mItems = items.Select(extractItem).OrderBy(x => x.Name).ToList();
+      mItems = items.OrderBy(x => x.Name).ToList();
       mItems.Add(EmptyItem);
-      var tempRunes = runes.Select(extractRune).OrderBy(x => x.Name).ToArray();
+      var tempRunes = runes.OrderBy(x => x.Name);
       mMarks = tempRunes.Where(x => x.Type == "red").ToList();
       mSeals = tempRunes.Where(x => x.Type == "yellow").ToList();
       mGlyphs = tempRunes.Where(x => x.Type == "blue").ToList();
@@ -207,9 +208,10 @@ namespace com.jcandksolutions.lol {
       mSeals.Add(EmptyRune);
       mGlyphs.Add(EmptyRune);
       mQuints.Add(EmptyRune);
-      ChampionsData = champions.Select(extractChampion).OrderBy(x => x.Name).ToList();
+      ChampionsData = champions.OrderBy(x => x.Name).ToList();
       ChampionsData.Add(EmptyChampion);
-      MasteriesTree = masteries.Select(extractBranch).OrderBy(x => x.Name).ToList();
+      MasteriesTree = masteries;
+      MasteryPage.loadMasteryNames(MasteriesTree);
     }
 
     public void loadBuild(string path) {
@@ -533,137 +535,9 @@ namespace com.jcandksolutions.lol {
       d["name"] = newName;
     }
 
-    private Branch extractBranch(JToken b) {
-      return new Branch {
-        Name = b["name"].ToString(),
-        Tiers = b["tiers"].Select(extractTier).ToList()
-      };
-    }
-
-    private Tier extractTier(JToken t) {
-      return new Tier {
-        Limit = int.Parse(t["limit"].ToString()),
-        Masteries = t["masteries"].Select(extractMastery).ToList()
-      };
-    }
-
-    private Mastery extractMastery(JToken m) {
-      MasteryPage.MasteryNames.Add(m["id"].ToString());
-      return new Mastery {
-        ID = m["id"].ToString(),
-        Name = m["name"].ToString(),
-        Description = m["description"].ToString(),
-        ImageURL = m["image"].ToString()
-      };
-    }
-
-    private Rune extractRune(JToken r) {
-      return new Rune {
-        Name = r["name"].ToString(),
-        ID = r["id"].ToString(),
-        Type = r["type"].ToString(),
-        Description = r["description"].ToString(),
-        Stats = r["stats"].Select(extractStat).ToList(),
-        ImageURL = r["image"].ToString()
-      };
-    }
-
-    private Champion extractChampion(JToken ch) {
-      return new Champion {
-        ID = ch["id"].ToString(),
-        Name = ch["name"].ToString(),
-        Resource = ch["secondBarType"].ToString(),
-        Stats = extractStats(ch["stats"]),
-        Passive = extractPassive(ch["passive"]),
-        Spells = extractSpells((JArray)ch["spells"]),
-        ImageURL = ch["image"].ToString()
-      };
-    }
-
-    private Stats extractStats(JToken spell) {
-      return new Stats {
-        Armor = double.Parse(spell["armor"].ToString()),
-        ArmorPerLevel = double.Parse(spell["armorperlevel"].ToString()),
-        AD = double.Parse(spell["attackdamage"].ToString()),
-        ADPerLevel = double.Parse(spell["attackdamageperlevel"].ToString()),
-        AS = double.Parse(spell["attackspeedoffset"].ToString()),
-        ASPerLevel = double.Parse(spell["attackspeedperlevel"].ToString()),
-        Crit = double.Parse(spell["crit"].ToString()),
-        CritPerLevel = double.Parse(spell["critperlevel"].ToString()),
-        HP = double.Parse(spell["hp"].ToString()),
-        HPPerLevel = double.Parse(spell["hpperlevel"].ToString()),
-        HPRegen = double.Parse(spell["hpregen"].ToString()),
-        HPRegenPerLevel = double.Parse(spell["hpregenperlevel"].ToString()),
-        MP = double.Parse(spell["mp"].ToString()),
-        MPPerLevel = double.Parse(spell["mpperlevel"].ToString()),
-        MPRegen = double.Parse(spell["mpregen"].ToString()),
-        MPRegenPerLevel = double.Parse(spell["mpregenperlevel"].ToString()),
-        MR = double.Parse(spell["spellblock"].ToString()),
-        MRPerLevel = double.Parse(spell["spellblockperlevel"].ToString()),
-        MoveSpeed = double.Parse(spell["movespeed"].ToString()),
-        Range = double.Parse(spell["attackrange"].ToString())
-      };
-    }
-
-    private List<Spell> extractSpells(JArray spells) {
-      return spells.Select(extractSpell).ToList();
-    }
-
-    private Spell extractSpell(JToken spell) {
-      return new Spell {
-        Name = spell["name"].ToString(),
-        Description = spell["description"].ToString(),
-        Tooltip = spell["tooltip"].ToString(),
-        Resource = spell["resource"].ToString(),
-        MaxRank = int.Parse(spell["maxrank"].ToString()),
-        Cooldown = spell["cooldown"].ToString(),
-        Effect = spell["effect"].Select(x => x.ToString()).ToList(),
-        Range = spell["range"].ToString(),
-        Cost = spell["cost"].ToString(),
-        CostType = spell["costType"].ToString(),
-        Vars = spell["vars"].Select(extractVar).ToList(),
-        ImageURL = spell["image"].ToString()
-      };
-    }
-
-    private Var extractVar(JToken var) {
-      return new Var {
-        Key = var["key"].ToString(),
-        Type = var["link"].ToString(),
-        RanksWith = var["ranksWith"].ToString(),
-        Coeffs = var["coeff"].Select(x => double.Parse(x.ToString())).ToList()
-      };
-    }
-
-    private Passive extractPassive(JToken passive) {
-      return new Passive {
-        Name = passive["name"].ToString(),
-        Description = passive["description"].ToString(),
-        ImageURL = passive["image"].ToString()
-      };
-    }
-
-    private Item extractItem(JToken item) {
-      return new Item {
-        Name = item["name"].ToString(),
-        ID = item["id"].ToString(),
-        Description = item["description"].ToString(),
-        Gold = int.Parse(item["gold"].ToString()),
-        Stats = item["stats"].Select(extractStat).ToList(),
-        ImageURL = item["image"].ToString()
-      };
-    }
-
-    private Stat extractStat(JToken stat) {
-      return new Stat {
-        Name = stat["name"].ToString(),
-        Value = double.Parse(stat["value"].ToString())
-      };
-    }
-    
-    private JObject loadDBData() {
+    private DBData loadDBData() {
       var ioManager = CommonInjector.provideIOManager();
-      return JObject.Parse(ioManager.readFile("./db.json"));
+      return JsonConvert.DeserializeObject<DBData>(ioManager.readFile("./db.json"));
     }
 
     private JObject loadBuildData(string path) {

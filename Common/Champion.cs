@@ -1,25 +1,34 @@
 ﻿using System.Drawing;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace com.jcandksolutions.lol {
+  [JsonObject(MemberSerialization.OptIn)]
   public class Champion {
+    [JsonProperty("id")]
     public string ID { get; set; }
+    [JsonProperty("name")]
     public string Name { get; set; }
+    [JsonProperty("secondBarType")]
     public string Resource { get; set; }
+    [JsonProperty("stats")]
     public Stats Stats { get; set; }
-    public string ImageURL { private get; set; }
+    [JsonProperty("image")]
+    public string ImageURL { get; set; }
     public Bitmap Image {
       get {
         return string.IsNullOrWhiteSpace(ImageURL) ? null : new Bitmap("img/champion/" + ImageURL);
       }
     }
+    [JsonProperty("passive")]
     public Passive Passive { get; set; }
     public Bitmap PassiveImage {
       get {
         return Passive.Image;
       }
     }
-    public List<Spell> Spells { private get; set; }
+    [JsonProperty("spells")]
+    public List<Spell> Spells { get; set; }
     public Spell Spell1 {
       get {
         return Spells[0];

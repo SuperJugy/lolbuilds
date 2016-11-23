@@ -1,10 +1,15 @@
 ﻿using System.Drawing;
+using Newtonsoft.Json;
 
 namespace com.jcandksolutions.lol {
+  [JsonObject(MemberSerialization.OptIn)]
   public class Passive {
-    public string Name { private get; set; }
-    public string Description { private get; set; }
-    public string ImageURL { private get; set; }
+    [JsonProperty("name")]
+    public string Name { get; set; }
+    [JsonProperty("description")]
+    public string Description { get; set; }
+    [JsonProperty("image")]
+    public string ImageURL { get; set; }
     public Bitmap Image {
       get {
         return string.IsNullOrWhiteSpace(ImageURL) ? null : new Bitmap("img/passive/" + ImageURL);

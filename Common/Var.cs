@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace com.jcandksolutions.lol {
+  [JsonObject(MemberSerialization.OptIn)]
   public class Var {
     private string mValue;
     private string Value {
@@ -12,10 +14,14 @@ namespace com.jcandksolutions.lol {
         return mValue;
       }
     }
+    [JsonProperty("key")]
     public string Key { get; set; }
-    public string Type { private get; set; }
-    public List<double> Coeffs { private get; set; }
-    public string RanksWith { private get; set; }
+    [JsonProperty("link")]
+    public string Type { get; set; }
+    [JsonProperty("coeff")]
+    public List<double> Coeffs { get; set; }
+    [JsonProperty("ranksWith")]
+    public string RanksWith { get; set; }
     public string Text {
       get {
         switch (Type) {

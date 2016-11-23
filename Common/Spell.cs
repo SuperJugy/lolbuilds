@@ -2,21 +2,35 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace com.jcandksolutions.lol {
+  [JsonObject(MemberSerialization.OptIn)]
   public class Spell {
-    private string mResource;
-    private string mTooltip;
-    public string Name { private get; set; }
-    public string Description { private get; set; }
-    public string Cooldown { private get; set; }
-    public string Range { private get; set; }
-    public string Cost { private get; set; }
-    public string CostType { private get; set; }
-    public string ImageURL { private get; set; }
+    [JsonProperty("resource")]
+    public string mResource;
+    [JsonProperty("tooltip")]
+    public string mTooltip;
+    [JsonProperty("name")]
+    public string Name { get; set; }
+    [JsonProperty("description")]
+    public string Description { get; set; }
+    [JsonProperty("cooldown")]
+    public string Cooldown { get; set; }
+    [JsonProperty("range")]
+    public string Range { get; set; }
+    [JsonProperty("cost")]
+    public string Cost { get; set; }
+    [JsonProperty("costType")]
+    public string CostType { get; set; }
+    [JsonProperty("image")]
+    public string ImageURL { get; set; }
+    [JsonProperty("maxrank")]
     public int MaxRank { get; set; }
-    public List<string> Effect { private get; set; }
-    public List<Var> Vars { private get; set; }
+    [JsonProperty("effect")]
+    public List<string> Effect { get; set; }
+    [JsonProperty("vars")]
+    public List<Var> Vars { get; set; }
     public string Tooltip {
       get {
         return Name + "\n\rRange: " + Range + "\n\rCost: " + Resource + "\n\rCooldown: " + Cooldown + "\n\rDescription: " + Description + "\n\r" + formatString(mTooltip);

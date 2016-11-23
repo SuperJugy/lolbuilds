@@ -1,14 +1,22 @@
 ﻿using System.Drawing;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace com.jcandksolutions.lol {
+  [JsonObject(MemberSerialization.OptIn)]
   public class Item {
+    [JsonProperty("id")]
     public string ID { get; set; }
+    [JsonProperty("name")]
     public string Name { get; set; }
-    public string Description { private get; set; }
-    public int Gold { private get; set; }
-    public List<Stat> Stats { private get; set; }
-    public string ImageURL { private get; set; }
+    [JsonProperty("description")]
+    public string Description { get; set; }
+    [JsonProperty("gold")]
+    public int Gold { get; set; }
+    [JsonProperty("stats")]
+    public List<Stat> Stats { get; set; }
+    [JsonProperty("image")]
+    public string ImageURL { get; set; }
     public Bitmap Image {
       get {
         return string.IsNullOrWhiteSpace(ImageURL) ? null : new Bitmap("img/item/" + ImageURL);

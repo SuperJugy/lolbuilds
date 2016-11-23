@@ -56,5 +56,15 @@ namespace com.jcandksolutions.lol {
         PropertyChanged(this, e);
       }
     }
+
+    public static void loadMasteryNames(List<Branch> masteriesTree) {
+      foreach (Branch branch in masteriesTree) {
+        foreach (Tier tier in branch.Tiers) {
+          foreach (Mastery mastery in tier.Masteries) {
+            mMasteryNames.Add(mastery.ID);
+          }
+        }
+      }
+    }
   }
 }

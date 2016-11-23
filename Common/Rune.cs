@@ -1,14 +1,22 @@
 ﻿using System.Drawing;
 using System.Collections.Generic;
+using Newtonsoft.Json;
 
 namespace com.jcandksolutions.lol {
+  [JsonObject(MemberSerialization.OptIn)]
   public class Rune {
+    [JsonProperty("id")]
     public string ID { get; set; }
+    [JsonProperty("name")]
     public string Name { get; set; }
+    [JsonProperty("type")]
     public string Type { get; set; }
-    public string ImageURL { private get; set; }
-    public string Description { private get; set; }
-    public List<Stat> Stats { private get; set; }
+    [JsonProperty("image")]
+    public string ImageURL { get; set; }
+    [JsonProperty("description")]
+    public string Description { get; set; }
+    [JsonProperty("stats")]
+    public List<Stat> Stats { get; set; }
     public string Tooltip {
       get {
         return Name + "\n\r" + Description;
