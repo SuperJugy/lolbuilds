@@ -46,73 +46,73 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BuildBind.cs" />
-    <Compile Include="BrowserViewImpl.cs">
+    <Compile Include="UI\BuildBind.cs" />
+    <Compile Include="UI\BrowserViewImpl.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BrowserViewImpl.Designer.cs">
+    <Compile Include="UI\BrowserViewImpl.Designer.cs">
       <DependentUpon>BrowserViewImpl.cs</DependentUpon>
     </Compile>
-    <Compile Include="CalculatorViewImpl.cs">
+    <Compile Include="UI\CalculatorViewImpl.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CalculatorViewImpl.Designer.cs">
+    <Compile Include="UI\CalculatorViewImpl.Designer.cs">
       <DependentUpon>CalculatorViewImpl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ComboBox.cs">
+    <Compile Include="UI\ComboBox.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="DBEditorViewImpl.cs">
+    <Compile Include="UI\DBEditorViewImpl.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="DBEditorViewImpl.Designer.cs">
+    <Compile Include="UI\DBEditorViewImpl.Designer.cs">
       <DependentUpon>DBEditorViewImpl.cs</DependentUpon>
     </Compile>
-    <Compile Include="EditorViewImpl.cs">
+    <Compile Include="UI\EditorViewImpl.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="EditorViewImpl.Designer.cs">
+    <Compile Include="UI\EditorViewImpl.Designer.cs">
       <DependentUpon>EditorViewImpl.cs</DependentUpon>
     </Compile>
-    <Compile Include="ItemSetBind.cs" />
-    <Compile Include="MainMenuViewImpl.cs">
+    <Compile Include="UI\ItemSetBind.cs" />
+    <Compile Include="UI\MainMenuViewImpl.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainMenuViewImpl.Designer.cs">
+    <Compile Include="UI\MainMenuViewImpl.Designer.cs">
       <DependentUpon>MainMenuViewImpl.cs</DependentUpon>
     </Compile>
-    <Compile Include="MasteryPageBind.cs" />
-    <Compile Include="NameDialog.cs">
+    <Compile Include="UI\MasteryPageBind.cs" />
+    <Compile Include="UI\NameDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="NameDialog.Designer.cs">
+    <Compile Include="UI\NameDialog.Designer.cs">
       <DependentUpon>NameDialog.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RunePageBind.cs" />
-    <Compile Include="SettingsDialog.cs">
+    <Compile Include="UI\RunePageBind.cs" />
+    <Compile Include="UI\SettingsDialog.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SettingsDialog.Designer.cs">
+    <Compile Include="UI\SettingsDialog.Designer.cs">
       <DependentUpon>SettingsDialog.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="BrowserViewImpl.resx">
+    <EmbeddedResource Include="UI\BrowserViewImpl.resx">
       <DependentUpon>BrowserViewImpl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CalculatorViewImpl.resx">
+    <EmbeddedResource Include="UI\CalculatorViewImpl.resx">
       <DependentUpon>CalculatorViewImpl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="DBEditorViewImpl.resx">
+    <EmbeddedResource Include="UI\DBEditorViewImpl.resx">
       <DependentUpon>DBEditorViewImpl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="EditorViewImpl.resx">
+    <EmbeddedResource Include="UI\EditorViewImpl.resx">
       <DependentUpon>EditorViewImpl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainMenuViewImpl.resx">
+    <EmbeddedResource Include="UI\MainMenuViewImpl.resx">
       <DependentUpon>MainMenuViewImpl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NameDialog.resx">
+    <EmbeddedResource Include="UI\NameDialog.resx">
       <DependentUpon>NameDialog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -125,7 +125,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="SettingsDialog.resx">
+    <EmbeddedResource Include="UI\SettingsDialog.resx">
       <DependentUpon>SettingsDialog.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="App.config" />

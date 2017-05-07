@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
+using com.jcandksolutions.lol.DependencyInjection;
+using com.jcandksolutions.lol.UI;
 
 namespace com.jcandksolutions.lol {
   internal static class Program {

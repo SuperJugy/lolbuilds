@@ -1,4 +1,4 @@
-Change BuildManager to use custom json converter and deserialize directly to classes instead of JArrays and JObjects.
+Add Summoner Spells
 LoL API functions
   - download complete DB
   - download champion list
