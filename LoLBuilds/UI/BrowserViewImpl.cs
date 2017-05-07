@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+
 using com.jcandksolutions.lol.Model;
 
 namespace com.jcandksolutions.lol.UI {
@@ -56,9 +57,7 @@ namespace com.jcandksolutions.lol.UI {
           Text = branch.Name,
           AutoSize = true,
           Anchor = AnchorStyles.None
-        },
-          j,
-          0);
+        }, j, 0);
         foreach (Tier tier in branch.Tiers) {
           var tierTable = new TableLayoutPanel {
             RowCount = 1,
@@ -90,8 +89,10 @@ namespace com.jcandksolutions.lol.UI {
             tierTable.Controls.Add(img, k, 0);
             ++k;
           }
+
           ++i;
         }
+
         ++j;
       }
       for (var i = 0; i < MasteriesTable.RowCount; ++i) {
@@ -114,6 +115,7 @@ namespace com.jcandksolutions.lol.UI {
       if (openFileDialog.ShowDialog() == DialogResult.OK) {
         return openFileDialog.FileName;
       }
+
       return null;
     }
 
@@ -123,6 +125,12 @@ namespace com.jcandksolutions.lol.UI {
 
     private void BrowserView_Load(object sender, EventArgs e) {
       mPresenter.onStart();
+    }
+
+    private void BuildBindingSource_CurrentChanged(object sender, EventArgs e) {
+      var build = (Build)BuildBindingSource.Current;
+      ToolTip.SetToolTip(Summoner1, build.Summoner1.Tooltip);
+      ToolTip.SetToolTip(Summoner2, build.Summoner2.Tooltip);
     }
 
     private void ChampionBindingSource_CurrentChanged(object sender, EventArgs e) {
@@ -220,6 +228,12 @@ namespace com.jcandksolutions.lol.UI {
       binding = new Binding("Image", ChampionBindingSource, "Spell4Image", true);
       binding.Format += ImageBinding_Format;
       Spell4.DataBindings.Add(binding);
+      binding = new Binding("Image", BuildBindingSource, "Summoner1Image", true);
+      binding.Format += ImageBinding_Format;
+      Summoner1.DataBindings.Add(binding);
+      binding = new Binding("Image", BuildBindingSource, "Summoner2Image", true);
+      binding.Format += ImageBinding_Format;
+      Summoner2.DataBindings.Add(binding);
       binding = new Binding("Image", ItemSetBindingSource, "Item1Image", true);
       binding.Format += ImageBinding_Format;
       Item1.DataBindings.Add(binding);

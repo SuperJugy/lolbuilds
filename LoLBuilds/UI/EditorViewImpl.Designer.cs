@@ -44,6 +44,8 @@
       System.Windows.Forms.Label label15;
       System.Windows.Forms.Label label13;
       System.Windows.Forms.Label label14;
+      System.Windows.Forms.Label label2;
+      System.Windows.Forms.Label label3;
       this.TabsControl = new System.Windows.Forms.TabControl();
       this.BuildsTab = new System.Windows.Forms.TabPage();
       this.RenameBuildButton = new System.Windows.Forms.Button();
@@ -81,68 +83,70 @@
       this.ToolTip = new System.Windows.Forms.ToolTip(this.components);
       this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
       this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
-      this.BuildName = new ComboBox();
-      this.Champion = new ComboBox();
-      this.ItemSet = new ComboBox();
-      this.RunePage = new ComboBox();
-      this.MasteryPage = new ComboBox();
-      this.MasteryPageName = new ComboBox();
-      this.RunePageName = new ComboBox();
-      this.Mark1 = new ComboBox();
-      this.Quint3 = new ComboBox();
-      this.Mark2 = new ComboBox();
-      this.Quint2 = new ComboBox();
-      this.Mark3 = new ComboBox();
-      this.Quint1 = new ComboBox();
-      this.Mark4 = new ComboBox();
-      this.Mark5 = new ComboBox();
-      this.Glyph9 = new ComboBox();
-      this.Mark6 = new ComboBox();
-      this.Glyph8 = new ComboBox();
-      this.Mark7 = new ComboBox();
-      this.Glyph7 = new ComboBox();
-      this.Mark8 = new ComboBox();
-      this.Glyph6 = new ComboBox();
-      this.Mark9 = new ComboBox();
-      this.Glyph5 = new ComboBox();
-      this.Glyph4 = new ComboBox();
-      this.Seal1 = new ComboBox();
-      this.Glyph3 = new ComboBox();
-      this.Seal2 = new ComboBox();
-      this.Glyph2 = new ComboBox();
-      this.Seal3 = new ComboBox();
-      this.Glyph1 = new ComboBox();
-      this.Seal4 = new ComboBox();
-      this.Seal5 = new ComboBox();
-      this.Seal9 = new ComboBox();
-      this.Seal6 = new ComboBox();
-      this.Seal8 = new ComboBox();
-      this.Seal7 = new ComboBox();
-      this.ItemSetName = new ComboBox();
-      this.Item24 = new ComboBox();
-      this.Item1 = new ComboBox();
-      this.Item23 = new ComboBox();
-      this.Item2 = new ComboBox();
-      this.Item22 = new ComboBox();
-      this.Item3 = new ComboBox();
-      this.Item21 = new ComboBox();
-      this.Item4 = new ComboBox();
-      this.Item20 = new ComboBox();
-      this.Item19 = new ComboBox();
-      this.Item5 = new ComboBox();
-      this.Item18 = new ComboBox();
-      this.Item6 = new ComboBox();
-      this.Item17 = new ComboBox();
-      this.Item7 = new ComboBox();
-      this.Item8 = new ComboBox();
-      this.Item16 = new ComboBox();
-      this.Item15 = new ComboBox();
-      this.Item9 = new ComboBox();
-      this.Item14 = new ComboBox();
-      this.Item10 = new ComboBox();
-      this.Item13 = new ComboBox();
-      this.Item11 = new ComboBox();
-      this.Item12 = new ComboBox();
+      this.Summoner2 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Summoner1 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.BuildName = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Champion = new com.jcandksolutions.lol.UI.ComboBox();
+      this.ItemSet = new com.jcandksolutions.lol.UI.ComboBox();
+      this.RunePage = new com.jcandksolutions.lol.UI.ComboBox();
+      this.MasteryPage = new com.jcandksolutions.lol.UI.ComboBox();
+      this.MasteryPageName = new com.jcandksolutions.lol.UI.ComboBox();
+      this.RunePageName = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Mark1 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Quint3 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Mark2 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Quint2 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Mark3 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Quint1 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Mark4 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Mark5 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Glyph9 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Mark6 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Glyph8 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Mark7 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Glyph7 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Mark8 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Glyph6 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Mark9 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Glyph5 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Glyph4 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Seal1 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Glyph3 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Seal2 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Glyph2 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Seal3 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Glyph1 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Seal4 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Seal5 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Seal9 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Seal6 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Seal8 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Seal7 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.ItemSetName = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Item24 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Item1 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Item23 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Item2 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Item22 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Item3 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Item21 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Item4 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Item20 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Item19 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Item5 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Item18 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Item6 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Item17 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Item7 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Item8 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Item16 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Item15 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Item9 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Item14 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Item10 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Item13 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Item11 = new com.jcandksolutions.lol.UI.ComboBox();
+      this.Item12 = new com.jcandksolutions.lol.UI.ComboBox();
       label17 = new System.Windows.Forms.Label();
       label23 = new System.Windows.Forms.Label();
       label18 = new System.Windows.Forms.Label();
@@ -163,6 +167,8 @@
       label15 = new System.Windows.Forms.Label();
       label13 = new System.Windows.Forms.Label();
       label14 = new System.Windows.Forms.Label();
+      label2 = new System.Windows.Forms.Label();
+      label3 = new System.Windows.Forms.Label();
       this.TabsControl.SuspendLayout();
       this.BuildsTab.SuspendLayout();
       this.BuildGroupBox.SuspendLayout();
@@ -223,7 +229,7 @@
       // label21
       // 
       label21.AutoSize = true;
-      label21.Location = new System.Drawing.Point(553, 49);
+      label21.Location = new System.Drawing.Point(563, 49);
       label21.Name = "label21";
       label21.Size = new System.Drawing.Size(52, 13);
       label21.TabIndex = 11;
@@ -355,6 +361,24 @@
       label14.TabIndex = 19;
       label14.Text = "Late Game";
       // 
+      // label2
+      // 
+      label2.AutoSize = true;
+      label2.Location = new System.Drawing.Point(6, 102);
+      label2.Name = "label2";
+      label2.Size = new System.Drawing.Size(66, 13);
+      label2.TabIndex = 17;
+      label2.Text = "Summoner 1";
+      // 
+      // label3
+      // 
+      label3.AutoSize = true;
+      label3.Location = new System.Drawing.Point(285, 102);
+      label3.Name = "label3";
+      label3.Size = new System.Drawing.Size(66, 13);
+      label3.TabIndex = 19;
+      label3.Text = "Summoner 2";
+      // 
       // TabsControl
       // 
       this.TabsControl.Controls.Add(this.BuildsTab);
@@ -385,7 +409,7 @@
       // 
       // RenameBuildButton
       // 
-      this.RenameBuildButton.Location = new System.Drawing.Point(249, 121);
+      this.RenameBuildButton.Location = new System.Drawing.Point(249, 146);
       this.RenameBuildButton.Name = "RenameBuildButton";
       this.RenameBuildButton.Size = new System.Drawing.Size(96, 23);
       this.RenameBuildButton.TabIndex = 23;
@@ -395,7 +419,7 @@
       // 
       // CopyBuildButton
       // 
-      this.CopyBuildButton.Location = new System.Drawing.Point(168, 121);
+      this.CopyBuildButton.Location = new System.Drawing.Point(168, 146);
       this.CopyBuildButton.Name = "CopyBuildButton";
       this.CopyBuildButton.Size = new System.Drawing.Size(75, 23);
       this.CopyBuildButton.TabIndex = 22;
@@ -406,7 +430,7 @@
       // DeleteBuildButton
       // 
       this.DeleteBuildButton.Enabled = false;
-      this.DeleteBuildButton.Location = new System.Drawing.Point(87, 121);
+      this.DeleteBuildButton.Location = new System.Drawing.Point(87, 146);
       this.DeleteBuildButton.Name = "DeleteBuildButton";
       this.DeleteBuildButton.Size = new System.Drawing.Size(75, 23);
       this.DeleteBuildButton.TabIndex = 21;
@@ -416,7 +440,7 @@
       // 
       // AddBuildButton
       // 
-      this.AddBuildButton.Location = new System.Drawing.Point(6, 121);
+      this.AddBuildButton.Location = new System.Drawing.Point(6, 146);
       this.AddBuildButton.Name = "AddBuildButton";
       this.AddBuildButton.Size = new System.Drawing.Size(75, 23);
       this.AddBuildButton.TabIndex = 20;
@@ -426,6 +450,10 @@
       // 
       // BuildGroupBox
       // 
+      this.BuildGroupBox.Controls.Add(this.Summoner2);
+      this.BuildGroupBox.Controls.Add(label3);
+      this.BuildGroupBox.Controls.Add(this.Summoner1);
+      this.BuildGroupBox.Controls.Add(label2);
       this.BuildGroupBox.Controls.Add(label17);
       this.BuildGroupBox.Controls.Add(this.BuildName);
       this.BuildGroupBox.Controls.Add(label23);
@@ -443,14 +471,14 @@
       this.BuildGroupBox.Enabled = false;
       this.BuildGroupBox.Location = new System.Drawing.Point(6, 6);
       this.BuildGroupBox.Name = "BuildGroupBox";
-      this.BuildGroupBox.Size = new System.Drawing.Size(822, 109);
+      this.BuildGroupBox.Size = new System.Drawing.Size(833, 134);
       this.BuildGroupBox.TabIndex = 19;
       this.BuildGroupBox.TabStop = false;
       this.BuildGroupBox.Text = "Build:";
       // 
       // MaxOrder
       // 
-      this.MaxOrder.Location = new System.Drawing.Point(347, 73);
+      this.MaxOrder.Location = new System.Drawing.Point(357, 73);
       this.MaxOrder.Name = "MaxOrder";
       this.MaxOrder.Size = new System.Drawing.Size(200, 20);
       this.MaxOrder.TabIndex = 15;
@@ -809,6 +837,26 @@
       this.openFileDialog.DefaultExt = "json";
       this.openFileDialog.Filter = "JSON files (*.json)|*.json";
       // 
+      // Summoner2
+      // 
+      this.Summoner2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.Summoner2.FormattingEnabled = true;
+      this.Summoner2.Location = new System.Drawing.Point(357, 99);
+      this.Summoner2.Name = "Summoner2";
+      this.Summoner2.Size = new System.Drawing.Size(200, 21);
+      this.Summoner2.TabIndex = 20;
+      this.Summoner2.SelectedIndexChanged += new System.EventHandler(this.BuildChanged);
+      // 
+      // Summoner1
+      // 
+      this.Summoner1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+      this.Summoner1.FormattingEnabled = true;
+      this.Summoner1.Location = new System.Drawing.Point(79, 99);
+      this.Summoner1.Name = "Summoner1";
+      this.Summoner1.Size = new System.Drawing.Size(200, 21);
+      this.Summoner1.TabIndex = 18;
+      this.Summoner1.SelectedIndexChanged += new System.EventHandler(this.BuildChanged);
+      // 
       // BuildName
       // 
       this.BuildName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -822,7 +870,7 @@
       // 
       this.Champion.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.Champion.FormattingEnabled = true;
-      this.Champion.Location = new System.Drawing.Point(347, 19);
+      this.Champion.Location = new System.Drawing.Point(357, 19);
       this.Champion.Name = "Champion";
       this.Champion.Size = new System.Drawing.Size(200, 21);
       this.Champion.TabIndex = 5;
@@ -842,7 +890,7 @@
       // 
       this.RunePage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.RunePage.FormattingEnabled = true;
-      this.RunePage.Location = new System.Drawing.Point(347, 46);
+      this.RunePage.Location = new System.Drawing.Point(357, 46);
       this.RunePage.Name = "RunePage";
       this.RunePage.Size = new System.Drawing.Size(200, 21);
       this.RunePage.TabIndex = 8;
@@ -852,7 +900,7 @@
       // 
       this.MasteryPage.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
       this.MasteryPage.FormattingEnabled = true;
-      this.MasteryPage.Location = new System.Drawing.Point(611, 46);
+      this.MasteryPage.Location = new System.Drawing.Point(621, 46);
       this.MasteryPage.Name = "MasteryPage";
       this.MasteryPage.Size = new System.Drawing.Size(200, 21);
       this.MasteryPage.TabIndex = 10;
@@ -1559,6 +1607,8 @@
     private System.Windows.Forms.Button RenameMasteryPageButton;
     private System.Windows.Forms.Button RenameRunePageButton;
     private System.Windows.Forms.Button RenameItemSetButton;
+    private ComboBox Summoner1;
+    private ComboBox Summoner2;
   }
 }
 

@@ -1,6 +1,8 @@
 ﻿using System.Drawing;
+
 using com.jcandksolutions.lol.BusinessLogic;
 using com.jcandksolutions.lol.DependencyInjection;
+
 using Newtonsoft.Json;
 
 namespace com.jcandksolutions.lol.Model {
@@ -10,14 +12,11 @@ namespace com.jcandksolutions.lol.Model {
     public string ItemSetName { get; set; }
 
     [JsonProperty("item1")]
-    public string Item1ID
-    {
-      get
-      {
+    public string Item1ID {
+      get {
         return Item1.ID;
       }
-      set
-      {
+      set {
         Item1 = CommonInjector.provideBuildManager().getItemByID(value);
       }
     }

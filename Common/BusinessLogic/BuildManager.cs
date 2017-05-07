@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using com.jcandksolutions.lol.DependencyInjection;
 using com.jcandksolutions.lol.Model;
+
 using Newtonsoft.Json;
 
 namespace com.jcandksolutions.lol.BusinessLogic {
@@ -12,9 +14,11 @@ namespace com.jcandksolutions.lol.BusinessLogic {
     private readonly List<Rune> mSeals;
     private readonly List<Rune> mGlyphs;
     private readonly List<Rune> mQuints;
+    private readonly List<SummonerSpell> mSummoners;
     private Rune mEmptyRune;
     private Item mEmptyItem;
     private Champion mEmptyChampion;
+    private SummonerSpell mEmptySummoner;
     private List<Build> mBuilds;
     private List<ItemSet> mItemSets;
     private MasteryPageList mMasteryPages;
@@ -43,6 +47,11 @@ namespace com.jcandksolutions.lol.BusinessLogic {
         });
       }
     }
+    public SummonerSpell EmptySummoner {
+      get {
+        return mEmptySummoner ?? (mEmptySummoner = mSummoners.First(x => x.ID == "35"));
+      }
+    }
     public object[] MarksList {
       get {
         return mMarks.ToArray<object>();
@@ -66,6 +75,11 @@ namespace com.jcandksolutions.lol.BusinessLogic {
     public object[] ItemsList {
       get {
         return mItems.ToArray<object>();
+      }
+    }
+    public object[] SummonersList {
+      get {
+        return mSummoners.ToArray<object>();
       }
     }
     public object[] ChampionsList {
@@ -122,9 +136,11 @@ namespace com.jcandksolutions.lol.BusinessLogic {
       List<Rune> runes = staticData.Runes;
       List<Item> items = staticData.Items;
       List<Champion> champions = staticData.Champions;
+      List<SummonerSpell> summoners = staticData.SummonerSpells;
       if (items == null || runes == null || masteries == null || champions == null) {
         throw new FormatException("The database file has wrong format or is corrupted");
       }
+
       mItems = items.OrderBy(x => x.Name).ToList();
       mItems.Add(EmptyItem);
       IOrderedEnumerable<Rune> tempRunes = runes.OrderBy(x => x.Name);
@@ -139,6 +155,8 @@ namespace com.jcandksolutions.lol.BusinessLogic {
       ChampionsData = champions.OrderBy(x => x.Name).ToList();
       ChampionsData.Add(EmptyChampion);
       MasteriesTree = masteries;
+      mSummoners = summoners.OrderBy(x => x.Name).ToList();
+      mSummoners.Add(EmptySummoner);
       MasteryPage.loadMasteryNames(MasteriesTree);
     }
 
@@ -258,7 +276,11 @@ namespace com.jcandksolutions.lol.BusinessLogic {
     public Item getItemByID(string id) {
       return mItems.FirstOrDefault(I => id == I.ID) ?? EmptyItem;
     }
-    
+
+    public SummonerSpell getSummonerByID(string id) {
+      return mSummoners.FirstOrDefault(S => S.ID == id) ?? EmptySummoner;
+    }
+
     public Build getBuildByName(string index) {
       return mBuilds.First(B => B.BuildName == index);
     }

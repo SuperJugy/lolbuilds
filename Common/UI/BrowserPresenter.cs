@@ -1,4 +1,5 @@
 ﻿using System;
+
 using com.jcandksolutions.lol.BusinessLogic;
 using com.jcandksolutions.lol.DependencyInjection;
 
@@ -28,6 +29,7 @@ namespace com.jcandksolutions.lol.UI {
       if (newBuildsPath == null) {
         return;
       }
+
       mBuildsPath = newBuildsPath;
       mBuildManager.loadBuild(mBuildsPath);
       bindLists();

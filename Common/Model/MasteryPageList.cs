@@ -11,6 +11,7 @@ namespace com.jcandksolutions.lol.Model {
         props[i] = new MasteryPagePropertyDescriptor(key);
         ++i;
       }
+
       return new PropertyDescriptorCollection(props, true);
     }
 

@@ -7,7 +7,6 @@
     }
 
     public void onStart() {
-      
     }
   }
 }

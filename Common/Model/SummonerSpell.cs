@@ -6,52 +6,41 @@ using System.Linq;
 using Newtonsoft.Json;
 
 namespace com.jcandksolutions.lol.Model {
-  [JsonObject(MemberSerialization.OptIn)]
-  public class Spell {
-    [JsonProperty("resource")]
-    public string mResource;
+  public class SummonerSpell {
     [JsonProperty("tooltip")]
     public string mTooltip;
     [JsonProperty("name")]
     public string Name { get; set; }
+    [JsonProperty("id")]
+    public string ID { get; set; }
     [JsonProperty("description")]
     public string Description { get; set; }
     [JsonProperty("cooldown")]
     public string Cooldown { get; set; }
-    [JsonProperty("range")]
-    public string Range { get; set; }
-    [JsonProperty("cost")]
-    public string Cost { get; set; }
-    [JsonProperty("costType")]
-    public string CostType { get; set; }
-    [JsonProperty("image")]
-    public string ImageURL { get; set; }
-    [JsonProperty("maxrank")]
-    public int MaxRank { get; set; }
     [JsonProperty("effect")]
     public List<string> Effect { get; set; }
+    [JsonProperty("range")]
+    public string Range { get; set; }
     [JsonProperty("vars")]
     public List<Var> Vars { get; set; }
+    [JsonProperty("image")]
+    public string ImageURL { get; set; }
+    public Bitmap Image {
+      get {
+        return string.IsNullOrWhiteSpace(ImageURL) ? null : new Bitmap("img/spell/" + ImageURL);
+      }
+    }
     public string Tooltip {
       get {
-        return Name + "\n\rRange: " + Range + "\n\rCost: " + Resource + "\n\rCooldown: " + Cooldown + "\n\rDescription: " + Description + "\n\r" + formatString(mTooltip);
+        return Name + "\n\rRange: " + Range + "\n\rCooldown: " + Cooldown + "\n\rDescription: " + Description + "\n\r" + formatString(mTooltip);
       }
       set {
         mTooltip = value;
       }
     }
-    public string Resource {
-      private get {
-        return formatString(mResource);
-      }
-      set {
-        mResource = value;
-      }
-    }
-    public Bitmap Image {
-      get {
-        return string.IsNullOrWhiteSpace(ImageURL) ? null : new Bitmap("img/spell/" + ImageURL);
-      }
+
+    public override string ToString() {
+      return Name;
     }
 
     private string formatString(string result) {
@@ -67,9 +56,6 @@ namespace com.jcandksolutions.lol.Model {
         }
       }
 
-      if (result.IndexOf("{{ cost }}", StringComparison.Ordinal) != -1) {
-        result = result.Replace("{{ cost }}", Cost);
-      }
       return result;
     }
   }

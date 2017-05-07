@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+
 using com.jcandksolutions.lol.Model;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -13,7 +15,8 @@ namespace com.jcandksolutions.lol.BusinessLogic {
         Items = extractItems(Caller.queryItems()),
         Champions = extractChampions(Caller.queryChampions()),
         Runes = extractRunes(Caller.queryRunes()),
-        Masteries = extractMasteries(Caller.queryMasteries())
+        Masteries = extractMasteries(Caller.queryMasteries()),
+        SummonerSpells = extractSummonerSpells(Caller.querySummonerSpells())
       };
       return JsonConvert.SerializeObject(root, Formatting.Indented);
     }
@@ -45,6 +48,12 @@ namespace com.jcandksolutions.lol.BusinessLogic {
       return tree.Properties().Select(branch => extractBranch(branch, masteryData)).ToList();
     }
 
+    private List<SummonerSpell> extractSummonerSpells(JObject data) {
+      var summonerSpellData = (JObject)data["data"];
+      List<SummonerSpell> summoners = summonerSpellData.Properties().Select(prop => extractSummonerSpell((JObject)prop.Value)).ToList();
+      return summoners;
+    }
+
     private Item extractItem(Dictionary<string, string> enchantmentMap, JObject prop) {
       string key = prop["id"].ToString();
       string image = prop["image"]["full"].ToString();
@@ -52,9 +61,9 @@ namespace com.jcandksolutions.lol.BusinessLogic {
       return new Item {
         ID = key,
         Description = extractString(prop["sanitizedDescription"]),
-        Gold= int.Parse(extractString(prop["gold"]["total"])),
-        Name= enchantmentMap.ContainsKey(key) && enchantmentMap[key] != "" ? enchantmentMap[key] + " - " + extractString(prop["name"]) : extractString(prop["name"]),
-        Stats= extractStatList((JObject)prop["stats"]),
+        Gold = int.Parse(extractString(prop["gold"]["total"])),
+        Name = enchantmentMap.ContainsKey(key) && enchantmentMap[key] != "" ? enchantmentMap[key] + " - " + extractString(prop["name"]) : extractString(prop["name"]),
+        Stats = extractStatList((JObject)prop["stats"]),
         ImageURL = image
       };
     }
@@ -198,6 +207,22 @@ namespace com.jcandksolutions.lol.BusinessLogic {
       };
     }
 
+    private SummonerSpell extractSummonerSpell(JObject prop) {
+      string image = prop["image"]["full"].ToString();
+      Caller.downloadSpellImage(image);
+      return new SummonerSpell {
+        Name = prop["name"].ToString(),
+        ID = prop["id"].ToString(),
+        Description = extractString(prop["sanitizedDescription"]),
+        Tooltip = extractString(prop["sanitizedTooltip"]),
+        Cooldown = extractString(prop["cooldownBurn"]),
+        Effect = extractEffects((JArray)prop["effectBurn"]),
+        Range = extractString(prop["rangeBurn"]),
+        Vars = extractVars((JArray)prop["vars"]),
+        ImageURL = image
+      };
+    }
+
     private Dictionary<string, string> buildEnchantmentMap(List<string> enchantments, List<dynamic> enchantables) {
       return enchantments.ToDictionary(enchantment => enchantment, enchantment => findEnchantableForEnchantment(enchantment, enchantments, enchantables));
     }
@@ -211,19 +236,11 @@ namespace com.jcandksolutions.lol.BusinessLogic {
     }
 
     private List<string> extractEnchantmentsIDs(JObject itemData) {
-      return
-        itemData.Properties()
-          .Where(itDa => itDa.Value["name"] != null && itDa.Value["name"].ToString().StartsWith("Enchantment"))
-          .Select(itDa => itDa.Value["id"].ToString())
-          .ToList();
+      return itemData.Properties().Where(itDa => itDa.Value["name"] != null && itDa.Value["name"].ToString().StartsWith("Enchantment")).Select(itDa => itDa.Value["id"].ToString()).ToList();
     }
 
     private string findEnchantableForEnchantment(string enchantment, List<string> enchantments, List<dynamic> enchantables) {
-      return
-        enchantables.Where(enchantable => enchantable.Into.Contains(enchantment))
-          .Select(enchantable => enchantments.Contains(enchantable.Id) ? findEnchantableForEnchantment(enchantable.Id, enchantments, enchantables) : enchantable.Name)
-          .DefaultIfEmpty<dynamic>("")
-          .First();
+      return enchantables.Where(enchantable => enchantable.Into.Contains(enchantment)).Select(enchantable => enchantments.Contains(enchantable.Id) ? findEnchantableForEnchantment(enchantable.Id, enchantments, enchantables) : enchantable.Name).DefaultIfEmpty<dynamic>("").First();
     }
 
     private object extractToken(JToken token) {
@@ -236,6 +253,7 @@ namespace com.jcandksolutions.lol.BusinessLogic {
       if (token.Type == JTokenType.Array) {
         return extractArray((JArray)token);
       }
+
       return token.ToString();
     }
 
@@ -243,6 +261,7 @@ namespace com.jcandksolutions.lol.BusinessLogic {
       if (token == null || token.Type == JTokenType.Null) {
         return "";
       }
+
       return token.ToString();
     }
 

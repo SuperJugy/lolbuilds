@@ -38,6 +38,8 @@
       System.Windows.Forms.Label label3;
       System.Windows.Forms.Label label4;
       this.BuildGroupBox = new System.Windows.Forms.GroupBox();
+      this.Summoner1 = new System.Windows.Forms.PictureBox();
+      this.Summoner2 = new System.Windows.Forms.PictureBox();
       this.Spell4 = new System.Windows.Forms.PictureBox();
       this.Spell3 = new System.Windows.Forms.PictureBox();
       this.Spell2 = new System.Windows.Forms.PictureBox();
@@ -134,6 +136,8 @@
       label3 = new System.Windows.Forms.Label();
       label4 = new System.Windows.Forms.Label();
       this.BuildGroupBox.SuspendLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.Summoner1)).BeginInit();
+      ((System.ComponentModel.ISupportInitialize)(this.Summoner2)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.Spell4)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.Spell3)).BeginInit();
       ((System.ComponentModel.ISupportInitialize)(this.Spell2)).BeginInit();
@@ -325,6 +329,8 @@
       // 
       // BuildGroupBox
       // 
+      this.BuildGroupBox.Controls.Add(this.Summoner1);
+      this.BuildGroupBox.Controls.Add(this.Summoner2);
       this.BuildGroupBox.Controls.Add(this.Spell4);
       this.BuildGroupBox.Controls.Add(this.Spell3);
       this.BuildGroupBox.Controls.Add(this.Spell2);
@@ -344,6 +350,24 @@
       this.BuildGroupBox.TabIndex = 0;
       this.BuildGroupBox.TabStop = false;
       this.BuildGroupBox.Text = "Build";
+      // 
+      // Summoner1
+      // 
+      this.Summoner1.Location = new System.Drawing.Point(413, 72);
+      this.Summoner1.Name = "Summoner1";
+      this.Summoner1.Size = new System.Drawing.Size(64, 64);
+      this.Summoner1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+      this.Summoner1.TabIndex = 42;
+      this.Summoner1.TabStop = false;
+      // 
+      // Summoner2
+      // 
+      this.Summoner2.Location = new System.Drawing.Point(483, 72);
+      this.Summoner2.Name = "Summoner2";
+      this.Summoner2.Size = new System.Drawing.Size(64, 64);
+      this.Summoner2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+      this.Summoner2.TabIndex = 41;
+      this.Summoner2.TabStop = false;
       // 
       // Spell4
       // 
@@ -402,6 +426,7 @@
       // BuildBindingSource
       // 
       this.BuildBindingSource.AllowNew = false;
+      this.BuildBindingSource.CurrentChanged += new System.EventHandler(this.BuildBindingSource_CurrentChanged);
       // 
       // StartAbilities
       // 
@@ -1178,6 +1203,8 @@
       this.Load += new System.EventHandler(this.BrowserView_Load);
       this.BuildGroupBox.ResumeLayout(false);
       this.BuildGroupBox.PerformLayout();
+      ((System.ComponentModel.ISupportInitialize)(this.Summoner1)).EndInit();
+      ((System.ComponentModel.ISupportInitialize)(this.Summoner2)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.Spell4)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.Spell3)).EndInit();
       ((System.ComponentModel.ISupportInitialize)(this.Spell2)).EndInit();
@@ -1342,6 +1369,8 @@
     private System.Windows.Forms.TableLayoutPanel MasteriesTable;
     private System.Windows.Forms.ComboBox MasteryPageName;
     private System.Windows.Forms.PictureBox ChampionImage;
+    private System.Windows.Forms.PictureBox Summoner1;
+    private System.Windows.Forms.PictureBox Summoner2;
   }
 }
 

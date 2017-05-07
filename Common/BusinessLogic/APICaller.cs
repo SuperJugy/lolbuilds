@@ -3,6 +3,7 @@ using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
+
 using Newtonsoft.Json.Linq;
 
 namespace com.jcandksolutions.lol.BusinessLogic {
@@ -20,13 +21,13 @@ namespace com.jcandksolutions.lol.BusinessLogic {
     public string Locale { private get; set; }
     private string QueryURL {
       get {
-        return mQueryURL ?? (mQueryURL = string.Format("https://global.api.pvp.net/api/lol/static-data/{0}/v1.2/{1}api_key={2}&locale={3}", Server, "{0}", APIKey, Locale));
+        return mQueryURL ?? (mQueryURL = string.Format("https://{0}.api.riotgames.com/lol/static-data/v3/{1}api_key={2}&locale={3}", Server, "{0}", APIKey, Locale));
       }
     }
     private string DownloadURL {
       get {
         if (mDownloadURL == null) {
-          JObject data = callAPI("realm?");
+          JObject data = callAPI("realms?");
           mDownloadURL = data["cdn"] + "/" + data["v"] + "/";
         }
         return mDownloadURL;
@@ -34,19 +35,23 @@ namespace com.jcandksolutions.lol.BusinessLogic {
     }
 
     public JObject queryItems() {
-      return callAPI("item?itemListData=all&");
+      return callAPI("items?itemListData=all&");
     }
 
     public JObject queryChampions() {
-      return callAPI("champion?dataById=true&champData=all&");
+      return callAPI("champions?dataById=true&champListData=all&");
     }
 
     public JObject queryRunes() {
-      return callAPI("rune?runeListData=all&");
+      return callAPI("runes?runeListData=all&");
     }
 
     public JObject queryMasteries() {
-      return callAPI("mastery?masteryListData=all&");
+      return callAPI("masteries?masteryListData=all&");
+    }
+
+    public JObject querySummonerSpells() {
+      return callAPI("summoner-spells?spellListData=all&dataById=true&");
     }
 
     public void downloadMasteryImage(string image) {
@@ -81,6 +86,7 @@ namespace com.jcandksolutions.lol.BusinessLogic {
         if (!response.IsSuccessStatusCode) {
           throw new InvalidOperationException("Error calling Riot API servers. Status Code: " + response.StatusCode);
         }
+
         return JObject.Parse(response.Content.ReadAsStringAsync().Result);
       }
     }

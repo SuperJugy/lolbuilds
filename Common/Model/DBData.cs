@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+
 using Newtonsoft.Json;
 
 namespace com.jcandksolutions.lol.Model {
@@ -11,5 +12,7 @@ namespace com.jcandksolutions.lol.Model {
     public List<Rune> Runes { get; set; }
     [JsonProperty("masteries")]
     public List<Branch> Masteries { get; set; }
+    [JsonProperty("summoners")]
+    public List<SummonerSpell> SummonerSpells { get; set; }
   }
 }

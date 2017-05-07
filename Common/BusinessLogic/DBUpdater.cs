@@ -1,4 +1,5 @@
 ﻿using System.Configuration;
+
 using com.jcandksolutions.lol.DependencyInjection;
 
 namespace com.jcandksolutions.lol.BusinessLogic {

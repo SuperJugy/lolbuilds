@@ -63,6 +63,7 @@
     <Compile Include="BusinessLogic\APICaller.cs" />
     <Compile Include="Model\MasteryPageConverter.cs" />
     <Compile Include="Model\BuildData.cs" />
+    <Compile Include="Model\SummonerSpell.cs" />
     <Compile Include="UI\BaseView.cs" />
     <Compile Include="Model\Branch.cs" />
     <Compile Include="UI\BrowserPresenter.cs" />

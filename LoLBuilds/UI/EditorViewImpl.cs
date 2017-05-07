@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
+
 using com.jcandksolutions.lol.Model;
 
 namespace com.jcandksolutions.lol.UI {
@@ -53,14 +54,18 @@ namespace com.jcandksolutions.lol.UI {
       checkItemSetsCount(true);
     }
 
-    public void configureBuildsDropdowns(object[] championsList) {
+    public void configureBuildsDropdowns(object[] championsList, object[] summonersList) {
       Champion.Tag = new BuildBind(BuildBind.Prop.Champion);
       ItemSet.Tag = new BuildBind(BuildBind.Prop.ItemSet);
       RunePage.Tag = new BuildBind(BuildBind.Prop.RunePage);
       MasteryPage.Tag = new BuildBind(BuildBind.Prop.MasteryPage);
       StartAbilities.Tag = new BuildBind(BuildBind.Prop.StartAbilities);
       MaxOrder.Tag = new BuildBind(BuildBind.Prop.MaxOrder);
+      Summoner1.Tag = new BuildBind(BuildBind.Prop.Summoner1);
+      Summoner2.Tag = new BuildBind(BuildBind.Prop.Summoner2);
       Champion.Items.AddRange(championsList);
+      Summoner1.Items.AddRange(summonersList);
+      Summoner2.Items.AddRange(summonersList);
     }
 
     public void configureRunePagesDropdowns(object[] marksList, object[] sealsList, object[] glyphsList, object[] quintsList) {
@@ -139,9 +144,7 @@ namespace com.jcandksolutions.lol.UI {
           Text = branch.Name,
           AutoSize = true,
           Anchor = AnchorStyles.None
-        },
-          j,
-          0);
+        }, j, 0);
         foreach (Tier tier in branch.Tiers) {
           var tierTable = new TableLayoutPanel {
             RowCount = 1,
@@ -172,8 +175,10 @@ namespace com.jcandksolutions.lol.UI {
             tierTable.Controls.Add(but, k, 0);
             ++k;
           }
+
           ++i;
         }
+
         ++j;
       }
       for (var i = 0; i < MasteriesTable.RowCount; ++i) {
@@ -251,6 +256,8 @@ namespace com.jcandksolutions.lol.UI {
       MasteryPage.SelectedItem = build.MasteryPage;
       StartAbilities.Text = build.StartAbilities;
       MaxOrder.Text = build.MaxOrder;
+      Summoner1.SelectedItem = build.Summoner1;
+      Summoner2.SelectedItem = build.Summoner2;
     }
 
     public void populateMasteryPage(MasteryPage masteryPage) {
@@ -455,6 +462,7 @@ namespace com.jcandksolutions.lol.UI {
       if (clickedValue == limit) {
         return;
       }
+
       ++clickedValue;
       if (clickedValue + partnerValue1 + partnerValue2 > limit) {
         if (partnerValue1 > 0) {
@@ -505,6 +513,7 @@ namespace com.jcandksolutions.lol.UI {
         if (clickedValue == 0) {
           return;
         }
+
         --clickedValue;
         clickedButton.Text = clickedValue.ToString();
       }

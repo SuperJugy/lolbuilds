@@ -1,6 +1,8 @@
 ﻿using System.Drawing;
+
 using com.jcandksolutions.lol.BusinessLogic;
 using com.jcandksolutions.lol.DependencyInjection;
+
 using Newtonsoft.Json;
 
 namespace com.jcandksolutions.lol.Model {
@@ -10,8 +12,7 @@ namespace com.jcandksolutions.lol.Model {
     public string RunePageName { get; set; }
     [JsonProperty("mark1")]
     public string Mark1ID {
-      get
-      {
+      get {
         return Mark1.ID;
       }
       set {

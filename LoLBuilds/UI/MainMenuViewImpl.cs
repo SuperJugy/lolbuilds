@@ -21,7 +21,7 @@ namespace com.jcandksolutions.lol.UI {
     public bool confirmDBOverwrite(string message, string title) {
       return MessageBox.Show(message, title, MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation) == DialogResult.Yes;
     }
-    
+
     public void showEditorWindow() {
       var editor = new EditorViewImpl();
       Hide();
@@ -69,7 +69,7 @@ namespace com.jcandksolutions.lol.UI {
     public void setCalculatorEnabled(bool enabled) {
       CalculatorButton.Enabled = enabled;
     }
-    
+
     private void UpdateDBButton_Click(object sender, EventArgs e) {
       mPresenter.onUpdateDBButtonClicked();
     }

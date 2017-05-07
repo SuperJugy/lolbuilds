@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+
 using com.jcandksolutions.lol.DependencyInjection;
 using com.jcandksolutions.lol.UI;
 

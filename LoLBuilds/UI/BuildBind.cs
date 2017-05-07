@@ -1,4 +1,5 @@
 ﻿using System.Windows.Forms;
+
 using com.jcandksolutions.lol.Model;
 
 namespace com.jcandksolutions.lol.UI {
@@ -9,7 +10,9 @@ namespace com.jcandksolutions.lol.UI {
       RunePage,
       MasteryPage,
       StartAbilities,
-      MaxOrder
+      MaxOrder,
+      Summoner1,
+      Summoner2
     }
 
     private readonly Prop mProp;
@@ -37,6 +40,12 @@ namespace com.jcandksolutions.lol.UI {
           break;
         case Prop.MaxOrder:
           build.MaxOrder = ((TextBox)control).Text;
+          break;
+        case Prop.Summoner1:
+          build.Summoner1 = (SummonerSpell)((ComboBox)control).SelectedItem;
+          break;
+        case Prop.Summoner2:
+          build.Summoner2 = (SummonerSpell)((ComboBox)control).SelectedItem;
           break;
       }
     }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 
@@ -12,7 +13,7 @@ namespace com.jcandksolutions.lol.Model {
     }
 
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer) {
-      var token = JObject.Load(reader); 
+      var token = JObject.Load(reader);
       var properties = token.ToObject<Dictionary<string, string>>();
       return new MasteryPage(properties);
     }

@@ -18,7 +18,7 @@ namespace com.jcandksolutions.lol.UI {
 
     public void start() {
       mView.shouldPauseBinding = true;
-      mView.configureBuildsDropdowns(mBuildManager.ChampionsList);
+      mView.configureBuildsDropdowns(mBuildManager.ChampionsList, mBuildManager.SummonersList);
       mView.configureMasteryTrees(mBuildManager.MasteriesTree);
       mView.configureRunePagesDropdowns(mBuildManager.MarksList, mBuildManager.SealsList, mBuildManager.GlyphsList, mBuildManager.QuintsList);
       mView.configureItemSetsDropdowns(mBuildManager.ItemsList);
@@ -39,6 +39,7 @@ namespace com.jcandksolutions.lol.UI {
         if (newBuildsPath == null) {
           return;
         }
+
         mBuildsPath = newBuildsPath;
         onDataSaved();
         mBuildManager.loadBuild(mBuildsPath);
@@ -52,8 +53,10 @@ namespace com.jcandksolutions.lol.UI {
         if (newBuildsPath == null) {
           return;
         }
+
         mBuildsPath = newBuildsPath;
       }
+
       onDataSaved();
       mBuildManager.save(mBuildsPath);
     }
@@ -117,6 +120,7 @@ namespace com.jcandksolutions.lol.UI {
       if (name == null) {
         return;
       }
+
       onDataChanged();
       mView.shouldPauseBinding = true;
       mView.updateBuildName(name);
@@ -129,6 +133,7 @@ namespace com.jcandksolutions.lol.UI {
       if (name == null) {
         return;
       }
+
       onDataChanged();
       mView.shouldPauseBinding = true;
       mView.updateMasteryPageName(name);
@@ -141,6 +146,7 @@ namespace com.jcandksolutions.lol.UI {
       if (name == null) {
         return;
       }
+
       onDataChanged();
       mView.shouldPauseBinding = true;
       mView.updateRunePageName(name);
@@ -153,12 +159,12 @@ namespace com.jcandksolutions.lol.UI {
       if (name == null) {
         return;
       }
+
       onDataChanged();
       mView.shouldPauseBinding = true;
       mView.updateItemSetName(name);
       mView.shouldPauseBinding = false;
       mBuildManager.updateItemSetName(data, name);
-      
     }
 
     public void onDeleteBuild(Build item) {
@@ -186,6 +192,7 @@ namespace com.jcandksolutions.lol.UI {
       if (name == null) {
         return;
       }
+
       onDataChanged();
       var build = new Build {
         BuildName = name
@@ -199,6 +206,7 @@ namespace com.jcandksolutions.lol.UI {
       if (name == null) {
         return;
       }
+
       onDataChanged();
       var masteryPage = new MasteryPage();
       masteryPage["name"] = name;
@@ -211,6 +219,7 @@ namespace com.jcandksolutions.lol.UI {
       if (name == null) {
         return;
       }
+
       onDataChanged();
       var runePage = new RunePage {
         RunePageName = name
@@ -224,6 +233,7 @@ namespace com.jcandksolutions.lol.UI {
       if (name == null) {
         return;
       }
+
       onDataChanged();
       var itemSet = new ItemSet {
         ItemSetName = name
@@ -237,6 +247,7 @@ namespace com.jcandksolutions.lol.UI {
       if (name == null) {
         return;
       }
+
       onDataChanged();
       var build = new Build(oldBuild) {
         BuildName = name
@@ -250,6 +261,7 @@ namespace com.jcandksolutions.lol.UI {
       if (name == null) {
         return;
       }
+
       onDataChanged();
       var masteryPage = new MasteryPage(oldMasteryPage);
       masteryPage["name"] = name;
@@ -262,6 +274,7 @@ namespace com.jcandksolutions.lol.UI {
       if (name == null) {
         return;
       }
+
       onDataChanged();
       var runePage = new RunePage(oldRunepage) {
         RunePageName = name
@@ -275,6 +288,7 @@ namespace com.jcandksolutions.lol.UI {
       if (name == null) {
         return;
       }
+
       onDataChanged();
       var itemSet = new ItemSet(oldItemset) {
         ItemSetName = name

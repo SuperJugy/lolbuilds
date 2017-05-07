@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+
 using Newtonsoft.Json;
 
 namespace com.jcandksolutions.lol.Model {
