@@ -174,10 +174,10 @@ namespace com.jcandksolutions.lol.BusinessLogic {
     public void save(string path) {
       IOManager ioManager = CommonInjector.provideIOManager();
       var root = new BuildData {
-        Builds = mBuilds,
-        Masteries = mMasteryPages,
-        Runes = mRunePages,
-        ItemSets = mItemSets
+        Builds = mBuilds.OrderBy(x => x.BuildName).ToList(),
+        Masteries = mMasteryPages.OrderBy(x => x["name"]).ToMasteryPageList(),
+        Runes = mRunePages.OrderBy(x => x.RunePageName).ToList(),
+        ItemSets = mItemSets.OrderBy(x => x.ItemSetName).ToList()
       };
       ioManager.writeFile(path, JsonConvert.SerializeObject(root, Formatting.Indented));
     }
