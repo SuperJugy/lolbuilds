@@ -14,8 +14,8 @@ namespace com.jcandksolutions.lol.Model {
       }
       set {
         mMasteries = value;
-        foreach (var m in mMasteries) {
-          foreach (var mp in mMasteries) {
+        foreach (Mastery m in mMasteries) {
+          foreach (Mastery mp in mMasteries) {
             if (mp != m) {
               m.addPartner(mp.ID);
             }

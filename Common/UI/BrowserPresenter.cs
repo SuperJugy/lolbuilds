@@ -36,10 +36,10 @@ namespace com.jcandksolutions.lol.UI {
     }
 
     private void bindLists() {
-      mView.bindBuildsControls(mBuildManager.BuildsData);
       mView.bindMasteryPagesControls(mBuildManager.MasteryPagesData);
       mView.bindRunePagesControls(mBuildManager.RunePagesData);
       mView.bindItemSetsControls(mBuildManager.ItemSetsData);
+      mView.bindBuildsControls(mBuildManager.BuildsData);
     }
   }
 }
