@@ -207,7 +207,7 @@ namespace com.jcandksolutions.lol.UI {
     private void ImageBinding_Format(object sender, ConvertEventArgs e) {
       var binding = (Binding)sender;
       var box = (PictureBox)binding.Control;
-      if (box != null && box.Image != null) {
+      if (box != null && box.Image != null && box.Image != e.Value) {
         box.Image.Dispose();
       }
     }
